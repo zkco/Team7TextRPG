@@ -29,5 +29,9 @@ namespace Team7TextRPG.Utils
                 _ => "알 수 없음",
             };
         }
+        public static int GrowthValue(int level, int maxLevel, double growthRate = 1.2, double baseExp = 100)
+        {
+            return (int)(baseExp * Math.Pow(growthRate, level));
+        }
     }
 }

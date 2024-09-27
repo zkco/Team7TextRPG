@@ -1,0 +1,4 @@
+DataId,Name,Description,RequiredLevel,RequiredJob,MpCoast,LearnPrice,SkillType,ValueType,Value,TargetCount,HitCount
+4001,강타,강력한 일격,1,None,5,300,Attack,Percent,120,1,1
+4002,붕대감기,상처에 붕대를 감는다.,3,None,8,200,Heal,Absolute,10,1,1
+4003,스매시,검을 강력하게 휘두른다.,5,Warrior,9,1000,Attack,Percent,150,1,1
