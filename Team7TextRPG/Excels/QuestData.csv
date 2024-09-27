@@ -1,0 +1,2 @@
+DataId,NpcDataId,QuestType,Name,Description,Order,TargetDataId1,Amount1,TargetDataId2,Amount2,ExpReward,GoldReward,ItemRewardDataId1,ItemRewardDataId2,RequiredLevel
+2001,105,Hunt,고블린 처치,촌장이 의뢰하는 고블린 퇴치 의뢰,1,3001,10,0,0,200,300,0,0,1

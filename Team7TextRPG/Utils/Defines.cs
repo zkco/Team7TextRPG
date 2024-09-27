@@ -33,6 +33,28 @@ namespace Team7TextRPG.Utils
             Archer, // 궁수
         }
 
+        public enum MonsterType
+        {
+            None,
+            Common,
+            Elite,
+        }
+
+        public enum NpcType
+        {
+            None,
+            Shop,
+            Event,
+            Quest
+        }
+
+        public enum QuestType
+        {
+            None,
+            Hunt,
+            Gathering,
+        }
+
         public enum ItemType
         {
             None,
@@ -59,6 +81,20 @@ namespace Team7TextRPG.Utils
             None,
             Yes,
             No,
+        }
+
+        public enum SkillType
+        {
+            None,
+            Attack,
+            Heal,
+        }
+
+        public enum SkillValueType
+        {
+            None,
+            Percent,
+            Absolute
         }
 
         public const int MAX_PLAYER_LEVEL = 100;
