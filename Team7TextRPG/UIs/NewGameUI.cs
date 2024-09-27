@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,7 +10,6 @@ namespace Team7TextRPG.UIs
 {
     public class NewGameUI : UIBase
     {
-
         public override void Write()
         {
             // 1. 이름을 입력 받고
