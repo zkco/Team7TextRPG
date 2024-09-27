@@ -1,0 +1,6 @@
+DataId,Name,Description,Price,ItemType,EquipmentType,ConsumableType,StatStr,StatDex,StatInt,StatLuck,MaxHp,MaxMp,Attack,Defense,Speed,DodgeChanceRate,CriticalChanceRate,HpAmount,MpAmount
+1001,목검,나무로 만든 튼튼한 검,100,Equipment,Weapon,None,0,0,0,0,0,0,7,0,0,0,0,0,0
+1002,누더기 옷,더러운 천쪼리가리 옷,50,Equipment,Armor,None,0,0,0,0,0,0,0,5,0,0,0,0,0
+1003,꽃반지,꽃으로 만든 반지,150,Equipment,Accessory,None,1,1,1,1,0,0,0,0,3,0.02,0.02,0,0
+1004,하급 HP 물약,엄청나게 써서 체력이 {HpAmount}만큼만 회복된다.,30,Consumable,None,Potion,0,0,0,0,0,0,0,0,0,0,0,50,0
+1005,중급 HP 물약,쓴물약 체력이 {HpAmount}만큼만 회복된다.,200,Consumable,None,Potion,0,0,0,0,0,0,0,0,0,0,0,150,0

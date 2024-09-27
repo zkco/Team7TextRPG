@@ -33,6 +33,13 @@ namespace Team7TextRPG.Utils
             Archer, // 궁수
         }
 
+        public enum ItemType
+        {
+            None,
+            Equipment,
+            Consumable,
+        }
+
         public enum EquipmentType
         {
             None,
