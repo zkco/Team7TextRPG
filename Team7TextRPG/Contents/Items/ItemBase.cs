@@ -1,8 +1,11 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Team7TextRPG.Datas;
+using Team7TextRPG.Utils;
+using static Team7TextRPG.Utils.Defines;
 
 namespace Team7TextRPG.Contents.Items
 {
@@ -11,9 +14,33 @@ namespace Team7TextRPG.Contents.Items
     /// </summary>
     public abstract class ItemBase
     {
-        public virtual string? Name { get; protected set; }
-        public virtual string? Description { get; protected set; }
-        public virtual int Price { get; protected set; }
+        public int DataId { get; protected set; }
+        public Defines.ItemType ItemType { get; protected set; }
+        public string? Name { get; protected set; }
+        public string? Description { get; protected set; }
+        public int Price { get; protected set; }
+
+        public virtual Stat ItemStat { get; protected set; } = new Stat();
+
+        public virtual void SetItemData(ItemData data)
+        {
+            DataId = data.DataId;
+            Name = data.Name;
+            Description = data.Description;
+            ItemType = data.ItemType;
+            Price = data.Price;
+            ItemStat.StatStr = data.StatStr;
+            ItemStat.StatDex = data.StatDex;
+            ItemStat.StatInt = data.StatInt;
+            ItemStat.StatLuck = data.StatLuck;
+            ItemStat.Attack = data.Attack;
+            ItemStat.Defense = data.Defense;
+            ItemStat.Speed = data.Speed;
+            ItemStat.DodgeChanceRate = data.DodgeChanceRate;
+            ItemStat.CriticalChanceRate = data.CriticalChanceRate;
+            ItemStat.MaxHp = data.MaxHp;
+            ItemStat.MaxMp = data.MaxMp;
+        }
 
         public virtual void Use()
         {

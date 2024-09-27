@@ -8,6 +8,8 @@ namespace Team7TextRPG
     {
         static void Main(string[] args)
         {
+            // Resource Data를 Load함.
+            DataManager.Instance.Init();
             // 처음에는 TitleScene을 Push함.
             SceneManager.Instance.LoadScene<TitleScene>();
             // JobManager의 JobQueue에 있는 Job을 무한으로 수행함.

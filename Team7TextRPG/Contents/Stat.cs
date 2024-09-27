@@ -1,15 +1,15 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Team7TextRPG.Creatures
+namespace Team7TextRPG.Contents
 {
     /// <summary>
     /// 생명체의 스탯을 절대값으로 나타냅니다.
     /// </summary>
-    public class CreatureStat
+    public class Stat
     {
         public int StatStr { get; set; } // 힘 ex) 5
         public int StatDex { get; set; } // 민첩 ex) 5

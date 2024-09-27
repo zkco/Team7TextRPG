@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Team7TextRPG.Contents;
 using Team7TextRPG.Utils;
 
 namespace Team7TextRPG.Creatures
@@ -15,7 +16,7 @@ namespace Team7TextRPG.Creatures
         public Defines.SpeciesType SpecisType { get; protected set; }
         public Defines.SexType SexType { get; protected set; }
         public Defines.JobType JobType { get; protected set; } = Defines.JobType.None;
-        public CreatureStat BaseStat { get; protected set; } = new CreatureStat();
+        public Stat BaseStat { get; protected set; } = new Stat();
 
         public virtual int StatStr => BaseStat.StatStr;
         public virtual int StatDex => BaseStat.StatDex;
