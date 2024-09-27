@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -26,6 +26,8 @@ namespace Team7TextRPG.Managers
         // 게임 limit 요소
         public const int DeadLine = 50;
         public int CurrentDay { get; private set; } = 0;
+        public int Gold = 0; //소지 중인 금액
+        public int Chip = 0; //소지 중인 칩 갯수
 
         public void CreatePlayer(string name, Defines.SexType sexType, Defines.SpeciesType specisType) 
         {
