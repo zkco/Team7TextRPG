@@ -19,13 +19,40 @@ namespace Team7TextRPG.Scenes
             switch (selection)
             {
                 case DungeonSceneType.Easy:
-                    WriteMessage("Easy 던전에 입장합니다.");
+                    UIManager.Instance.Confirm("던전에 들어갑니다.",
+                        () =>
+                        {
+                            WriteMessage("던전 입장");
+                        },
+                        () =>
+                        {
+                            SceneManager.Instance.LoadScene<DungeonScene>();
+                        }
+                        );
                     break;
                 case DungeonSceneType.Normal:
-                    WriteMessage("Normal 던전에 입장합니다.");
+                    UIManager.Instance.Confirm("던전에 들어갑니다.",
+                        () =>
+                        {
+                            WriteMessage("던전 입장");
+                        },
+                        () =>
+                        {
+                            SceneManager.Instance.LoadScene<DungeonScene>();
+                        }
+                        );
                     break;
                 case DungeonSceneType.Hard:
-                    WriteMessage("Hard 던전에 입장합니다.");
+                    UIManager.Instance.Confirm("던전에 들어갑니다.",
+                        () =>
+                        {
+                            WriteMessage("던전 입장");
+                        },
+                        () =>
+                        {
+                            SceneManager.Instance.LoadScene<DungeonScene>();
+                        }
+                        );
                     break;
                 case DungeonSceneType.Exit:
                     SceneManager.Instance.LoadScene<TownScene>();
