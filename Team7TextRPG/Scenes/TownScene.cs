@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,12 +20,30 @@ namespace Team7TextRPG.Scenes
 
         public override void Show()
         {
-            // 이벤트,
-            // 휴식,
-            // 상점 -> 상점 무기, 방어, 잡화 ,-> 상점 화면
-            // 마을 나가기
-            
+            Console.Clear();
+            // UI Base 출력
+            WriteType<TownSceneType>();
+            TownSceneType selection = InputManager.Instance.GetInputType<TownSceneType>();
 
+            switch (selection)
+            {
+                case TownSceneType.Event:
+                    WriteMessage("이벤트 씬으로 이동");
+                    SceneManager.Instance.LoadScene<TownScene>();
+                    break;
+                case TownSceneType.Inn:
+                    WriteMessage("휴식 씬으로 이동");
+                    SceneManager.Instance.LoadScene<TownScene>();
+                    break;
+                case TownSceneType.Shop:
+                    WriteMessage("상점 씬으로 이동");
+                    SceneManager.Instance.LoadScene<TownScene>();
+                    break;
+                case TownSceneType.Exit:
+                    WriteMessage("필드 씬으로 이동");
+                    SceneManager.Instance.LoadScene<TownScene>();
+                    break;
+            }
         }
 
         protected override string SceneTypeToText<T>(T type)
