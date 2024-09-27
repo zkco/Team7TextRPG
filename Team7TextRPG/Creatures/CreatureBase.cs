@@ -12,7 +12,7 @@ namespace Team7TextRPG.Creatures
         public string? Name { get; protected set; }
         public int Level { get; protected set; }
 
-        public Defines.SpecisType SpecisType { get; protected set; }
+        public Defines.SpeciesType SpecisType { get; protected set; }
         public Defines.SexType SexType { get; protected set; }
         public Defines.JobType JobType { get; protected set; } = Defines.JobType.None;
         public CreatureStat BaseStat { get; protected set; } = new CreatureStat();

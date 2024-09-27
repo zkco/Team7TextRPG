@@ -36,7 +36,7 @@ namespace Team7TextRPG.Creatures
         public EqArmor? EArmor { get; private set; }
         public EqAccessory? EAccessory { get; private set; }
 
-        public PlayerCreature(string name, Defines.SexType sexType, Defines.SpecisType specisType)
+        public PlayerCreature(string name, Defines.SexType sexType, Defines.SpeciesType specisType)
         {
             this.Name = name;
             this.SpecisType = specisType;
