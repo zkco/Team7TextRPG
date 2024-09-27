@@ -51,7 +51,7 @@ namespace Team7TextRPG.Utils
         public enum QuestType
         {
             None,
-            Kill,
+            Hunt,
             Gathering,
         }
 

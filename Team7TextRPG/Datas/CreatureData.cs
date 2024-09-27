@@ -10,35 +10,35 @@ namespace Team7TextRPG.Datas
 {
     public class LevelData
     {
-        public int Level;
-        public int MaxExp;
-        public int Str;
-        public int Dex;
-        public int Int;
-        public int Luck;
-        public int BonusPoint;
+        public int Level; // 레벨
+        public int MaxExp; // 최대 경험치
+        public int Str; // 힘
+        public int Dex; // 민첩
+        public int Int; // 지능
+        public int Luck; // 운
+        public int BonusPoint; // 보너스 포인트
     }
     public class MonsterData
     {
-        public int DataId;
-        public string Name;
-        public string Description;
-        public Defines.MonsterType MonsterType;
-        public int Level;
-        public int StatStr;
-        public int StatDex;
-        public int StatInt;
-        public int StatLuck;
-        public int MaxHp;
-        public int MaxMp;
-        public int Attack;
-        public int Defense;
-        public int Speed;
-        public int DodgeChanceRate;
-        public int CriticalChanceRate;
-        public int ExpReward;
-        public int ItemReward;
-        public int DropItemRate;
-        public string? SkillDataIds;
+        public int DataId; // 데이터 아이디 ex) 1
+        public string? Name; // 몬스터 이름
+        public string? Description; // 몬스터 설명
+        public Defines.MonsterType MonsterType; // 몬스터 타입 (Normal, Elite, Boss)
+        public int Level; // 레벨
+        public int StatStr; // 힘
+        public int StatDex; // 민첩
+        public int StatInt; // 지능
+        public int StatLuck; // 운
+        public int MaxHp; // 최대 체력
+        public int MaxMp; // 최대 마나
+        public int Attack; // 공격력
+        public int Defense; // 방어력
+        public int Speed; // 속도
+        public int DodgeChanceRate; // 회피 확률
+        public int CriticalChanceRate; // 치명타 확률
+        public int ExpReward; // 경험치 보상
+        public int ItemReward; // 아이템 보상
+        public int DropItemRate; // 드랍 확률
+        public string? SkillDataIds; // 스킬 데이터 아이디 1|2|3
     }
 }

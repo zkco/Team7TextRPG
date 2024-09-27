@@ -11,12 +11,12 @@ namespace Team7TextRPG.Datas
     public class ItemData
     {
         public int DataId; // 데이터 아이디 ex) 1
-        public string? Name;
-        public string? Description;
-        public int Price;
-        public Defines.ItemType ItemType;
-        public Defines.EquipmentType EquipmentType;
-        public Defines.ConsumableType ConsumableType;
+        public string? Name; // 아이템 이름
+        public string? Description; // 아이템 설명
+        public int Price; // 가격
+        public Defines.ItemType ItemType; // 아이템 타입 (Equipment, Consumable)
+        public Defines.EquipmentType EquipmentType; // 장비 타입 (Weapon, Armor, Accessory)
+        public Defines.ConsumableType ConsumableType; // 소비 타입 (Hp, Mp)
 
         public int StatStr; // 힘 ex) 5
         public int StatDex; // 민첩 ex) 5
