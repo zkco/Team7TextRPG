@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -36,7 +36,7 @@ namespace Team7TextRPG.Creatures
         public EqArmor? EArmor { get; private set; }
         public EqAccessory? EAccessory { get; private set; }
 
-        public PlayerCreature(string name, Defines.SexType sexType, Defines.SpecisType specisType)
+        public PlayerCreature(string name, Defines.SexType sexType, Defines.SpeciesType specisType)
         {
             this.Name = name;
             this.SpecisType = specisType;
@@ -46,6 +46,15 @@ namespace Team7TextRPG.Creatures
         public override void SetInfo(Defines.JobType job)
         {
             this.JobType = job;
+            switch(JobType)
+            {
+                case Defines.JobType.Warrior:
+                    BaseStat.StatStr = 10;
+                    BaseStat.StatDex = 5;
+                    BaseStat.StatInt = 5;
+                    BaseStat.StatLuck = 5;
+                    break;
+            }
         }
 
         public void Equip(EquipmentBase equipment)
@@ -64,7 +73,7 @@ namespace Team7TextRPG.Creatures
         {
             // 장비 변경 시 변화되는 스텟
             ItemStat.StatStr = (EWeapon?.StatStr ?? 0) + (EArmor?.StatStr ?? 0) + (EAccessory?.StatStr ?? 0);
-            ItemStat.StatDex = (EWeapon?.StatStr ?? 0) + (EArmor?.StatStr ?? 0) + (EAccessory?.StatStr ?? 0);
+            ItemStat.StatDex = (EWeapon?.StatDex ?? 0) + (EArmor?.StatDex ?? 0) + (EAccessory?.StatDex ?? 0);
             ItemStat.StatInt = (EWeapon?.StatInt ?? 0) + (EArmor?.StatInt ?? 0) + (EAccessory?.StatInt ?? 0);
             ItemStat.StatLuck = (EWeapon?.StatLuck ?? 0) + (EArmor?.StatLuck ?? 0) + (EAccessory?.StatLuck ?? 0);
 

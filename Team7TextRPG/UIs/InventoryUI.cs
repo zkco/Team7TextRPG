@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +12,9 @@ namespace Team7TextRPG.UIs
         public override void Write()
         {
             // 인벤토리 표시
+            // 1. 인벤토리 아이템 목록 표시
+            // 2. 아이템 사용 여부 확인
+            // 3. 아이템 사용
         }
     }
 }

@@ -27,7 +27,7 @@ namespace Team7TextRPG.Managers
         public const int DeadLine = 50;
         public int CurrentDay { get; private set; } = 0;
 
-        public void CreatePlayer(string name, Defines.SexType sexType, Defines.SpecisType specisType) 
+        public void CreatePlayer(string name, Defines.SexType sexType, Defines.SpeciesType specisType) 
         {
             // 플레이어 생성
             Player = new PlayerCreature(name, sexType, specisType);
