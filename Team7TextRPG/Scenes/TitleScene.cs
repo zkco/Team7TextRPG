@@ -1,5 +1,6 @@
 using Team7TextRPG.UIs;
 using Team7TextRPG.Managers;
+using Team7TextRPG.Utils;
 
 namespace Team7TextRPG.Scenes
 {
@@ -17,7 +18,7 @@ namespace Team7TextRPG.Scenes
         public override void Show()
         {
             // 로고 출력
-            WriteMessage("Team7 Text RPG");
+            TextHelper.BtContent("Team7 Text RPG");
             // 1. 메뉴를 보여준다.
             WriteType<TitleSceneType>();
             // 2. 사용자 입력 받는다.

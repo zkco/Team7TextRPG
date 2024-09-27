@@ -1,8 +1,9 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Team7TextRPG.Utils;
 
 namespace Team7TextRPG.Scenes
 {
@@ -19,7 +20,7 @@ namespace Team7TextRPG.Scenes
             {
                 if (i == 0) continue;
                 object obj = Enum.Parse(t, types[i]);
-                Console.WriteLine($"{i}. {SceneTypeToText((T)obj)}");
+                TextHelper.ItContent($"{i}. {SceneTypeToText((T)obj)}");
             }
         }
         protected virtual void WriteMessage(string message)

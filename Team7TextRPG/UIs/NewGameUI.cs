@@ -11,15 +11,23 @@ namespace Team7TextRPG.UIs
             // 1. 이름을 입력 받고
             string name = InputManager.Instance.GetInputString("당신의 이름은?");
             // 2. 성별을 입력받고
+            WriteType<Defines.SexType>();
             Defines.SexType sexType = InputManager.Instance.GetInputType<Defines.SexType>("성별은?");
             // 3. 종족을 입력받고
+            WriteType<Defines.SpeciesType>();
             Defines.SpeciesType speciesType = InputManager.Instance.GetInputType<Defines.SpeciesType>("종족은?");
             // 4. 캐릭터 생성 여부 확인
             Console.Clear();
-            Console.WriteLine($"이름 : {name}");
-            Console.WriteLine($"성별 : {Util.SexTypeToString(sexType)}");
-            Console.WriteLine($"종족 : {Util.SpeciesTypeToString(speciesType)}");
-            UIManager.Instance.Confirm("캐릭터를 생성하시겠습니까?",
+
+            string sexText = Util.SexTypeToString(sexType);
+            string speciesText = Util.SpeciesTypeToString(speciesType);
+
+            TextHelper.CtHeader("Intro");
+            TextHelper.CtContent($"어느 날, {name}는 낯선 곳에서 눈을 떴습니다.");
+            TextHelper.CtContent($"성별이 {sexText}고 종족이 {speciesText}인것을 제외하곤 아무런 기억도 나지 않습니다.");
+            TextHelper.CtContent("당신은 이제부터 생존을 위한 모험을 시작해야 합니다.");
+
+            UIManager.Instance.Confirm("본격적으로 모험을 떠나시겠습니까?",
             () =>
             {
                 // 캐릭터 생성
@@ -35,6 +43,16 @@ namespace Team7TextRPG.UIs
                 // 5. 타이틀 화면으로 이동
                 SceneManager.Instance.LoadScene<TitleScene>();
             });
+        }
+
+        protected override string EnumTypeToText<T>(T type) where T : default
+        {
+            if (type is Defines.SexType)
+                return Util.SexTypeToString((Defines.SexType)(object)type);
+            else if (type is Defines.SpeciesType)
+                return Util.SpeciesTypeToString((Defines.SpeciesType)(object)type);
+            else
+                return string.Empty;
         }
     }
 }
