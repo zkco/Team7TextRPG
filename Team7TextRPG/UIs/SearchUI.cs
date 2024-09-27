@@ -73,10 +73,9 @@ namespace Team7TextRPG.UIs
             //보물획득처리 시스템으로 UI? 화면?
         }
 
-
-
-
-
-
+        protected override string EnumTypeToText<T>(T type)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
