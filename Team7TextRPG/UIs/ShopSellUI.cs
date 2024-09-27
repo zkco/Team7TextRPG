@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +11,10 @@ namespace Team7TextRPG.UIs
         public override void Write()
         {
             // 상점 판매 목록 표시
+        }
+        protected override string EnumTypeToText<T>(T type)
+        {
+            throw new NotImplementedException();
         }
     }
 }

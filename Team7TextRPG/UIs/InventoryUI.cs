@@ -16,5 +16,10 @@ namespace Team7TextRPG.UIs
             // 2. 아이템 사용 여부 확인
             // 3. 아이템 사용
         }
+
+        protected override string EnumTypeToText<T>(T type)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
