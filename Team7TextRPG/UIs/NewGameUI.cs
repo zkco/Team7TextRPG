@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,7 +14,7 @@ namespace Team7TextRPG.UIs
         public override void Write()
         {
             // 1. 이름을 입력 받고
-
+            string name = InputManager.Instance.GetInputString("너의 이름은?");
             // 2. 성별을 입력받고
 
             // 3. 종족을 입력받고
