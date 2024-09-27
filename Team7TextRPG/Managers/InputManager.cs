@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,8 +12,8 @@ namespace Team7TextRPG.Managers
         private static InputManager? _instance;
         public static InputManager Instance => _instance ??= new InputManager();
 
-        private string[] _keywords = new string[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "I", "S", "K", "Q" };
-        
+        private string[] _keywords = new string[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "I", "S", "K", "Q" };
+
         // string을 입력받아 반환하는 함수
         public string GetInputString(string message = "키워드를 입력하세요.")
         {
@@ -30,15 +30,18 @@ namespace Team7TextRPG.Managers
             return input;
         }
         // 입력받은 문자열을 int로 변환해서 반환하는 함수
-        public int GetInputInt(string message = "숫자를 입력하세요.")
+        public int GetInputInt(string message = "숫자를 입력하세요.", int minValue = 0, int maxValue = 9)
         {
             if (int.TryParse(GetInputString(message), out int value) == false)
                 throw new Exception("입력 가능한 숫자가 아닙니다.");
 
+            if (value < minValue || value > maxValue)
+                throw new Exception("입력 가능한 숫자 범위가 아닙니다.");
+
             return value;
         }
         // 입력받은 문자열을 enum으로 변환해서 반환하는 함수
-        public T GetInputType<T>(string message = "숫자를 입력하세요.", int defaultValue = 0)
+        public T GetInputType<T>(string message = "숫자를 입력하세요.", int defaultValue = 0) where T : Enum
         {
             int value = GetInputInt(message);
             T[] values = (T[])Enum.GetValues(typeof(T));

@@ -1,4 +1,4 @@
-﻿using Team7TextRPG.UIs;
+using Team7TextRPG.UIs;
 using Team7TextRPG.Managers;
 
 namespace Team7TextRPG.Scenes
@@ -22,12 +22,6 @@ namespace Team7TextRPG.Scenes
             WriteType<TitleSceneType>();
             // 2. 사용자 입력 받는다.
             TitleSceneType selection = InputManager.Instance.GetInputType<TitleSceneType>();
-            // 이 부분은 InputManager로 옮김.
-            // 숫자로 변환할 수 있냐? && 숫자로 변환 했을때 범위가 메뉴 범위 안에 있냐?
-            //string? input = Console.ReadLine();
-            //if (int.TryParse(input, out int value) && Enum.GetValues<GameMenuType>().Length >= value)
-            //    selection = (TitleMenuType)value;
-
             // 3. 사용자 입력에 따라 다음 화면으로 이동하거나 표시한다.
             switch (selection) 
             { 
