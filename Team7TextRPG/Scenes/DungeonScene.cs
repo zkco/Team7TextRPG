@@ -67,7 +67,8 @@ namespace Team7TextRPG.Scenes
                 DungeonSceneType.Easy => "슈퍼 겁쟁이들의 쉼터",
                 DungeonSceneType.Normal => "겁쟁이들의 쉼터",
                 DungeonSceneType.Hard => "상남자 클럽",
-                DungeonSceneType.Exit => "돌아가기"
+                DungeonSceneType.Exit => "돌아가기",
+                _ => "없음",
             };
         }
     }

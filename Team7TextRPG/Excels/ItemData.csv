@@ -1,6 +1,6 @@
-DataId,Name,Description,Price,ItemType,EquipmentType,ConsumableType,NumberOfNest,StatStr,StatDex,StatInt,StatLuck,MaxHp,MaxMp,Attack,Defense,Speed,DodgeChanceRate,CriticalChanceRate,HpAmount,MpAmount
-1001,¸ñ°Ë,³ª¹«·Î ¸¸µç Æ°Æ°ÇÑ °Ë,100,Equipment,Weapon,None,1,0,0,0,0,0,0,7,0,0,0,0,0,0
-1002,´©´õ±â ¿Ê,´õ·¯¿î ÃµÂÉ¸®°¡¸® ¿Ê,50,Equipment,Armor,None,1,0,0,0,0,0,0,0,5,0,0,0,0,0
-1003,²É¹İÁö,²ÉÀ¸·Î ¸¸µç ¹İÁö,150,Equipment,Accessory,None,1,1,1,1,1,0,0,0,0,3,0.02,0.02,0,0
-1004,ÇÏ±Ş HP ¹°¾à,¾öÃ»³ª°Ô ½á¼­ Ã¼·ÂÀÌ {HpAmount}¸¸Å­¸¸ È¸º¹µÈ´Ù.,30,Consumable,None,Potion,20,0,0,0,0,0,0,0,0,0,0,0,50,0
-1005,Áß±Ş HP ¹°¾à,¾´¹°¾à Ã¼·ÂÀÌ {HpAmount}¸¸Å­¸¸ È¸º¹µÈ´Ù.,200,Consumable,None,Potion,20,0,0,0,0,0,0,0,0,0,0,0,150,0
+DataId,Name,Description,Price,ItemType,EquipmentType,ConsumableType,RequiredJobType,MaxCount,StatStr,StatDex,StatInt,StatLuck,MaxHp,MaxMp,Attack,Defense,Speed,DodgeChanceRate,CriticalChanceRate,HpAmount,MpAmount
+1001,ëª©ê²€,ë‚˜ë¬´ë¡œ ë§Œë“  íŠ¼íŠ¼í•œ ê²€,100,Equipment,Weapon,None,None,1,0,0,0,0,0,0,7,0,0,0,0,0,0
+1002,ëˆ„ë”ê¸° ì˜·,ë”ëŸ¬ìš´ ì²œìª¼ë¦¬ê°€ë¦¬ ì˜·,50,Equipment,Armor,None,None,1,0,0,0,0,0,0,0,5,0,0,0,0,0
+1003,ê½ƒë°˜ì§€,ê½ƒìœ¼ë¡œ ë§Œë“  ë°˜ì§€,150,Equipment,Accessory,None,None,1,1,1,1,1,0,0,0,0,3,0.02,0.02,0,0
+1004,í•˜ê¸‰ HP ë¬¼ì•½,ì—„ì²­ë‚˜ê²Œ ì¨ì„œ ì²´ë ¥ì´ {HpAmount}ë§Œí¼ë§Œ íšŒë³µëœë‹¤.,30,Consumable,None,Potion,None,20,0,0,0,0,0,0,0,0,0,0,0,50,0
+1005,ì¤‘ê¸‰ HP ë¬¼ì•½,ì“´ë¬¼ì•½ ì²´ë ¥ì´ {HpAmount}ë§Œí¼ë§Œ íšŒë³µëœë‹¤.,200,Consumable,None,Potion,None,20,0,0,0,0,0,0,0,0,0,0,0,150,0

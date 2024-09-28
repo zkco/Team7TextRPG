@@ -20,6 +20,8 @@ namespace Team7TextRPG.Contents.Items
         public string? Description { get; protected set; }
         public int Price { get; protected set; }
         public Defines.JobType RequiredJobType { get; protected set; }
+        public int Count { get; protected set; }
+        public int MaxCount { get; protected set; }
 
         public virtual Stat ItemStat { get; protected set; } = new Stat();
 
@@ -30,6 +32,7 @@ namespace Team7TextRPG.Contents.Items
             Description = data.DescText();
             ItemType = data.ItemType;
             Price = data.Price;
+            MaxCount = data.MaxCount;
             ItemStat.StatStr = data.StatStr;
             ItemStat.StatDex = data.StatDex;
             ItemStat.StatInt = data.StatInt;

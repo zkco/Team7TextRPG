@@ -110,8 +110,8 @@ namespace Team7TextRPG.Utils
 
         public enum PagingSelectionType
         {
-            None,
-            Item1, Item2, Item3, Item4, Item5, // 아이템 5개씩 선택
+            None = 0,
+            // Item1, Item2, Item3, Item4, Item5, // 아이템 5개씩 선택
             NextPage = 6,
             PrevPage = 7,
             Exit = 8

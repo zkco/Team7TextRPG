@@ -20,7 +20,6 @@ namespace Team7TextRPG.Contents.Shops
             Buy = 1,
             Sell = 2
         }
-        public int DataId { get; protected set; }
         protected List<ItemData> SaleItems { get; set; } = new List<ItemData>();
         public virtual Defines.ShopType ShopType { get; protected set; }
 
@@ -29,14 +28,17 @@ namespace Team7TextRPG.Contents.Shops
 
         public ShopBase()
         {
-            DataManager.Instance.ShopDataDict.Values.ToList().ForEach(shopData =>
+            // 상점에 팔 아이템 데이터를 가져오기 위한 전처리
+            foreach (var item in DataManager.Instance.ShopDataDict.Values)
             {
-                if (shopData.ShopType == ShopType)
+                if (item.ShopType == ShopType)
                 {
-                    this.DataId = shopData.DataId;
-                    this.ShopType = shopData.ShopType;
+                    if (DataManager.Instance.ItemDataDict.TryGetValue(item.ItemDataId, out ItemData? itemData) == false)
+                        continue;
+
+                    SaleItems.Add(itemData);
                 }
-            });
+            }
         }
 
         protected void NextPage()
@@ -61,10 +63,11 @@ namespace Team7TextRPG.Contents.Shops
             // 6. 다음 페이지
             // 7. 이전 페이지
             // 8. 나가기
-            Enum.GetValues(typeof(Defines.PagingSelectionType)).Cast<Defines.PagingSelectionType>().ToList().ForEach(selection =>
+            foreach (var selection in Enum.GetValues(typeof(Defines.PagingSelectionType)).Cast<Defines.PagingSelectionType>())
             {
-                TextHelper.WriteLine($"{(int)selection}. {selection}");
-            });
+                if (selection == Defines.PagingSelectionType.None) continue;
+                TextHelper.ItContent($"{(int)selection}. {Util.PagingSelectionTypeToString(selection)}");
+            }
         }
         // 나열..
         public virtual void Buy(Defines.PagingSelectionType selection)
@@ -83,9 +86,9 @@ namespace Team7TextRPG.Contents.Shops
                 case Defines.PagingSelectionType.None:
                     return;
                 default:
-                    if (selection >= Defines.PagingSelectionType.Item1 && selection <= Defines.PagingSelectionType.Item5)
+                    if (selection > 0 && selection < Defines.PagingSelectionType.NextPage)
                     {
-                        int index = (int)selection - (int)Defines.PagingSelectionType.Item1;
+                        int index = (int)selection - 1;
                         if (index < items.Length)
                         {
                             ItemData item = items[index];
@@ -112,7 +115,7 @@ namespace Team7TextRPG.Contents.Shops
         // 살때 목록
         protected virtual void ShowSaleItems()
         {
-            TextHelper.ItContent(" 이름 | 가격 | 직업 | 설명");
+            TextHelper.ItContent("번호 | 이름 | 가격 | 직업 | 설명");
             ItemData[] items = SaleItems.Skip(pageIndex * pageSize).Take(pageSize).ToArray();
             for (int i = 0; i < 5; i++)
             {
@@ -120,7 +123,7 @@ namespace Team7TextRPG.Contents.Shops
                 {
                     ItemData item = items[i];
                     string jobText = item.RequiredJobType == Defines.JobType.None ? "전체" : Util.JobTypeToString(item.RequiredJobType);
-                    TextHelper.ItContent($"{i + 1}. {item.Name} | {item.Price} | {jobText} | {item.DescText}");
+                    TextHelper.ItContent($"{i + 1}. {item.Name} | {item.Price}G | {jobText} | {item.DescText()}");
                 }
                 else
                 {
@@ -133,7 +136,7 @@ namespace Team7TextRPG.Contents.Shops
         // 팔때 목록
         protected virtual void ShowPlayerItems()
         {
-            TextHelper.ItContent(" 이름 | 가격 | 직업 | 설명");
+            TextHelper.ItContent("번호 | 이름 | 가격 | 직업 | 설명");
             ItemBase[] items = GameManager.Instance.PlayerItems.Skip(pageIndex * pageSize).Take(pageSize).ToArray();
             for (int i = 0; i < 5; i++)
             {
@@ -141,7 +144,7 @@ namespace Team7TextRPG.Contents.Shops
                 {
                     ItemBase item = items[i];
                     string jobText = item.RequiredJobType == Defines.JobType.None ? "전체" : Util.JobTypeToString(item.RequiredJobType);
-                    TextHelper.ItContent($"{i + 1}. {item.Name} | {item.Price} | {jobText} | {item.Description}");
+                    TextHelper.ItContent($"{i + 1}. {item.Name} | {item.Price}G | {jobText} | {item.Description}");
                 }
                 else
                 {

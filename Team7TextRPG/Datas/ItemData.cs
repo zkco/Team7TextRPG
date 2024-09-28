@@ -17,6 +17,7 @@ namespace Team7TextRPG.Datas
         public Defines.EquipmentType EquipmentType; // 장비 타입 (Weapon, Armor, Accessory)
         public Defines.ConsumableType ConsumableType; // 소비 타입 (Hp, Mp)
         public Defines.JobType RequiredJobType; // 요구 직업
+        public int MaxCount;
 
         public int StatStr; // 힘 ex) 5
         public int StatDex; // 민첩 ex) 5

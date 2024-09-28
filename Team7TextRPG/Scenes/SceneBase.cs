@@ -25,7 +25,7 @@ namespace Team7TextRPG.Scenes
         }
         protected virtual void WriteMessage(string message)
         {
-            Console.WriteLine(message);
+            TextHelper.BtContent(message);
         }
 
     }
