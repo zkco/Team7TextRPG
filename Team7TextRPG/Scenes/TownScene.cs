@@ -37,11 +37,11 @@ namespace Team7TextRPG.Scenes
                     break;
                 case TownSceneType.Shop:
                     WriteMessage("상점 씬으로 이동");
-                    SceneManager.Instance.LoadScene<TownScene>();
+                    SceneManager.Instance.LoadScene<ShopScene>();
                     break;
                 case TownSceneType.Exit:
                     WriteMessage("필드 씬으로 이동");
-                    SceneManager.Instance.LoadScene<TownScene>();
+                    SceneManager.Instance.LoadScene<FieldScene>();
                     break;
             }
         }
