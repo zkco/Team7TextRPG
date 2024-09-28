@@ -1,6 +1,6 @@
-DataId,NpcDataId,ItemDataId
-201,101,1001
-202,102,1002
-203,103,1003
-204,104,1004
-205,104,1005
+DataId,ShopType,NpcDataId,ItemDataId
+201,Weapon,101,1001
+202,Armor,102,1002
+203,Accessory,103,1003
+204,Potion,104,1004
+205,Potion,104,1005

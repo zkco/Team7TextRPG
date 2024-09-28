@@ -1,9 +1,11 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Team7TextRPG.Scenes;
 using Team7TextRPG.UIs;
+using Team7TextRPG.Utils;
 
 namespace Team7TextRPG.Managers
 {
@@ -17,6 +19,11 @@ namespace Team7TextRPG.Managers
         public void Write<T>() where T : UIBase, new()
         {
             new T().Write();
+        }
+        public void ShopWrite(Defines.ShopType type)
+        {
+            ShopUI shopUI = new ShopUI(type);
+            shopUI.Write();
         }
 
         public bool Confirm(string message, Action? onYes = null, Action? onNo = null)

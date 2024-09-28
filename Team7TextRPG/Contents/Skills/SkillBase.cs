@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,7 +9,8 @@ namespace Team7TextRPG.Contents.Skills
 {
     public abstract class SkillBase
     {
-        public virtual CreatureBase Owner { get; protected set; }
+        public int DataId { get; protected set; }
+        public CreatureBase Owner { get; protected set; }
         public virtual string? Name { get; protected set; }
         public virtual string? Description { get; protected set; }
         public virtual int Level { get; protected set; }

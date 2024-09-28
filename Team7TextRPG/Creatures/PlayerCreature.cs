@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Team7TextRPG.Contents;
 using Team7TextRPG.Contents.Items;
+using Team7TextRPG.Datas;
 using Team7TextRPG.Utils;
 
 namespace Team7TextRPG.Creatures
@@ -24,8 +25,8 @@ namespace Team7TextRPG.Creatures
         public override int StatInt => BaseStat.StatInt + ItemStat.StatInt;
         public override int StatLuck => BaseStat.StatLuck + ItemStat.StatLuck;
 
-        public override int MaxHp => BaseStat.MaxHp + ItemStat.MaxHp;
-        public override int MaxMp => BaseStat.MaxMp + ItemStat.MaxMp;
+        public override int MaxHp => BaseStat.MaxHp + ItemStat.MaxHp + CalcJobMaxHp();
+        public override int MaxMp => BaseStat.MaxMp + ItemStat.MaxMp + CalcJobMaxMp();
 
         public override int Attack => BaseStat.Attack + ItemStat.Attack + CalcJobAttack();
         public override int Defense => BaseStat.Defense + ItemStat.Defense + CalcJobDefense();
@@ -47,15 +48,23 @@ namespace Team7TextRPG.Creatures
         public override void SetInfo(Defines.JobType job)
         {
             this.JobType = job;
-            switch(JobType)
-            {
-                case Defines.JobType.Warrior:
-                    BaseStat.StatStr = 10;
-                    BaseStat.StatDex = 5;
-                    BaseStat.StatInt = 5;
-                    BaseStat.StatLuck = 5;
-                    break;
-            }
+        }
+
+        public void SetLoadData(SavePlayerData saveData)
+        {
+            // 저장 데이터 로드시 사용할 예정
+            SetLevel(saveData.Level);
+            BaseStat.StatStr = saveData.StatStr;
+            BaseStat.StatDex = saveData.StatDex;
+            BaseStat.StatInt = saveData.StatInt;
+            BaseStat.StatLuck = saveData.StatLuck;
+
+            Exp = saveData.Exp;
+            JobType = saveData.JobType;
+            SexType = saveData.SexType;
+            SpecisType = saveData.SpeciesType;
+            Hp = saveData.Hp;
+            Mp = saveData.Mp;
         }
 
         public void Equip(EquipmentItem equipment)

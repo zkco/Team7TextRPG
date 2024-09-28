@@ -1,4 +1,4 @@
 DataId,Name,Description,RequiredLevel,RequiredJob,MpCoast,LearnPrice,SkillType,ValueType,Value,TargetCount,HitCount
-4001,ê°•íƒ€,ê°•ë ¥í•œ ì¼ê²©,1,None,5,300,Attack,Percent,120,1,1
-4002,ë¶•ëŒ€ê°ê¸°,ìƒì²˜ì— ë¶•ëŒ€ë¥¼ ê°ëŠ”ë‹¤.,3,None,8,200,Heal,Absolute,10,1,1
-4003,ìŠ¤ë§¤ì‹œ,ê²€ì„ ê°•ë ¥í•˜ê²Œ íœ˜ë‘ë¥¸ë‹¤.,5,Warrior,9,1000,Attack,Percent,150,1,1
+4001,°­Å¸,°­·ÂÇÑ ÀÏ°İ,1,None,5,300,Attack,Percent,120,1,1
+4002,ºØ´ë°¨±â,»óÃ³¿¡ ºØ´ë¸¦ °¨´Â´Ù.,3,None,8,200,Heal,Absolute,10,1,1
+4003,½º¸Å½Ã,°ËÀ» °­·ÂÇÏ°Ô ÈÖµÎ¸¥´Ù.,5,Warrior,9,1000,Attack,Percent,150,1,1

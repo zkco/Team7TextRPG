@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Team7TextRPG.Contents;
+using Team7TextRPG.Datas;
+using Team7TextRPG.Managers;
 using Team7TextRPG.Utils;
 
 namespace Team7TextRPG.Creatures
@@ -17,6 +19,9 @@ namespace Team7TextRPG.Creatures
         public Defines.SexType SexType { get; protected set; }
         public Defines.JobType JobType { get; protected set; } = Defines.JobType.None;
         public Stat BaseStat { get; protected set; } = new Stat();
+
+        public int Hp { get; protected set; }
+        public int Mp { get; protected set; }
 
         public virtual int StatStr => BaseStat.StatStr;
         public virtual int StatDex => BaseStat.StatDex;
@@ -35,10 +40,28 @@ namespace Team7TextRPG.Creatures
         protected Random random = new Random();
 
         public abstract void SetInfo(Defines.JobType job);
-        public abstract void LevelUp();
         public abstract void OnDamaged(int damage);
         public abstract void OnHealed(int heal);
         public abstract void OnDead();
+
+        public virtual void LevelUp()
+        {
+            SetLevel(Level + 1);
+        }
+        protected virtual void SetLevel(int level)
+        {
+            int maxLevel = DataManager.Instance.LevelDataDict.Count;
+            if (maxLevel < level)
+            {
+                Level = maxLevel;
+                return;
+            }
+            LevelData levelData = DataManager.Instance.LevelDataDict[level];
+            BaseStat.StatStr = levelData.Str;
+            BaseStat.StatDex = levelData.Dex;
+            BaseStat.StatInt = levelData.Int;
+            BaseStat.StatLuck = levelData.Luck;
+        }
 
         public int CalcJobAttack()
         {
@@ -88,6 +111,26 @@ namespace Team7TextRPG.Creatures
                 Defines.JobType.Archer => StatLuck * 0.003,
                 Defines.JobType.Mage => StatLuck * 0.002,
                 _ => 0.01,
+            };
+        }
+        public int CalcJobMaxHp()
+        {
+            return JobType switch
+            {
+                Defines.JobType.Warrior => StatStr * 10,
+                Defines.JobType.Archer => StatDex * 5,
+                Defines.JobType.Mage => StatInt * 5,
+                _ => StatStr * 10,
+            };
+        }
+        public int CalcJobMaxMp()
+        {
+            return JobType switch
+            {
+                Defines.JobType.Warrior => StatStr * 5,
+                Defines.JobType.Archer => StatDex * 5,
+                Defines.JobType.Mage => StatInt * 10,
+                _ => StatStr * 5,
             };
         }
     }

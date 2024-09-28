@@ -7,7 +7,6 @@ using Team7TextRPG.Utils;
 
 namespace Team7TextRPG.Datas
 {
-    [Serializable]
     public class ItemData
     {
         public int DataId; // 데이터 아이디 ex) 1
@@ -17,6 +16,7 @@ namespace Team7TextRPG.Datas
         public Defines.ItemType ItemType; // 아이템 타입 (Equipment, Consumable)
         public Defines.EquipmentType EquipmentType; // 장비 타입 (Weapon, Armor, Accessory)
         public Defines.ConsumableType ConsumableType; // 소비 타입 (Hp, Mp)
+        public Defines.JobType RequiredJobType; // 요구 직업
 
         public int StatStr; // 힘 ex) 5
         public int StatDex; // 민첩 ex) 5
@@ -34,5 +34,20 @@ namespace Team7TextRPG.Datas
 
         public int HpAmount; // 체력 회복량 ex) 10
         public int MpAmount; // 마나 회복량 ex) 10
+
+        public string? DescText () => Description?
+                .Replace("{StatStr}", StatStr.ToString())
+                .Replace("{StatDex}", StatDex.ToString())
+                .Replace("{StatInt}", StatInt.ToString())
+                .Replace("{StatLuck}", StatLuck.ToString())
+                .Replace("{MaxHp}", MaxHp.ToString())
+                .Replace("{MaxMp}", MaxMp.ToString())
+                .Replace("{Attack}", Attack.ToString())
+                .Replace("{Defense}", Defense.ToString())
+                .Replace("{Speed}", Speed.ToString())
+                .Replace("{DodgeChanceRate}", $"{(DodgeChanceRate * 100):0.00}%")
+                .Replace("{CriticalChanceRate}", $"{(CriticalChanceRate * 100):0.00}%")
+                .Replace("{HpAmount}", HpAmount.ToString())
+                .Replace("{MpAmount}", MpAmount.ToString());
     }
 }

@@ -48,6 +48,17 @@ namespace Team7TextRPG.Utils
             Quest
         }
 
+        public enum ShopType
+        {
+            None,       //0. 없음
+            Potion,     //1. 잡화 상점
+            Weapon,     //2. 무기 상점
+            Armor,      //3. 방어구 상점
+            Accessory,  //4. 악세서리 상점
+            Blacksmith, //5. 대장간
+            Outshop     //6. 상점 나가기
+        }
+
         public enum QuestType
         {
             None,
@@ -95,6 +106,15 @@ namespace Team7TextRPG.Utils
             None,
             Percent,
             Absolute
+        }
+
+        public enum PagingSelectionType
+        {
+            None,
+            Item1, Item2, Item3, Item4, Item5, // 아이템 5개씩 선택
+            NextPage = 6,
+            PrevPage = 7,
+            Exit = 8
         }
 
         public const int MAX_PLAYER_LEVEL = 100;

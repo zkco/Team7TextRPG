@@ -1,2 +1,2 @@
 DataId,NpcDataId,QuestType,Name,Description,Order,TargetDataId1,Amount1,TargetDataId2,Amount2,ExpReward,GoldReward,ItemRewardDataId1,ItemRewardDataId2,RequiredLevel
-2001,105,Hunt,ê³ ë¸”ë¦° ì²˜ì¹˜,ì´Œì¥ì´ ì˜ë¢°í•˜ëŠ” ê³ ë¸”ë¦° í‡´ì¹˜ ì˜ë¢°,1,3001,10,0,0,200,300,0,0,1
+2001,105,Hunt,°íºí¸° Ã³Ä¡,ÃÌÀåÀÌ ÀÇ·ÚÇÏ´Â °íºí¸° ÅğÄ¡ ÀÇ·Ú,1,3001,10,0,0,200,300,0,0,1
