@@ -50,5 +50,17 @@ namespace Team7TextRPG.Managers
 
             return (T)Enum.ToObject(typeof(T), value);
         }
+
+        public T ParseInputType<T>(string input) where T : Enum
+        {
+            if (int.TryParse(input, out int value) == false)
+                throw new Exception("입력 가능한 숫자가 아닙니다.");
+
+            T[] values = (T[])Enum.GetValues(typeof(T));
+            if (values.Length <= value || value <= 0)
+                throw new Exception("입력 가능한 숫자 범위가 아닙니다.");
+
+            return (T)Enum.ToObject(typeof(T), value);
+        }
     }
 }

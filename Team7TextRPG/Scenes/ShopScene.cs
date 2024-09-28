@@ -8,13 +8,17 @@ namespace Team7TextRPG.Scenes
     {
         public override void Show()
         {
-            // 상점 안내 출력
             Console.Clear();
+            // [상태, 인벤토리, 스킬, 퀘스트]
+            UIManager.Instance.CommonWrite();
+            // 상점 안내 출력
             WriteMessage("방문하려는 상점을 선택하세요.");
             // 1. 메뉴를 보여준다.
             WriteType<Defines.ShopType>();
             // 2. 사용자 입력 받는다.
-            Defines.ShopType selection = InputManager.Instance.GetInputType<Defines.ShopType>();
+            string input = InputManager.Instance.GetInputKeyword();
+            UIManager.Instance.CommonLoad(input);
+            Defines.ShopType selection = InputManager.Instance.ParseInputType<Defines.ShopType>(input);
             // 3. 사용자 입력에 따라 다음 화면으로 이동하거나 표시한다.
             if (selection == Defines.ShopType.Outshop)
             {

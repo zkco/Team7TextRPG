@@ -8,11 +8,14 @@ namespace Team7TextRPG.UIs
     {
         public override void Write()
         {
+            Console.Clear();
             // 1. 이름을 입력 받고
             string name = InputManager.Instance.GetInputString("당신의 이름은?");
+            Console.Clear();
             // 2. 성별을 입력받고
             WriteType<Defines.SexType>();
             Defines.SexType sexType = InputManager.Instance.GetInputType<Defines.SexType>("성별은?");
+            Console.Clear();
             // 3. 종족을 입력받고
             WriteType<Defines.SpeciesType>();
             Defines.SpeciesType speciesType = InputManager.Instance.GetInputType<Defines.SpeciesType>("종족은?");

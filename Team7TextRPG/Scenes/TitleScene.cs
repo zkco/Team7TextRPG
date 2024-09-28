@@ -17,6 +17,7 @@ namespace Team7TextRPG.Scenes
 
         public override void Show()
         {
+            Console.Clear();
             // 로고 출력
             TextHelper.BtContent("Team7 Text RPG");
             // 1. 메뉴를 보여준다.

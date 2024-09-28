@@ -98,5 +98,17 @@ namespace Team7TextRPG.Utils
         // BannerTextContent = BtContent
         public static void BtContent(string message, params object?[]? args) => Content(TextType.Banner, message, args);
 
+        public static void PageWrite(string text)
+        {
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
+            Console.WriteLine($"[ {text} ]");
+            Console.ResetColor();
+        }
+        public static void StatusBar(string text)
+        {
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.WriteLine($"[ {text} ]");
+            Console.ResetColor();
+        }
     }
 }

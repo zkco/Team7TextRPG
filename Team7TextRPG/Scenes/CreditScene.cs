@@ -11,6 +11,7 @@ namespace Team7TextRPG.Scenes
     {
         public override void Show()
         {
+            Console.Clear();
             // 1. 기능
             // 2. 기능
             Console.WriteLine("엔딩 크레딧 미구현");

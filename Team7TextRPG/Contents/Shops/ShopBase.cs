@@ -51,7 +51,7 @@ namespace Team7TextRPG.Contents.Shops
         }
         protected void CurrentPage()
         {
-            TextHelper.ItHeader($"현재 페이지: {pageIndex + 1}/{(SaleItems.Count - 1) / pageSize + 1}");
+            TextHelper.PageWrite($"현재 페이지: {pageIndex + 1}/{(SaleItems.Count - 1) / pageSize + 1}");
         }
         public void ShowSelection()
         {
@@ -144,7 +144,7 @@ namespace Team7TextRPG.Contents.Shops
                 {
                     ItemBase item = items[i];
                     string jobText = item.RequiredJobType == Defines.JobType.None ? "전체" : Util.JobTypeToString(item.RequiredJobType);
-                    TextHelper.ItContent($"{i + 1}. {item.Name} | {item.Price}G | {jobText} | {item.Description}");
+                    TextHelper.ItContent($"{i + 1}. {item.Name} | {(int)(item.Price * 0.5)}G | {jobText} | {item.Description}");
                 }
                 else
                 {
@@ -157,6 +157,7 @@ namespace Team7TextRPG.Contents.Shops
         // 구매 or 판매 선택
         public virtual void Show()
         {
+            Console.Clear();
             TextHelper.ItHeader($"{Util.ShopTypeToString(ShopType)}");
             TextHelper.ItContent("1. 구매");
             TextHelper.ItContent("2. 판매");

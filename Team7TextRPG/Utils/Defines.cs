@@ -117,6 +117,15 @@ namespace Team7TextRPG.Utils
             Exit = 8
         }
 
+        public enum CommonUIType
+        {
+            None,
+            Status,
+            Inventory,
+            Skill,
+            Quest
+        }
+
         public const int MAX_PLAYER_LEVEL = 100;
 
     }

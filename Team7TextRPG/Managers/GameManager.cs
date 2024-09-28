@@ -26,13 +26,13 @@ namespace Team7TextRPG.Managers
 
         public PlayerCreature? Player { get; private set; }
         public List<ItemBase> PlayerItems { get; private set; } = new List<ItemBase>();
-        public int PlayerGold { get; private set; }
+        
 
         // 게임 limit 요소
         public const int DeadLine = 50;
         public int CurrentDay { get; private set; } = 0;
-        public int Gold = 0; //소지 중인 금액
-        public int Chip = 0; //소지 중인 칩 갯수
+        public int PlayerGold { get; private set; } //소지 중인 금액
+        public int PlayerChip { get; private set; } //소지 중인 칩 갯수 
 
         public void CreatePlayer(string name, Defines.SexType sexType, Defines.SpeciesType specisType)
         {
@@ -41,6 +41,7 @@ namespace Team7TextRPG.Managers
             // 플레이어 정보 설정
             Player.SetInfo(Defines.JobType.Newbie);
             // 플레이어 초기화
+            Player.Init();
         }
 
         public void AddGold(int gold)
@@ -50,6 +51,15 @@ namespace Team7TextRPG.Managers
         public void RemoveGold(int gold)
         {
             PlayerGold -= gold;
+        }
+
+        public void AddChip(int chip)
+        {
+            PlayerChip += chip;
+        }
+        public void RemoveChip(int chip)
+        {
+            PlayerChip -= chip;
         }
 
         public void AddItem(ItemData item)

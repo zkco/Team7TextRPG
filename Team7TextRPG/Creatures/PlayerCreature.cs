@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Team7TextRPG.Contents;
 using Team7TextRPG.Contents.Items;
 using Team7TextRPG.Datas;
+using Team7TextRPG.Managers;
 using Team7TextRPG.Utils;
 
 namespace Team7TextRPG.Creatures
@@ -50,6 +51,14 @@ namespace Team7TextRPG.Creatures
             this.JobType = job;
         }
 
+        public void Init()
+        {
+            // 처음 캐릭터 생성시에만 사용
+            this.SetLevel(1);
+            this.Exp = 0;
+            this.Hp = MaxHp;
+        }
+
         public void SetLoadData(SavePlayerData saveData)
         {
             // 저장 데이터 로드시 사용할 예정
@@ -67,16 +76,43 @@ namespace Team7TextRPG.Creatures
             Mp = saveData.Mp;
         }
 
-        public void Equip(EquipmentItem equipment)
+        protected override void SetLevel(int level)
+        {
+            base.SetLevel(level);
+            LevelData levelData = DataManager.Instance.LevelDataDict[level];
+            MaxExp = levelData.MaxExp;
+        }
+
+        public void EquipItem(EquipmentItem equipment)
         {
             // 장비 장착
             OnEuipmentChanged();
+            UnEquipItem(equipment.EquipmentType);
+            if (equipment.EquipmentType == Defines.EquipmentType.Weapon)
+                EWeapon = equipment;
+            else if (equipment.EquipmentType == Defines.EquipmentType.Armor)
+                EArmor = equipment;
+            else if (equipment.EquipmentType == Defines.EquipmentType.Accessory)
+                EAccessory = equipment;
         }
 
-        public void UnEquip(EquipmentItem equipment)
+        public void UnEquipItem(Defines.EquipmentType equipmentType)
         {
             // 장비 해제
+
+            if (equipmentType == Defines.EquipmentType.Weapon)
+                EWeapon = null;
+            else if (equipmentType == Defines.EquipmentType.Armor)
+                EArmor = null;
+            else if (equipmentType == Defines.EquipmentType.Accessory)
+                EAccessory = null;
+
             OnEuipmentChanged();
+        }
+
+        public void UseItem(ConsumableItem item)
+        {
+            // 아이템 사용
         }
 
         private void OnEuipmentChanged()

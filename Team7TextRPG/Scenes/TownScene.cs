@@ -21,9 +21,12 @@ namespace Team7TextRPG.Scenes
         public override void Show()
         {
             Console.Clear();
+            UIManager.Instance.CommonWrite();
             // UI Base 출력
             WriteType<TownSceneType>();
-            TownSceneType selection = InputManager.Instance.GetInputType<TownSceneType>();
+            string input = InputManager.Instance.GetInputKeyword();
+            UIManager.Instance.CommonLoad(input);
+            TownSceneType selection = InputManager.Instance.ParseInputType<TownSceneType>(input);
 
             switch (selection)
             {

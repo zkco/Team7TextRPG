@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Team7TextRPG.Managers;
 using Team7TextRPG.UIs;
+using Team7TextRPG.Utils;
 using static Team7TextRPG.Scenes.TitleScene;
 
 namespace Team7TextRPG.Scenes
@@ -21,13 +22,19 @@ namespace Team7TextRPG.Scenes
 
         public override void Show()
         {
+            Console.Clear();
+            // [상태, 인벤토리, 스킬, 퀘스트]
+            UIManager.Instance.CommonWrite();
             // 1. 주변을 탐색한다
             // 2. 던전으로 가기          
             // 3. 마을로 돌아가기
 
 
             WriteType<FieldSceneType>();
-            FieldSceneType selection = InputManager.Instance.GetInputType<FieldSceneType>();
+
+            string input = InputManager.Instance.GetInputKeyword();
+            UIManager.Instance.CommonLoad(input);
+            FieldSceneType selection = InputManager.Instance.ParseInputType<FieldSceneType>(input);
 
             switch (selection)
             {

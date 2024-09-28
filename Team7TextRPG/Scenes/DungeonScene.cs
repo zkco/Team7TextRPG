@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Team7TextRPG.Managers;
+using static Team7TextRPG.Scenes.FieldScene;
 
 namespace Team7TextRPG.Scenes
 {
@@ -13,9 +14,13 @@ namespace Team7TextRPG.Scenes
         public override void Show()
         {
             Console.Clear();
+            // [상태, 인벤토리, 스킬, 퀘스트]
+            UIManager.Instance.CommonWrite();
             WriteType<DungeonSceneType>();
 
-            DungeonSceneType selection = InputManager.Instance.GetInputType<DungeonSceneType>();
+            string input = InputManager.Instance.GetInputKeyword();
+            UIManager.Instance.CommonLoad(input);
+            DungeonSceneType selection = InputManager.Instance.ParseInputType<DungeonSceneType>(input);
             switch (selection)
             {
                 case DungeonSceneType.Easy:

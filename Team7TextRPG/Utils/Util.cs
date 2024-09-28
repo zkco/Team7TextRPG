@@ -63,6 +63,17 @@ namespace Team7TextRPG.Utils
                 _ => "알 수 없음"
             };
         }
+        public static string CommonUITypeToString(Defines.CommonUIType commonUiType)
+        {
+            return commonUiType switch
+            {
+                Defines.CommonUIType.Status => "상태",
+                Defines.CommonUIType.Inventory => "인벤토리",
+                Defines.CommonUIType.Skill => "스킬",
+                Defines.CommonUIType.Quest => "퀘스트",
+                _ => "알 수 없음",
+            };
+        }
         public static int GrowthValue(int level, int maxLevel, double growthRate = 1.2, double baseExp = 100)
         {
             return (int)(baseExp * Math.Pow(growthRate, level));
