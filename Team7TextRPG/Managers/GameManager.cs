@@ -1,12 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Team7TextRPG.Contents;
 using Team7TextRPG.Contents.Items;
 using Team7TextRPG.Creatures;
 using Team7TextRPG.Datas;
-using Team7TextRPG.UIs;
 using Team7TextRPG.Utils;
 
 namespace Team7TextRPG.Managers
@@ -26,7 +21,8 @@ namespace Team7TextRPG.Managers
 
         public PlayerCreature? Player { get; private set; }
         public List<ItemBase> PlayerItems { get; private set; } = new List<ItemBase>();
-        
+        public List<Skill> PlayerSkills { get; private set; } = new List<Skill>();
+
 
         // 게임 limit 요소
         public const int DeadLine = 50;
@@ -52,6 +48,10 @@ namespace Team7TextRPG.Managers
         {
             PlayerGold -= gold;
         }
+        public bool HasGold(int gold)
+        {
+            return PlayerGold >= gold;
+        }
 
         public void AddChip(int chip)
         {
@@ -62,18 +62,87 @@ namespace Team7TextRPG.Managers
             PlayerChip -= chip;
         }
 
-        public void AddItem(ItemData item)
+        public bool AddItem(ItemData itemData)
         {
             // 아이템 추가 로직
-            // 중첩 가능한 아이템은 중첩 되도록
-            // 중첩 불가능한 아이템은 중첩 되지 않도록
+            // 반환값 : 추가 되었는지 여부
+            ItemBase? item = PlayerItems.FirstOrDefault(s => s.DataId == itemData.DataId);
+            if (item == null)
+            {
+                // 가지고 있는 아이템이 없다면 생성
+                switch (itemData.ItemType)
+                {
+                    case Defines.ItemType.Equipment:
+                        item = new EquipmentItem();
+                        break;
+                    case Defines.ItemType.Consumable:
+                        item = new ConsumableItem();
+                        break;
+                }
+
+                item?.SetItemData(itemData);
+                if (item != null)
+                {
+                    PlayerItems.Add(item);
+                    return true;
+                }
+
+                return false;
+            }
+            else
+            {
+                // 가지고 있는 아이템이 있다면
+                if (item.MaxCount > item.Count)
+                {
+                    item.AddCount(); // 수량 추가
+                    return true;
+                }
+
+                return false;
+            }
+        }
+        public void RemoveItem(int dataId)
+        {
+            // 아이템 삭제 로직
+            ItemBase? item = PlayerItems.FirstOrDefault(s => s.DataId == dataId);
+            if (item != null)
+                RemoveItem(item);
         }
         public void RemoveItem(ItemBase item)
         {
             // 아이템 삭제 로직
-            // 중첩 가능한 아이템은 하나씩 삭제
-            // 중첩 불가능한 아이템은 그대로 삭제
+            item.RemoveCount();
+            if (item.Count == 0) // 아이템 중첩 수가 0이면
+                PlayerItems.Remove(item); // 항목에서 삭제
         }
 
+        public void AddSkill(SkillData skillData)
+        {
+            if (Player == null) return;
+
+            Skill skill = new Skill(Player);
+            skill.SetSkillData(skillData);
+            PlayerSkills.Add(skill);
+        }
+        public void RemoveSkill(int dataId)
+        {
+            Skill? skill = PlayerSkills.FirstOrDefault(s => s.DataId == dataId);
+            if (skill != null)
+                RemoveSkill(skill);
+        }
+        public void RemoveSkill(Skill skill)
+        {
+            PlayerSkills.Remove(skill);
+        }
+
+        public bool IsEquippedItem(int dataId)
+        {
+            if (DataManager.Instance.ItemDataDict.TryGetValue(dataId, out ItemData? itemData) == false)
+                return false;
+
+            return itemData.ItemType == Defines.ItemType.Equipment && (Player?.EWeapon?.DataId == itemData.DataId
+                || Player?.EArmor?.DataId == itemData.DataId
+                || Player?.EAccessory?.DataId == itemData.DataId);
+        }
     }
 }

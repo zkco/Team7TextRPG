@@ -44,6 +44,7 @@ namespace Team7TextRPG.Contents.Items
             ItemStat.CriticalChanceRate = data.CriticalChanceRate;
             ItemStat.MaxHp = data.MaxHp;
             ItemStat.MaxMp = data.MaxMp;
+            Count = 1;
         }
 
         public virtual void Use()
@@ -51,6 +52,19 @@ namespace Team7TextRPG.Contents.Items
             Console.WriteLine($"아이템 {Name}을 사용했습니다.");
         }
 
+        public virtual void AddCount(int count = 1)
+        {
+            Count += count;
+            if (Count > MaxCount)
+                Count = MaxCount;
+        }
+
+        public virtual void RemoveCount(int count = 1)
+        {
+            Count -= count;
+            if (Count < 0)
+                Count = 0;
+        }
         public override string ToString()
         {
             return $"{Name} - {Description} - 가격: {Price}골드";

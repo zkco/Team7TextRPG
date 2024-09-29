@@ -42,7 +42,8 @@ namespace Team7TextRPG.UIs
                     {
                         ItemBase item = items[i];
                         string jobText = item.RequiredJobType == Defines.JobType.None ? "전체" : Util.JobTypeToString(item.RequiredJobType);
-                        TextHelper.ItContent($"{i + 1}. {item.Name} | {jobText} | {item.Description}");
+                        bool equipped = GameManager.Instance.IsEquippedItem(item.DataId);
+                        TextHelper.ItContent($"{i + 1}. {(equipped ? "[E]" : "")}{item.Name} x{item.Count} | {jobText} | {item.Description}");
                     }
                     else
                     {

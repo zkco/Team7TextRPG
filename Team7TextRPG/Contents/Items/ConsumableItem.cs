@@ -8,7 +8,7 @@ using Team7TextRPG.Utils;
 
 namespace Team7TextRPG.Contents.Items
 {
-    public abstract class ConsumableItem : ItemBase
+    public class ConsumableItem : ItemBase
     {
         public Defines.ConsumableType ConsumableType { get; private set; }
 

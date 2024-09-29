@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Team7TextRPG.Managers;
+using Team7TextRPG.Utils;
 using static Team7TextRPG.Scenes.FieldScene;
 
 namespace Team7TextRPG.Scenes
@@ -14,50 +15,32 @@ namespace Team7TextRPG.Scenes
         public override void Show()
         {
             Console.Clear();
+            TextHelper.BtHeader("던전");
             // [상태, 인벤토리, 스킬, 퀘스트]
-            UIManager.Instance.CommonWrite();
+            UIManager.Instance.CommonWriteBar();
             WriteType<DungeonSceneType>();
 
             string input = InputManager.Instance.GetInputKeyword();
-            UIManager.Instance.CommonLoad(input);
+
+            // 공통 UI 호출한 경우 볼일 마치가 다시 처음으로
+            if (UIManager.Instance.CommonLoad(input))
+            {
+                SceneManager.Instance.LoadScene<DungeonScene>();
+                return;
+            }
+
             DungeonSceneType selection = InputManager.Instance.ParseInputType<DungeonSceneType>(input);
             switch (selection)
             {
                 case DungeonSceneType.Easy:
-                    UIManager.Instance.Confirm("던전에 들어갑니다.",
-                        () =>
-                        {
-                            WriteMessage("던전 입장");
-                        },
-                        () =>
-                        {
-                            SceneManager.Instance.LoadScene<DungeonScene>();
-                        }
-                        );
-                    break;
                 case DungeonSceneType.Normal:
-                    UIManager.Instance.Confirm("던전에 들어갑니다.",
-                        () =>
-                        {
-                            WriteMessage("던전 입장");
-                        },
-                        () =>
-                        {
-                            SceneManager.Instance.LoadScene<DungeonScene>();
-                        }
-                        );
-                    break;
                 case DungeonSceneType.Hard:
-                    UIManager.Instance.Confirm("던전에 들어갑니다.",
-                        () =>
-                        {
-                            WriteMessage("던전 입장");
-                        },
-                        () =>
-                        {
-                            SceneManager.Instance.LoadScene<DungeonScene>();
-                        }
-                        );
+                    if (UIManager.Instance.Confirm($"{SceneTypeToText(selection)}던전에 들어갑니다."))
+                    {
+                        WriteMessage($"{SceneTypeToText(selection)} 던전 입장");
+                        SceneManager.Instance.LoadScene<DungeonScene>();
+                        return;
+                    }
                     break;
                 case DungeonSceneType.Exit:
                     SceneManager.Instance.LoadScene<TownScene>();

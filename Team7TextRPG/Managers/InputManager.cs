@@ -43,12 +43,15 @@ namespace Team7TextRPG.Managers
         // 입력받은 문자열을 enum으로 변환해서 반환하는 함수
         public T GetInputType<T>(string message = "숫자를 입력하세요.", int defaultValue = 0) where T : Enum
         {
-            int value = GetInputInt(message);
-            T[] values = (T[])Enum.GetValues(typeof(T));
-            if (values.Length <= value || value <= 0)
+            try
+            {
+                int value = GetInputInt(message);
+                return (T)Enum.ToObject(typeof(T), value);
+            }
+            catch
+            {
                 return (T)Enum.ToObject(typeof(T), defaultValue);
-
-            return (T)Enum.ToObject(typeof(T), value);
+            }
         }
 
         public T ParseInputType<T>(string input) where T : Enum

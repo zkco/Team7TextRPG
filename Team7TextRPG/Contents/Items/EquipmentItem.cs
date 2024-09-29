@@ -8,7 +8,7 @@ using Team7TextRPG.Utils;
 
 namespace Team7TextRPG.Contents.Items
 {
-    public abstract class EquipmentItem : ItemBase
+    public class EquipmentItem : ItemBase
     {
         public Defines.EquipmentType EquipmentType { get; protected set; }
 

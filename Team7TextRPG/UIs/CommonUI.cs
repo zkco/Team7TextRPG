@@ -14,6 +14,12 @@ namespace Team7TextRPG.UIs
         public override void Write()
         {
             // 공통 UI 표시
+            StatusBar();
+            InterfaceBar();
+        }
+
+        public void StatusBar()
+        {
             if (GameManager.Instance.Player == null)
             {
                 TextHelper.WriteLine("플레이어 정보가 없습니다.");
@@ -24,11 +30,15 @@ namespace Team7TextRPG.UIs
 
             string hpBar = GetHpBar(GameManager.Instance.Player.Hp, GameManager.Instance.Player.MaxHp);
             TextHelper.StatusBar($"체력바{hpBar} | 소지금 {gold}G");
+        }
+
+        public void InterfaceBar()
+        {
             TextHelper.ItHeader(
                 $"{EnumTypeToText(Defines.CommonUIType.Status)} : S | " +
                 $"{EnumTypeToText(Defines.CommonUIType.Inventory)} : I | " +
                 $"{EnumTypeToText(Defines.CommonUIType.Skill)} : K | " +
-                $"{EnumTypeToText(Defines.CommonUIType.Quest)} : Q | "
+                $"{EnumTypeToText(Defines.CommonUIType.Quest)} : Q"
             );
         }
 
@@ -53,9 +63,9 @@ namespace Team7TextRPG.UIs
             for (int i = 0; i < 5; i++)
             {
                 if (i < hpPercent)
-                    sb.Append("■");
+                    sb.Append("♥");
                 else
-                    sb.Append("□");
+                    sb.Append("♡");
             }
             sb.Append(")");
             return sb.ToString();

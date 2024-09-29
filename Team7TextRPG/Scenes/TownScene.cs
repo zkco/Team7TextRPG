@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Team7TextRPG.Managers;
+using Team7TextRPG.UIs;
+using Team7TextRPG.Utils;
 
 namespace Team7TextRPG.Scenes
 {
@@ -21,31 +23,35 @@ namespace Team7TextRPG.Scenes
         public override void Show()
         {
             Console.Clear();
-            UIManager.Instance.CommonWrite();
+            TextHelper.BtHeader("마을");
+            UIManager.Instance.CommonWriteBar();
             // UI Base 출력
             WriteType<TownSceneType>();
             string input = InputManager.Instance.GetInputKeyword();
-            UIManager.Instance.CommonLoad(input);
+            // 공통 UI 호출한 경우 볼일 마치가 다시 처음으로
+            if (UIManager.Instance.CommonLoad(input))
+            {
+                SceneManager.Instance.LoadScene<TownScene>();
+                return;
+            }
+
             TownSceneType selection = InputManager.Instance.ParseInputType<TownSceneType>(input);
 
             switch (selection)
             {
                 case TownSceneType.Event:
-                    WriteMessage("이벤트 씬으로 이동");
-                    SceneManager.Instance.LoadScene<TownScene>();
-                    break;
+                    SceneManager.Instance.LoadScene<EventScene>();
+                    return; // Scene 호출 뒤에는 while문을 빠져나가야 함.
                 case TownSceneType.Inn:
-                    WriteMessage("휴식 씬으로 이동");
+                    UIManager.Instance.Write<RestUI>();
                     SceneManager.Instance.LoadScene<TownScene>();
-                    break;
+                    return; // Scene 호출 뒤에는 while문을 빠져나가야 함.
                 case TownSceneType.Shop:
-                    WriteMessage("상점 씬으로 이동");
                     SceneManager.Instance.LoadScene<ShopScene>();
-                    break;
+                    return; // Scene 호출 뒤에는 while문을 빠져나가야 함.
                 case TownSceneType.Exit:
-                    WriteMessage("필드 씬으로 이동");
                     SceneManager.Instance.LoadScene<FieldScene>();
-                    break;
+                    return; // Scene 호출 뒤에는 while문을 빠져나가야 함.
             }
         }
 

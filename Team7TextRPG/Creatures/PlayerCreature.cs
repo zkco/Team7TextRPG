@@ -57,6 +57,16 @@ namespace Team7TextRPG.Creatures
             this.SetLevel(1);
             this.Exp = 0;
             this.Hp = MaxHp;
+
+            // 치트
+            GameManager.Instance.AddGold(100000);
+            GameManager.Instance.AddChip(1000);
+
+            foreach (var item in DataManager.Instance.ItemDataDict.Values)
+                GameManager.Instance.AddItem(item);
+
+            foreach (var skill in DataManager.Instance.SkillDataDict.Values)
+                GameManager.Instance.AddSkill(skill);
         }
 
         public void SetLoadData(SavePlayerData saveData)
@@ -152,6 +162,12 @@ namespace Team7TextRPG.Creatures
         public override void OnDead()
         {
             // 사망했을 때
+        }
+
+        public void Rest()
+        {
+            Hp = MaxHp;
+            Mp = MaxMp;
         }
     }
 }

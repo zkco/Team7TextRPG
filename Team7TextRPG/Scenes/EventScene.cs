@@ -1,15 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using Team7TextRPG.Contents;
-using Team7TextRPG.Creatures;
 using Team7TextRPG.Managers;
-using Team7TextRPG.Scenes;
+using Team7TextRPG.UIs;
+using Team7TextRPG.Utils;
 
-namespace Team7TextRPG.UIs
+namespace Team7TextRPG.Scenes
 {
     public class EventScene : SceneBase
     {
@@ -25,14 +18,30 @@ namespace Team7TextRPG.UIs
         public override void Show()
         {
             Console.Clear();
+            TextHelper.BtHeader("이벤트");
+            // [상태, 인벤토리, 스킬, 퀘스트]
+            UIManager.Instance.CommonWriteBar();
             WriteType<EventType>();
-            EventType selection = InputManager.Instance.GetInputType<EventType>();
+
+            string input = InputManager.Instance.GetInputKeyword();
+            // 공통 UI 호출한 경우 볼일 마치가 다시 처음으로
+            if (UIManager.Instance.CommonLoad(input))
+            {
+                SceneManager.Instance.LoadScene<EventScene>();
+                return;
+            }
+
+            EventType selection = InputManager.Instance.ParseInputType<EventType>(input);
 
             switch (selection)
             {
                 case EventType.MeetCheif:
+                    UIManager.Instance.Write<QuestUI>();
+                    SceneManager.Instance.LoadScene<EventScene>();
                     break;
                 case EventType.ClassChange:
+                    UIManager.Instance.Write<ClassChangeUI>();
+                    SceneManager.Instance.LoadScene<EventScene>();
                     break;
                 case EventType.Casino:
                     SceneManager.Instance.LoadScene<CasinoScene>();

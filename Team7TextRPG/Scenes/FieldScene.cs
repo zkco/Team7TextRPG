@@ -23,17 +23,24 @@ namespace Team7TextRPG.Scenes
         public override void Show()
         {
             Console.Clear();
+            TextHelper.BtHeader("필드");
             // [상태, 인벤토리, 스킬, 퀘스트]
-            UIManager.Instance.CommonWrite();
+            UIManager.Instance.CommonWriteBar();
             // 1. 주변을 탐색한다
             // 2. 던전으로 가기          
             // 3. 마을로 돌아가기
 
-
             WriteType<FieldSceneType>();
 
             string input = InputManager.Instance.GetInputKeyword();
-            UIManager.Instance.CommonLoad(input);
+
+            // 공통 UI 호출한 경우 볼일 마치가 다시 처음으로
+            if (UIManager.Instance.CommonLoad(input))
+            {
+                SceneManager.Instance.LoadScene<FieldScene>();
+                return;
+            }
+
             FieldSceneType selection = InputManager.Instance.ParseInputType<FieldSceneType>(input);
 
             switch (selection)
@@ -43,10 +50,10 @@ namespace Team7TextRPG.Scenes
                     break;
                 case FieldSceneType.Dungeon:
                     SceneManager.Instance.LoadScene<FieldScene>();  //던전화면으로
-                    break;
+                    return; // Scene 호출 뒤에는 while문을 빠져나가야 함.
                 case FieldSceneType.Exit:
                     SceneManager.Instance.LoadScene<TownScene>(); //마을화면으로 돌아가기
-                    break;
+                    return; // Scene 호출 뒤에는 while문을 빠져나가야 함.
             }
         }
 

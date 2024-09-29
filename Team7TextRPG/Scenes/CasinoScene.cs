@@ -31,14 +31,22 @@ namespace Team7TextRPG.Scenes
         public override void Show()
         {
             Console.Clear();
+            TextHelper.BtHeader("카지노");
             // [상태, 인벤토리, 스킬, 퀘스트]
-            UIManager.Instance.CommonWrite();
+            UIManager.Instance.CommonWriteBar();
             TextHelper.DtContent("인생 한 방 카지노에 오신 것을 환영합니다!");
             TextHelper.DtContent("어떤 게임을 즐기러 오셨나요?");
             WriteType<ChoiceGame>();
 
             string input = InputManager.Instance.GetInputKeyword();
-            UIManager.Instance.CommonLoad(input);
+
+            // 공통 UI 호출한 경우 볼일 마치가 다시 처음으로
+            if (UIManager.Instance.CommonLoad(input))
+            {
+                SceneManager.Instance.LoadScene<CasinoScene>();
+                return;
+            }
+
             ChoiceGame selection = InputManager.Instance.ParseInputType<ChoiceGame>(input);
 
             switch(selection)

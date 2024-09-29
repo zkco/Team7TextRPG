@@ -37,31 +37,54 @@ namespace Team7TextRPG.Managers
             return (_confirmUI ??= new ConfirmUI()).Confirm(message, onYes, onNo);
         }
 
-        public void CommonWrite()
+        public void CommonWriteBar()
         {
             if (_commonUI == null)
                 _commonUI = new CommonUI();
 
+            // 상단 체력바 + 소지금만 표시
+            // [ 상태 : S | 인벤토리 : I | 스킬 : K | 퀘스트 : Q ] 표시
+            // 둘다 표시
             _commonUI.Write();
         }
 
-        public void CommonLoad(string key)
+        public void CommonStatusBar()
+        {
+            // 상단 체력바 + 소지금만 표시
+            if (_commonUI == null)
+                _commonUI = new CommonUI();
+
+            _commonUI.StatusBar();
+        }
+
+        public void CommonInterfaceBar()
+        {
+            // [ 상태 : S | 인벤토리 : I | 스킬 : K | 퀘스트 : Q ] 표시
+            if (_commonUI == null)
+                _commonUI = new CommonUI();
+
+            _commonUI.InterfaceBar();
+        }
+
+        public bool CommonLoad(string key)
         {
             switch (key)
             {
                 case "I": // 인벤토리 UI
                     (_inventoryUI ??= new InventoryUI()).Write();
-                    break;
+                    return true;
                 case "S": // 스탯 UI
                     (_statusUI ??= new StatusUI()).Write();
-                    break;
+                    return true;
                 case "K": // 스킬 UI
                     (_skillUI ??= new SkillUI()).Write();
-                    break;
+                    return true;
                 case "Q": // 퀘스트 UI
                     (_questUI ??= new QuestUI()).Write();
-                    break;
+                    return true;
             }
+
+            return false;
         }
     }
 }
