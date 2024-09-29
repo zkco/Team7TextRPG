@@ -46,7 +46,7 @@ namespace Team7TextRPG.Creatures
             this.SexType = sexType;
         }
 
-        public override void SetInfo(Defines.JobType job)
+        public void SetJob(Defines.JobType job)
         {
             this.JobType = job;
         }
@@ -152,16 +152,25 @@ namespace Team7TextRPG.Creatures
         public override void OnDamaged(int damage)
         {
             // 데미지를 받을 때
+            Hp -= damage;
+            if (Hp <= 0)
+            {
+                Hp = 0;
+                OnDead();
+            }
         }
 
         public override void OnHealed(int heal)
         {
             // 힐을 받을 때
+            Hp += heal;
+            if (Hp > MaxHp)
+                Hp = MaxHp;
         }
 
         public override void OnDead()
         {
-            // 사망했을 때
+            // 사망했을 때, 필요없다면 제거합시다.
         }
 
         public void Rest()

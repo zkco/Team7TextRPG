@@ -35,9 +35,21 @@ namespace Team7TextRPG.Managers
             // 플레이어 생성
             Player = new PlayerCreature(name, sexType, specisType);
             // 플레이어 정보 설정
-            Player.SetInfo(Defines.JobType.Newbie);
+            Player.SetJob(Defines.JobType.Newbie);
             // 플레이어 초기화
             Player.Init();
+        }
+        public MonsterCreature? CreateMonster(int dataId)
+        {
+            // 몬스터 생성 (테스트용 3001)
+            // 다음과 같이 사용
+            // MonsterCreature? monster = GameManager.Instance.CreateMonster(3001);
+            if (DataManager.Instance.MonsterDataDict.TryGetValue(dataId, out MonsterData? monsterData) == false)
+                return null;
+
+            MonsterCreature monster = new MonsterCreature();
+            monster.SetMonsterData(monsterData);
+            return monster;
         }
 
         public void AddGold(int gold)

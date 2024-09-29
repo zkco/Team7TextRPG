@@ -1,2 +1,2 @@
 DataId,Name,Description,MonsterType,Level,StatStr,StatDex,StatInt,StatLuck,MaxHp,MaxMp,Attack,Defense,Speed,DodgeChanceRate,CriticalChanceRate,ExpReward,ItemReward,DropItemRate,SkillDataId1,SkillDataId2,SkillDataId3
-3001,°íºí¸°,¸ø»ı±ä °íºí¸°,Common,1,3,3,3,3,30,10,3,3,3,0,0,20,0,0,0,0,0,0,0
+3001,ê³ ë¸”ë¦°,ëª»ìƒê¸´ ê³ ë¸”ë¦°,Common,1,3,3,3,3,30,10,3,3,3,0,0,20,0,0,0,0,0,0,0

@@ -37,9 +37,10 @@ namespace Team7TextRPG.Creatures
         public virtual double DodgeChanceRate => BaseStat.DodgeChanceRate + CalcJobDodgeChanceRate();
         public virtual double CriticalChanceRate => BaseStat.CriticalChanceRate + CalcJobCriticalChanceRate();
 
+        public bool IsDead => Hp <= 0;
+
         protected Random random = new Random();
 
-        public abstract void SetInfo(Defines.JobType job);
         public abstract void OnDamaged(int damage);
         public abstract void OnHealed(int heal);
         public abstract void OnDead();

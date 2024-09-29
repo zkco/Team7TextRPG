@@ -39,6 +39,8 @@ namespace Team7TextRPG.Datas
         public int ExpReward; // 경험치 보상
         public int ItemReward; // 아이템 보상
         public int DropItemRate; // 드랍 확률
-        public string? SkillDataIds; // 스킬 데이터 아이디 1|2|3
+        public int SkillDataId1; // 스킬 데이터 아이디
+        public int SkillDataId2; // 스킬 데이터 아이디
+        public int SkillDataId3; // 스킬 데이터 아이디
     }
 }
