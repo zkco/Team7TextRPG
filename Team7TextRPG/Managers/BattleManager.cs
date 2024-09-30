@@ -33,15 +33,15 @@ namespace Team7TextRPG.Managers
             this.enemy = enemy;
             battleEnded = false;
 
-
-
             Console.Clear();
-            UIManager.Instance.Write<CommonUI>();
+            UIManager.Instance.CommonStatusBar(true);
             Console.WriteLine("=== 전투 시작 ===");
             Console.WriteLine($"{enemy.Name} 을(를) 발견했다!");
 
             // 턴제 배틀
-            while (!battleEnded && !player.IsDead && !enemy.IsDead)
+            while (battleEnded == false
+                && player.IsDead == false
+                && enemy.IsDead == false)
             {
                 // 속도 기반으로 턴 우선권 결정
                 if (player.Speed >= enemy.Speed)
@@ -62,20 +62,18 @@ namespace Team7TextRPG.Managers
             EndBattle();
         }
 
-
-
         // 플레이어 데미지설정 아직 못했음 
         private void PlayerTurn()
         {
             Console.WriteLine();
             Console.WriteLine("=== 당신의 턴 ===");
-     
+
+            UIManager.Instance.CommonStatusBar(true);
 
             BattleMenuUI battleMenu = new BattleMenuUI(enemy!);
             battleMenu.Write();
 
         }
-
 
         //  몬스터 데미지설정 아직 못했음 
         private void MonsterTurn()
@@ -86,7 +84,7 @@ namespace Team7TextRPG.Managers
             Console.WriteLine();
             Console.WriteLine("=== 몬스터의 턴 ===");
             Thread.Sleep(1000);
-
+            EnemyStatusBar();
             // 몬스터가 플레이어를 공격
             int damage = random.Next(5, 15); // 몬스터의 데미지 추후에 스탯+아이템 비례로적용되게
             player!.OnDamaged(damage);        // 플레이어에게 데미지 적용
@@ -109,9 +107,6 @@ namespace Team7TextRPG.Managers
 
             Thread.Sleep(2000);
         }
-
-
-    
 
         public void Runaway()
         {
@@ -144,6 +139,18 @@ namespace Team7TextRPG.Managers
             }
             battleEnded = true;
             SceneManager.Instance.LoadScene<FieldScene>(); // 필드로 돌아가기
+        }
+
+
+        //몬스터 정보 출력
+        private void EnemyStatusBar()
+        {
+            if (enemy != null)
+            {
+                TextHelper.BtHeader($"{enemy.Name} (Lv {enemy.Level})");
+                string hpBar = Util.GetHpBar(enemy.Hp, enemy.MaxHp);
+                TextHelper.StatusBar($"체력: {hpBar} {enemy.Hp}/{enemy.MaxHp}");
+            }
         }
     }
 }

@@ -15,6 +15,8 @@ namespace Team7TextRPG.UIs
         protected int pageSize = 5;
         protected int pageIndex = 0;
 
+        private Skill? _selectedSkill;
+
         public void NextPage()
         {
             pageIndex = Math.Min(pageIndex + 1, (GameManager.Instance.PlayerItems.Count - 1) / pageSize);
@@ -68,7 +70,8 @@ namespace Team7TextRPG.UIs
                         return;
                     default:
                         // 배틀에서만 사용
-                        break;
+                        _selectedSkill = skills[input - 1];
+                        return;
                 }
             }
         }
@@ -92,6 +95,12 @@ namespace Team7TextRPG.UIs
                 if (selection == Defines.PagingSelectionType.None) continue;
                 TextHelper.ItContent($"{(int)selection}. {Util.PagingSelectionTypeToString(selection)}");
             }
+        }
+
+        public Skill? Read()
+        {
+            Write();
+            return _selectedSkill;
         }
     }
 }

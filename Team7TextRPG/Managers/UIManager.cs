@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Team7TextRPG.Contents;
 using Team7TextRPG.Scenes;
 using Team7TextRPG.UIs;
 using Team7TextRPG.Utils;
@@ -31,6 +32,11 @@ namespace Team7TextRPG.Managers
             ShopUI shopUI = new ShopUI(type);
             shopUI.Write();
         }
+        public Skill? SkillRead()
+        {
+            _skillUI ??= new SkillUI();
+            return _skillUI.Read();
+        }
 
         public bool Confirm(string message, Action? onYes = null, Action? onNo = null)
         {
@@ -48,13 +54,13 @@ namespace Team7TextRPG.Managers
             _commonUI.Write();
         }
 
-        public void CommonStatusBar()
+        public void CommonStatusBar(bool isHpNumber = false)
         {
             // 상단 체력바 + 소지금만 표시
             if (_commonUI == null)
                 _commonUI = new CommonUI();
 
-            _commonUI.StatusBar();
+            _commonUI.StatusBar(isHpNumber);
         }
 
         public void CommonInterfaceBar()

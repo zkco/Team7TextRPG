@@ -18,7 +18,7 @@ namespace Team7TextRPG.UIs
             InterfaceBar();
         }
 
-        public void StatusBar()
+        public void StatusBar(bool isHpNumber = false)
         {
             if (GameManager.Instance.Player == null)
             {
@@ -27,9 +27,11 @@ namespace Team7TextRPG.UIs
             }
 
             int gold = GameManager.Instance.PlayerGold;
-
-            string hpBar = GetHpBar(GameManager.Instance.Player.Hp, GameManager.Instance.Player.MaxHp);
-            TextHelper.StatusBar($"체력바{hpBar} | 소지금 {gold}G");
+            int hp = GameManager.Instance.Player.Hp;
+            int maxHp = GameManager.Instance.Player.MaxHp;
+            string hpBar = Util.GetHpBar(hp, maxHp);
+            string hpNumber = isHpNumber ? $"({hp}/{maxHp})" : "";
+            TextHelper.StatusBar($"체력바{hpBar} {hpNumber}| 소지금 {gold}G");
         }
 
         public void InterfaceBar()
@@ -52,23 +54,6 @@ namespace Team7TextRPG.UIs
                 Defines.CommonUIType.Quest => "퀘스트",
                 _ => "알 수 없음",
             };
-        }
-
-        private string GetHpBar(int hp, int maxHp)
-        {
-            int hpPercent = maxHp == 0 ? 0 : (int)Math.Ceiling((hp * 5.0) / maxHp);
-
-            StringBuilder sb = new StringBuilder();
-            sb.Append("(");
-            for (int i = 0; i < 5; i++)
-            {
-                if (i < hpPercent)
-                    sb.Append("♥");
-                else
-                    sb.Append("♡");
-            }
-            sb.Append(")");
-            return sb.ToString();
         }
     }
 }

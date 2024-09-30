@@ -110,5 +110,22 @@ namespace Team7TextRPG.Utils
                 return true;
             }
         }
+        public static string GetHpBar(int hp, int maxHp)
+        {
+            // 크리쳐의 체력 게이지
+            int hpPercent = maxHp == 0 ? 0 : (int)Math.Ceiling((hp * 5.0) / maxHp);
+
+            StringBuilder sb = new StringBuilder();
+            sb.Append("(");
+            for (int i = 0; i < 5; i++)
+            {
+                if (i < hpPercent)
+                    sb.Append("♥");
+                else
+                    sb.Append("♡");
+            }
+            sb.Append(")");
+            return sb.ToString();
+        }
     }
 }

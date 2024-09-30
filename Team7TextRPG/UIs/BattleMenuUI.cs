@@ -11,6 +11,7 @@ using Team7TextRPG.Utils;
 using static Team7TextRPG.Scenes.BattleScene;
 
 using Team7TextRPG.Creatures;
+using Team7TextRPG.Contents;
 
 namespace Team7TextRPG.UIs
 {
@@ -40,9 +41,6 @@ namespace Team7TextRPG.UIs
 
         public override void Write()
         {
-
-            ShowEnemyInfo();
-
             WriteType<BattleAction>();
             BattleAction selection = InputManager.Instance.GetInputType<BattleAction>();
 
@@ -53,7 +51,8 @@ namespace Team7TextRPG.UIs
                     BattleManager.Instance.AttackEnemy();   //플레이어 공격 실행
                     break;
                 case BattleAction.Skill:
-                    UIManager.Instance.Write<SkillUI>(); //스킬UI로
+                    Skill? skill =  UIManager.Instance.SkillRead(); //스킬UI로
+                    skill?.Use(new CreatureBase[] { enemy });
                     break;
                 case BattleAction.Item:
                     UIManager.Instance.Write<InventoryUI>(); //인벤토리UI로
@@ -71,7 +70,7 @@ namespace Team7TextRPG.UIs
 
                 default:
                     Console.WriteLine("잘못된 입력입니다.");
-                    break;     
+                    break;
             }
         }
 
@@ -82,34 +81,6 @@ namespace Team7TextRPG.UIs
             return InputManager.Instance.GetInputType<BattleAction>();
         }
 
-        //몬스터 정보 출력
-        private void ShowEnemyInfo()
-        {
-            if (enemy != null)
-            {
-                TextHelper.BtHeader($"{enemy.Name} (Lv {enemy.Level})");
-                string hpBar = GetHpBar(enemy.Hp, enemy.MaxHp);
-                TextHelper.StatusBar($"체력: {hpBar} {enemy.Hp}/{enemy.MaxHp}");
-            }
-        }
-
-        // 몬스터 체력 바 표현
-        private string GetHpBar(int hp, int maxHp)
-        {
-            int hpPercent = maxHp == 0 ? 0 : (int)Math.Ceiling((hp * 5.0) / maxHp);
-
-            StringBuilder sb = new StringBuilder();
-            sb.Append("(");
-            for (int i = 0; i < 5; i++)
-            {
-                if (i < hpPercent)
-                    sb.Append("♥");
-                else
-                    sb.Append("♡");
-            }
-            sb.Append(")");
-            return sb.ToString();
-        }
 
         protected override string EnumTypeToText<T>(T type)
         {

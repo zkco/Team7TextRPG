@@ -61,7 +61,35 @@ namespace Team7TextRPG.Contents.CasinoGame
 
         public string CardOnBoard(Card card)
         {
-            return $"{card.SuitOfCard} {card.RankOfCard}";
+            StringBuilder sb = new StringBuilder();
+            switch (card.SuitOfCard)
+            {
+                case Suit.Spade:
+                    sb.Append("♠");
+                    break;
+                case Suit.Heart:
+                    sb.Append("♥");
+                    break;
+                case Suit.Clover:
+                    sb.Append("♣");
+                    break;
+                case Suit.Diamond:
+                    sb.Append("◆");
+                    break;
+            }
+            sb.Append(" ");
+            switch (card.RankOfCard)
+            {
+                case Rank.Jack: // ||
+                case Rank.King: // ||
+                case Rank.Queen:
+                    sb.Append(card.RankOfCard);
+                    break;
+                default:
+                    sb.Append(((int)card.RankOfCard).ToString());
+                    break;
+            }
+            return sb.ToString();
         }
 
         public int CalcScore(List<Card> WhosHand)
@@ -188,7 +216,7 @@ namespace Team7TextRPG.Contents.CasinoGame
                 {
                     StartBlackJack();
                 },
-                () => 
+                () =>
                 {
                     SceneManager.Instance.LoadScene<CasinoScene>();
                 });
