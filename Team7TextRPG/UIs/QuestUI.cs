@@ -8,7 +8,6 @@ namespace Team7TextRPG.UIs
 {
     public class QuestUI : UIBase
     {
-        private readonly object item;
 
         public override void Write()
         {

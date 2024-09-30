@@ -17,6 +17,7 @@ namespace Team7TextRPG.Scenes
             Event,
             Inn,
             Shop,
+            Save,
             Exit,
         }
 
@@ -49,6 +50,10 @@ namespace Team7TextRPG.Scenes
                 case TownSceneType.Shop:
                     SceneManager.Instance.LoadScene<ShopScene>();
                     return; // Scene 호출 뒤에는 while문을 빠져나가야 함.
+                case TownSceneType.Save:
+                    UIManager.Instance.Write<SaveGameUI>();
+                    SceneManager.Instance.LoadScene<TownScene>();
+                    return; // Scene 호출 뒤에는 while문을 빠져나가야 함.
                 case TownSceneType.Exit:
                     SceneManager.Instance.LoadScene<FieldScene>();
                     return; // Scene 호출 뒤에는 while문을 빠져나가야 함.
@@ -62,6 +67,7 @@ namespace Team7TextRPG.Scenes
                 TownSceneType.Event => "이벤트",
                 TownSceneType.Inn => "휴식",
                 TownSceneType.Shop => "상점",
+                TownSceneType.Save => "저장",
                 TownSceneType.Exit => "마을 나가기",
                 _ => "없음",
             };
