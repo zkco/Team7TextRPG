@@ -1,10 +1,12 @@
 using System;
 using System.Threading;
+using Team7TextRPG.Contents;
 using Team7TextRPG.Creatures;
 using Team7TextRPG.Managers;
 using Team7TextRPG.Scenes;
 using Team7TextRPG.UIs;
 using Team7TextRPG.Utils;
+using static Team7TextRPG.UIs.BattleMenuUI;
 
 namespace Team7TextRPG.Managers
 {
@@ -62,7 +64,7 @@ namespace Team7TextRPG.Managers
             EndBattle();
         }
 
-        // 플레이어 데미지설정 아직 못했음 
+         //플레이어 턴
         private void PlayerTurn()
         {
             Console.WriteLine();
@@ -75,46 +77,107 @@ namespace Team7TextRPG.Managers
 
         }
 
-        //  몬스터 데미지설정 아직 못했음 
-        private void MonsterTurn()
+         // 스킬 사용
+        public void UseSkill()
         {
-            Console.Clear();
-            UIManager.Instance.Write<CommonUI>();
+            // 스킬 UI를 통해 사용 가능한 스킬을 선택
+            Skill? selectedSkill = UIManager.Instance.SkillRead();
 
-            Console.WriteLine();
-            Console.WriteLine("=== 몬스터의 턴 ===");
-            Thread.Sleep(1000);
-            EnemyStatusBar();
-            // 몬스터가 플레이어를 공격
-            int damage = random.Next(5, 15); // 몬스터의 데미지 추후에 스탯+아이템 비례로적용되게
-            player!.OnDamaged(damage);        // 플레이어에게 데미지 적용
-            Console.WriteLine($"{enemy!.Name} 이(가) {damage}의 피해를 입혔습니다!");
+            // 선택한 스킬이 없는 경우
+            if (selectedSkill == null)
+            {
+                Console.WriteLine("스킬을 선택하지 않았습니다.");
+                return;
+            }
+
+            // MP가 충분?
+            if (player!.Mp < selectedSkill.MpCost)
+            {
+                Console.WriteLine($"{player.Name}의 MP가 부족합니다. (필요 MP: {selectedSkill.MpCost})");
+                return;
+            }
+
+            // 적을 타겟으로 스킬 사용 
+            bool skillSuccess = selectedSkill.Use(new CreatureBase[] { enemy! });
+
+            // 스킬이 성공적으로 사용된 경우
+            if (skillSuccess)
+            {
+                player.UseMp(selectedSkill.MpCost);  // MP 소모
+
+                // 스킬 사용 메시지 출력
+                Console.WriteLine($"{player.Name}이(가) {selectedSkill.Name} 스킬을 사용했습니다!");
+
+                // 공격 스킬일 경우 피해 메시지 출력
+                if (selectedSkill.SkillType == Defines.SkillType.Attack)
+                {
+                    int totalDamage = selectedSkill.ValueType == Defines.SkillValueType.Absolute
+                        ? selectedSkill.Value  // 절대값인 경우
+                        : (int)(player.Attack * (selectedSkill.Value / 100.0));  // 퍼센트 기반
+
+                    Console.WriteLine($"{enemy.Name}에게 {totalDamage}의 피해를 입혔습니다.");
+                }
+                else if (selectedSkill.SkillType == Defines.SkillType.Heal)
+                {
+                    // 힐 스킬일 경우 치유 메시지 출력
+                    int healAmount = selectedSkill.ValueType == Defines.SkillValueType.Absolute
+                        ? selectedSkill.Value
+                        : (int)(player.MaxHp * (selectedSkill.Value / 100.0));
+
+                    Console.WriteLine($"{player.Name}이(가) {healAmount}만큼 치유되었습니다.");
+                }
+            }
+            else
+            {
+                // 스킬 사용 실패 시 메시지 출력
+                Console.WriteLine($"{selectedSkill.Name} 사용에 실패했습니다.");
+            }
 
             Thread.Sleep(2000);
-
         }
+
 
         public void AttackEnemy()
         {
-            Console.Clear();
-            UIManager.Instance.Write<CommonUI>();
-
             Console.WriteLine();
             Console.WriteLine($"{player!.Name}이(가) {enemy!.Name}을(를) 공격합니다.");
-            int damage = random.Next(10, 20);  // 플레이어의 데미지
-            enemy!.OnDamaged(damage);           // 몬스터에게 데미지 적용
+            int damage = player!.Attack;  // 플레이어의 데미지
+            enemy!.OnDamaged(damage);     // 몬스터에게 데미지 적용
             Console.WriteLine($"{enemy.Name}에게 {damage}의 피해를 입혔습니다!");
 
             Thread.Sleep(2000);
         }
+
+
+
+
+        //에너미 턴
+        private void MonsterTurn()
+        {
+            Console.WriteLine();
+            Console.WriteLine("=== 몬스터의 턴 ===");
+            EnemyStatusBar();
+
+            Thread.Sleep(1000);
+
+            // 몬스터가 플레이어를 공격
+            int damage = enemy!.Attack; // 몬스터의 데미지
+            player!.OnDamaged(damage);  // 플레이어에게 데미지 적용
+            
+            Console.WriteLine($"\n{enemy!.Name} 이(가) {damage}의 피해를 입혔습니다!");
+
+            Thread.Sleep(2000);
+
+        }
+
+        
 
         public void Runaway()
         {
             Console.WriteLine();
             int chance = random.Next(100);
             if (chance < 50)
-            {
-                Thread.Sleep(1000);
+            {   
                 battleEnded = true; // 도망에 성공하면 전투가 끝나는 판정
             }
             else

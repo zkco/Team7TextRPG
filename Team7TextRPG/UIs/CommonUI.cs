@@ -4,8 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using static Team7TextRPG.Utils.Defines;
+using static Team7TextRPG.Creatures.PlayerCreature;
 using Team7TextRPG.Utils;
 using Team7TextRPG.Managers;
+using System.Numerics;
+using Team7TextRPG.Creatures;
+using System.Collections;
 
 namespace Team7TextRPG.UIs
 {
@@ -26,12 +30,32 @@ namespace Team7TextRPG.UIs
                 return;
             }
 
+            var player = GameManager.Instance.Player;
+
             int gold = GameManager.Instance.PlayerGold;
             int hp = GameManager.Instance.Player.Hp;
             int maxHp = GameManager.Instance.Player.MaxHp;
             string hpBar = Util.GetHpBar(hp, maxHp);
             string hpNumber = isHpNumber ? $"({hp}/{maxHp})" : "";
-            TextHelper.StatusBar($"체력바{hpBar} {hpNumber}| 소지금 {gold}G");
+ 
+            int mp = GameManager.Instance.Player.Mp;
+            int maxMp = GameManager.Instance.Player.MaxMp;
+            string mpBar = Util.GetMpBar(mp, maxMp);
+            string mpNumber = isHpNumber ? $"({mp}/{maxMp})" : "";
+
+            int attack = player.Attack;
+            int defense = player.Defense;
+
+
+            TextHelper.StatusBar(
+                $"체력: {hpBar} {hpNumber} | " +
+                $"마나: {mpBar} {mpNumber} | " +
+                $"공격력: {attack} | 방어력: {defense} | 소지금: {gold}G"
+            );
+
+
+
+
         }
 
         public void InterfaceBar()

@@ -23,7 +23,7 @@ namespace Team7TextRPG.Creatures
         public List<Skill> Skills { get; private set; } = new List<Skill>();
 
         public int Hp { get; protected set; }
-        public int Mp { get; protected set; }
+        public int Mp { get; protected  set; }
 
         public virtual int StatStr => BaseStat.StatStr;
         public virtual int StatDex => BaseStat.StatDex;
@@ -122,8 +122,8 @@ namespace Team7TextRPG.Creatures
             return JobType switch
             {
                 Defines.JobType.Warrior => StatStr * 10,
-                Defines.JobType.Archer => StatDex * 5,
-                Defines.JobType.Mage => StatInt * 5,
+                Defines.JobType.Archer => StatStr * 5,
+                Defines.JobType.Mage => StatStr * 5,
                 _ => StatStr * 10,
             };
         }
@@ -131,29 +131,32 @@ namespace Team7TextRPG.Creatures
         {
             return JobType switch
             {
-                Defines.JobType.Warrior => StatStr * 5,
-                Defines.JobType.Archer => StatDex * 5,
+                Defines.JobType.Warrior => StatInt * 5,
+                Defines.JobType.Archer => StatInt * 5,
                 Defines.JobType.Mage => StatInt * 10,
                 _ => StatStr * 5,
             };
         }
 
-        public void AddSkill(int skillDataId)
+        public bool AddSkill(int skillDataId)
         {
             if (DataManager.Instance.SkillDataDict.TryGetValue(skillDataId, out SkillData? skillData))
-            {
-                AddSkill(skillData);
-            }
+                return AddSkill(skillData);
+
+            return false;
         }
-        public void AddSkill(SkillData skillData)
+        public bool AddSkill(SkillData skillData)
         {
-            if (skillData.RequiredJob == Defines.JobType.None
-                    || skillData.RequiredJob == JobType)
-            {
-                Skill skill = new Skill(this);
-                skill.SetSkillData(skillData);
-                Skills.Add(skill);
-            }
+            if ((skillData.RequiredJob == Defines.JobType.None || skillData.RequiredJob == JobType) == false)
+                return false;
+
+            if (Skills.Any(s => s.DataId == skillData.DataId))
+                return false;
+
+            Skill skill = new Skill(this);
+            skill.SetSkillData(skillData);
+            Skills.Add(skill);
+            return true;
         }
         public void RemoveSkill(int dataId)
         {
@@ -164,6 +167,17 @@ namespace Team7TextRPG.Creatures
         public void RemoveSkill(Skill skill)
         {
             Skills.Remove(skill);
+        }
+        public void UseMp(int amount)
+        {
+            if (Mp >= amount)
+            {
+                Mp -= amount;
+            }
+            else
+            {
+                Console.WriteLine("MP가 부족합니다.");
+            }
         }
     }
 }

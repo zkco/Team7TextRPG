@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Team7TextRPG.Utils;
 
 namespace Team7TextRPG.Datas
@@ -10,7 +5,6 @@ namespace Team7TextRPG.Datas
     public class QuestData
     {
         public int DataId; // 데이터 아이디 ex) 1
-        public int NpcDataId; // 의뢰 NPC 데이터 아이디
         public Defines.QuestType QuestType; // 퀘스트 타입 (Hunt, Gathering)
         public string? Name; // 퀘스트 이름
         public string? Description; // 퀘스트 설명
@@ -24,5 +18,7 @@ namespace Team7TextRPG.Datas
         public int ItemRewardDataId1; // 아이템 보상 데이터 아이디 1
         public int ItemRewardDataId2; // 아이템 보상 데이터 아이디 2
         public int RequiredLevel; // 필요 레벨
+        public Defines.JobType RequiredJobType; // 필요 직업
+        public int SkillRewardDataId; // 스킬 보상 데이터 아이디
     }
 }
