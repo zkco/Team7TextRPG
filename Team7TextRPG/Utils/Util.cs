@@ -78,5 +78,37 @@ namespace Team7TextRPG.Utils
         {
             return (int)(baseExp * Math.Pow(growthRate, level));
         }
+        public static bool CheckUserName(string name)
+        {
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                // 공백 X
+                TextHelper.ItContent("공백은 허용되지 않습니다.");
+                Thread.Sleep(1000);
+                return false;
+            }
+            else if (name.Length < 2 || name.Length > 10)
+            {
+                // 길이 2~10
+                TextHelper.ItContent("2~10자 이내로 입력해주세요.");
+                Thread.Sleep(1000);
+                return false;
+            }
+            else
+            {
+                // 특수문자 X, 영어, 숫자, 한글만 가능
+                foreach (char c in name)
+                {
+                    if (!char.IsLetterOrDigit(c) && !char.GetUnicodeCategory(c).ToString().StartsWith("OtherLetter"))
+                    {
+                        TextHelper.ItContent("특수문자는 사용할 수 없습니다.");
+                        Thread.Sleep(1000);
+                        return false;
+                    }
+                }
+
+                return true;
+            }
+        }
     }
 }

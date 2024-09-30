@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 using Team7TextRPG.Contents;
@@ -57,6 +58,7 @@ namespace Team7TextRPG.Creatures
                 Level = maxLevel;
                 return;
             }
+            Level = level;
             LevelData levelData = DataManager.Instance.LevelDataDict[level];
             BaseStat.StatStr = levelData.Str;
             BaseStat.StatDex = levelData.Dex;

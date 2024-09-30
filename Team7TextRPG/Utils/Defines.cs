@@ -126,6 +126,15 @@ namespace Team7TextRPG.Utils
             Quest
         }
 
+        public enum StatPointType
+        {
+            None,
+            StatStr,
+            StatDex,
+            StatInt,
+            StatLuck
+        }
+
         public const int MAX_PLAYER_LEVEL = 100;
 
     }

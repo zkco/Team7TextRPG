@@ -11,7 +11,7 @@ namespace Team7TextRPG.Scenes
             None,
             NewGame,
             Credit,
-            //LoadGame,
+            LoadGame,
             Exit
         }
 
@@ -25,13 +25,16 @@ namespace Team7TextRPG.Scenes
             // 2. 사용자 입력 받는다.
             TitleSceneType selection = InputManager.Instance.GetInputType<TitleSceneType>();
             // 3. 사용자 입력에 따라 다음 화면으로 이동하거나 표시한다.
-            switch (selection) 
-            { 
+            switch (selection)
+            {
                 case TitleSceneType.NewGame:
                     UIManager.Instance.Write<NewGameUI>();
                     break;
                 case TitleSceneType.Credit:
                     SceneManager.Instance.LoadScene<CreditScene>();
+                    break;
+                case TitleSceneType.LoadGame:
+                    UIManager.Instance.Write<LoadGameUI>();
                     break;
                 case TitleSceneType.Exit:
                     Environment.Exit(0);
@@ -45,6 +48,7 @@ namespace Team7TextRPG.Scenes
             {
                 TitleSceneType.NewGame => "새 게임",
                 TitleSceneType.Credit => "Credit",
+                TitleSceneType.LoadGame => "불러오기",
                 TitleSceneType.Exit => "종료",
                 _ => String.Empty,
             };
