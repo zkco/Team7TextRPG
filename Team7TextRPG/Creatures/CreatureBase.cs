@@ -23,7 +23,7 @@ namespace Team7TextRPG.Creatures
         public List<Skill> Skills { get; private set; } = new List<Skill>();
 
         public int Hp { get; protected set; }
-        public int Mp { get; protected set; }
+        public int Mp { get; protected  set; }
 
         public virtual int StatStr => BaseStat.StatStr;
         public virtual int StatDex => BaseStat.StatDex;
@@ -122,8 +122,8 @@ namespace Team7TextRPG.Creatures
             return JobType switch
             {
                 Defines.JobType.Warrior => StatStr * 10,
-                Defines.JobType.Archer => StatDex * 5,
-                Defines.JobType.Mage => StatInt * 5,
+                Defines.JobType.Archer => StatStr * 5,
+                Defines.JobType.Mage => StatStr * 5,
                 _ => StatStr * 10,
             };
         }
@@ -131,8 +131,8 @@ namespace Team7TextRPG.Creatures
         {
             return JobType switch
             {
-                Defines.JobType.Warrior => StatStr * 5,
-                Defines.JobType.Archer => StatDex * 5,
+                Defines.JobType.Warrior => StatInt * 5,
+                Defines.JobType.Archer => StatInt * 5,
                 Defines.JobType.Mage => StatInt * 10,
                 _ => StatStr * 5,
             };
@@ -164,6 +164,17 @@ namespace Team7TextRPG.Creatures
         public void RemoveSkill(Skill skill)
         {
             Skills.Remove(skill);
+        }
+        public void UseMp(int amount)
+        {
+            if (Mp >= amount)
+            {
+                Mp -= amount;
+            }
+            else
+            {
+                Console.WriteLine("MP가 부족합니다.");
+            }
         }
     }
 }

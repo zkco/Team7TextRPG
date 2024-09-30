@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Team7TextRPG.Creatures;
 using Team7TextRPG.Datas;
 using Team7TextRPG.Utils;
-
+using static Team7TextRPG.Creatures.PlayerCreature;
 namespace Team7TextRPG.Contents
 {
     public class Skill
@@ -58,6 +58,8 @@ namespace Team7TextRPG.Contents
                 TextHelper.WriteLine($"{Owner.Name}의 MP가 부족합니다.");
                 return false;
             }
+            // MP 소모
+            Owner.UseMp(MpCost);
 
             if (this.SkillType == Defines.SkillType.Attack)
             {
@@ -91,6 +93,25 @@ namespace Team7TextRPG.Contents
             }
 
             return false;
+        }
+        private int CalculateDamage()
+        {
+            // 공격 스킬의 데미지 계산 로직
+            if (this.ValueType == Defines.SkillValueType.Absolute)
+                return this.Value; // 절대값 데미지
+            else if (this.ValueType == Defines.SkillValueType.Percent)
+                return (int)(Owner.Attack * (this.Value / 100.0)); // 공격력의 퍼센트 계산
+            return 0;
+        }
+
+        private int CalculateHealing()
+        {
+            // 힐 스킬의 치유량 계산 로직
+            if (this.ValueType == Defines.SkillValueType.Absolute)
+                return this.Value; // 절대값 치유량
+            else if (this.ValueType == Defines.SkillValueType.Percent)
+                return (int)(Owner.MaxHp * (this.Value / 100.0)); // 최대 체력의 퍼센트 계산
+            return 0;
         }
     }
 }
