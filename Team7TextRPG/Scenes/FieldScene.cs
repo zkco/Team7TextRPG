@@ -49,7 +49,7 @@ namespace Team7TextRPG.Scenes
                     UIManager.Instance.Write<SearchUI>();   //탐색ui로
                     break;
                 case FieldSceneType.Dungeon:
-                    SceneManager.Instance.LoadScene<FieldScene>();  //던전화면으로
+                    SceneManager.Instance.LoadScene<DungeonScene>();  //던전화면으로
                     return; // Scene 호출 뒤에는 while문을 빠져나가야 함.
                 case FieldSceneType.Exit:
                     SceneManager.Instance.LoadScene<TownScene>(); //마을화면으로 돌아가기
