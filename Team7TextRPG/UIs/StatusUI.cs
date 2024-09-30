@@ -28,6 +28,8 @@ namespace Team7TextRPG.UIs
         }
         public override void Write()
         {
+            PlayerCreature? player = GameManager.Instance.Player;
+            if (player == null ) return;
             Console.Clear();
             TextHelper.BtHeader("상태창");
             TextHelper.ItHeader("기본");
@@ -45,10 +47,10 @@ namespace Team7TextRPG.UIs
             Console.WriteLine($"치명타확률: {GameManager.Instance.Player.CriticalChanceRate}");
             Console.WriteLine("");
             TextHelper.ItHeader("부능력치");
-            Console.WriteLine($"힘: {GameManager.Instance.Player.StatStr}");
-            Console.WriteLine($"민첩: {GameManager.Instance.Player.StatDex}");
-            Console.WriteLine($"지력: {GameManager.Instance.Player.StatInt}");
-            Console.WriteLine($"운: {GameManager.Instance.Player.StatLuck}");
+            Console.WriteLine($"힘: {GameManager.Instance.Player.StatStr}+{GameManager.Instance.Player.StatPointStr}");
+            Console.WriteLine($"민첩: {GameManager.Instance.Player.StatDex}+{GameManager.Instance.Player.StatPointDex}");
+            Console.WriteLine($"지력: {GameManager.Instance.Player.StatInt}+{GameManager.Instance.Player.StatPointInt}");
+            Console.WriteLine($"운: {GameManager.Instance.Player.StatLuck}+{GameManager.Instance.Player.StatPointLuck}");
             Console.WriteLine("");
             TextHelper.BtHeader("스탯투자");
             WriteType<statPlus>();
