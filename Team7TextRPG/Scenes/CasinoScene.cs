@@ -99,9 +99,10 @@ namespace Team7TextRPG.Scenes
                         //칩 갯수에 따라 교환할 수 있는 보상 추가 (레어 아이템, 고효율 포션 등)
                     break;
                 case ChoiceGame.BlackJack:
-                    GameManager.Instance.blackJack.StartBlackJack();
+                    CasinoManager.Instance.blackJack.StartBlackJack();
                     break;
                 case ChoiceGame.SlotMachine:
+                    CasinoManager.Instance.slotMachine.GameStart();
                     break;
                 case ChoiceGame.OddEven:
                     break;
