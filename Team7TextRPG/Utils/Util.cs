@@ -127,5 +127,22 @@ namespace Team7TextRPG.Utils
             sb.Append(")");
             return sb.ToString();
         }
+        public static string GetMpBar(int mp, int maxMp)
+        {
+            // 크리쳐의 마력 게이지
+            int hpPercent = maxMp == 0 ? 0 : (int)Math.Ceiling((mp * 5.0) / maxMp);
+
+            StringBuilder sb = new StringBuilder();
+            sb.Append("(");
+            for (int i = 0; i < 5; i++)
+            {
+                if (i < hpPercent)
+                    sb.Append("★");
+                else
+                    sb.Append("☆");
+            }
+            sb.Append(")");
+            return sb.ToString();
+        }
     }
 }

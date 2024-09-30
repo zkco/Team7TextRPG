@@ -41,6 +41,7 @@ namespace Team7TextRPG.Managers
             Player.SetJob(Defines.JobType.Newbie);
             // 플레이어 초기화
             Player.Init();
+        
         }
         public MonsterCreature? CreateMonster(int dataId)
         {

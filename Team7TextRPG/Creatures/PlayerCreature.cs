@@ -63,6 +63,7 @@ namespace Team7TextRPG.Creatures
             this.SetLevel(1);
             this.Exp = 0;
             this.Hp = MaxHp;
+            this.Mp = MaxMp;
 
             // 치트
             GameManager.Instance.AddGold(100000);
@@ -218,7 +219,7 @@ namespace Team7TextRPG.Creatures
 
         public override void OnDead()
         {
-            // 사망했을 때, 필요없다면 제거합시다.
+            // 사망했을 때, 필요없다면 제거합시다. //필요합니당
         }
 
         public void Rest()
@@ -226,5 +227,7 @@ namespace Team7TextRPG.Creatures
             Hp = MaxHp;
             Mp = MaxMp;
         }
+
+        
     }
 }

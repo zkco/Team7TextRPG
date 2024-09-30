@@ -41,41 +41,43 @@ namespace Team7TextRPG.UIs
 
         public override void Write()
         {
+          while (true) 
+            { 
             WriteType<BattleAction>();
             BattleAction selection = InputManager.Instance.GetInputType<BattleAction>();
 
 
-            switch (selection)
-            {
-                case BattleAction.Attack:
-                    BattleManager.Instance.AttackEnemy();   //플레이어 공격 실행
-                    break;
-                case BattleAction.Skill:
-                    Skill? skill =  UIManager.Instance.SkillRead(); //스킬UI로
-                    skill?.Use(new CreatureBase[] { enemy });
-                    break;
-                case BattleAction.Item:
-                    UIManager.Instance.Write<InventoryUI>(); //인벤토리UI로
-                    break;
-                case BattleAction.Run:
-                    Console.Clear();
-                    UIManager.Instance.Write<CommonUI>();
-                    BattleManager.Instance.Runaway();
-                    Console.WriteLine("성공적으로 도망쳤습니다...");
+                switch (selection)
+                {
+                    case BattleAction.Attack:
+                        BattleManager.Instance.AttackEnemy();   //플레이어 공격 실행
+                        return;
+                    case BattleAction.Skill:
+                        BattleManager.Instance.UseSkill(); //스킬 사용
+                        return;
+                    case BattleAction.Item:
+                        UIManager.Instance.Write<InventoryUI>(); //인벤토리UI로
+                        return;
+                    case BattleAction.Run:
+                        Console.Clear();
+                        UIManager.Instance.Write<CommonUI>();
+                        BattleManager.Instance.Runaway();
+                        Console.WriteLine("성공적으로 도망쳤습니다...");
 
-                    Thread.Sleep(1000);
-                    SceneManager.Instance.LoadScene<FieldScene>(); //탐색UI로 돌아가기
-                    return; // 도망 후 종료
+                        Thread.Sleep(2000);
+                        SceneManager.Instance.LoadScene<FieldScene>(); //탐색UI로 돌아가기
+                        return; // 도망 후 종료
 
 
-                default:
-                    Console.WriteLine("잘못된 입력입니다.");
-                    break;
+                    default:
+                        Console.WriteLine("잘못된 입력입니다. 다시 선택 해주세요.");
+                        break;
+                }
             }
         }
 
 
-        public BattleAction PlayerAction()
+            public BattleAction PlayerAction()
         {
             WriteType<BattleAction>(); // 행동 선택지 출력
             return InputManager.Instance.GetInputType<BattleAction>();
