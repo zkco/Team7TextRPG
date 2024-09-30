@@ -1,5 +1,6 @@
 using System.Xml.Linq;
 using Team7TextRPG.Contents;
+using Team7TextRPG.Contents.CasinoGame;
 using Team7TextRPG.Contents.Items;
 using Team7TextRPG.Creatures;
 using Team7TextRPG.Datas;
