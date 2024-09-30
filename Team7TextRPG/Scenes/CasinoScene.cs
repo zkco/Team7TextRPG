@@ -55,7 +55,7 @@ namespace Team7TextRPG.Scenes
                     Console.Clear();
                     TextHelper.ItContent("1. 칩을 골드로 바꾼다.");
                     TextHelper.ItContent("2. 골드를 칩으로 바꾼다.");
-                    int _inputInt = InputManager.Instance.GetInputInt(Console.ReadLine(), 1, 2);
+                    int _inputInt = InputManager.Instance.GetInputInt("숫자를 입력하세요.", 1, 2);
                     JobManager.Instance.Push(() => 
                     {
                         if (_inputInt == 1)
@@ -66,7 +66,6 @@ namespace Team7TextRPG.Scenes
                             if (_tryExchange * CHIP_PRICE > GameManager.Instance.PlayerGold)
                             {
                                 TextHelper.DtContent("돈이 모자랍니다.");
-                                SceneManager.Instance.LoadScene<CasinoScene>();
                             }
                             else 
                             {
@@ -83,7 +82,6 @@ namespace Team7TextRPG.Scenes
                             if (_tryExchange > GameManager.Instance.PlayerChip)
                             {
                                 Console.WriteLine("칩이 모자랍니다.");
-                                SceneManager.Instance.LoadScene<CasinoScene>();
                             }
                             else
                             {
@@ -91,15 +89,17 @@ namespace Team7TextRPG.Scenes
                                 GameManager.Instance.RemoveChip(_tryExchange);
                                 TextHelper.DtContent($"칩 {_tryExchange}개를 {_tryExchange * CHIP_PRICE} 골드로 교환했습니다.");
                             }
-                            SceneManager.Instance.LoadScene<CasinoScene>();
                         }
+                        TextHelper.StatusBar($"현재 보유 칩 갯수 : {GameManager.Instance.PlayerChip}");
+                        Thread.Sleep(1000);
+                        SceneManager.Instance.LoadScene<CasinoScene>();
                     });
                     break;
                 case ChoiceGame.ExchangeReward:
                         //칩 갯수에 따라 교환할 수 있는 보상 추가 (레어 아이템, 고효율 포션 등)
                     break;
                 case ChoiceGame.BlackJack:
-                        
+                    GameManager.Instance.blackJack.StartBlackJack();
                     break;
                 case ChoiceGame.SlotMachine:
                     break;
