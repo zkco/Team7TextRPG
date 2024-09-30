@@ -38,7 +38,9 @@ namespace Team7TextRPG.UIs
             }
             else
             {
-                Console.WriteLine("아무것도 발견하지 못했습니다.");
+                Console.Clear();
+                UIManager.Instance.Write<CommonUI>();
+                Console.WriteLine("\n아무것도 발견하지 못했습니다.");
                 Ask();
             }
 
@@ -67,7 +69,9 @@ namespace Team7TextRPG.UIs
         private void EncounterMonster()
         {
             Console.Clear();
-            Console.WriteLine("몬스터와 만났습니다! 전투를 시작합니다.");
+            UIManager.Instance.Write<CommonUI>();
+            // 어떤 몬스터를 만났는지 알려주는 기능
+            Console.WriteLine("\n몬스터와 만났습니다! 어떻게 하시겠습니까?\n");
             //전투화면으로
             SceneManager.Instance.LoadScene<BattleScene>();
             
