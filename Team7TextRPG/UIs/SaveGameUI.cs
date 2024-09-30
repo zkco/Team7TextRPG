@@ -3,23 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Team7TextRPG.Contents;
+using Team7TextRPG.Contents.Items;
+using Team7TextRPG.Datas;
 using Team7TextRPG.Managers;
-using Team7TextRPG.UIs;
 using Team7TextRPG.Utils;
 
 namespace Team7TextRPG.UIs
 {
-    public class SkillUI : UIBase
+    public class SaveGameUI : UIBase
     {
         protected int pageSize = 5;
         protected int pageIndex = 0;
 
-        private Skill? _selectedSkill;
-
         public void NextPage()
         {
-            pageIndex = Math.Min(pageIndex + 1, (GameManager.Instance.PlayerItems.Count - 1) / pageSize);
+            pageIndex = Math.Min(pageIndex + 1, (SaveManager.Instance.SaveSlotTotalCount - 1) / pageSize);
         }
         public void PrevPage()
         {
@@ -30,29 +28,23 @@ namespace Team7TextRPG.UIs
         {
             while (true)
             {
+                SavedMetaData?[] datas = SaveManager.Instance.GetSavedMetaDatas();
                 Console.Clear();
-                // 인벤토리 표시
-                TextHelper.ItHeader("스킬");
-                TextHelper.PageWrite($"현재 페이지: {pageIndex + 1}/{(GameManager.Instance.PlayerItems.Count - 1) / pageSize + 1}");
-                TextHelper.ItContent("번호 | 이름 | 직업 | 소모MP | 설명");
-                Skill[] skills = GameManager.Instance.PlayerSkills.Skip(pageIndex * pageSize).Take(pageSize).ToArray();
-                // 1. 인벤토리 아이템 목록 표시
-                for (int i = 0; i < 5; i++)
+                TextHelper.BtHeader("저장");
+                TextHelper.BtContent("저장할 데이터를 선택하세요.");
+                TextHelper.PageWrite($"현재 페이지: {pageIndex + 1}/{(SaveManager.Instance.SaveSlotTotalCount - 1) / pageSize + 1}");
+                var items = datas.Skip(pageIndex * pageSize).Take(pageSize).ToArray();
+                for (int i = 0; i < items.Length; i++)
                 {
-                    if (i <= skills.Length - 1)
-                    {
-                        Skill skill = skills[i];
-                        string jobText = skill.RequiredJobType == Defines.JobType.None ? "전체" : Util.JobTypeToString(skill.RequiredJobType);
-                        TextHelper.ItContent($"{i + 1}. {skill.Name} | {jobText} | {skill.MpCost} | {skill.Description}");
-                    }
+                    SavedMetaData? data = items[i];
+                    if (data != null)
+                        TextHelper.ItContent($"{i + 1}. {data.SavedAt.ToString("yyyy-MM-dd HH:mm:ss")} - Lv.{data.Level} {data.Name}({Util.JobTypeToString(data.JobType)})");
                     else
-                    {
                         TextHelper.ItContent($"{i + 1}. -");
-                    }
                 }
+
                 ShowSelection();
-                // 2. 아이템 사용 여부 확인
-                // 3. 아이템 사용
+
                 int input = InputManager.Instance.GetInputInt("번호를 입력하세요.",
                     (int)Defines.PagingSelectionType.None + 1,
                     (int)Defines.PagingSelectionType.Exit);
@@ -69,24 +61,25 @@ namespace Team7TextRPG.UIs
                     case Defines.PagingSelectionType.Exit:
                         return;
                     default:
-                        // 배틀에서만 사용
-                        _selectedSkill = skills[input - 1];
-                        return;
+                        // 아이템 사용
+                        int saveSeq = input + (pageSize * pageIndex);
+                        SavedMetaData? selectedItem = datas[saveSeq - 1];
+                        if (selectedItem != null && UIManager.Instance.Confirm("이미 저장된 데이터가 있습니다. 덮어쓰시겠습니까?") == false)
+                            continue;
+
+                        SaveManager.Instance.Save(saveSeq);
+                        break;
                 }
             }
-        }
-        protected override string EnumTypeToText<T>(T type)
-        {
-            throw new NotImplementedException();
         }
 
         private void ShowSelection()
         {
-            // 1. 스킬1
-            // 2. 스킬2
-            // 3. 스킬3
-            // 4. 스킬4
-            // 5. 스킬5
+            // 1. 저장1
+            // 2. 저장2
+            // 3. 저장3
+            // 4. 저장4
+            // 5. 저장5
             // 6. 다음 페이지
             // 7. 이전 페이지
             // 8. 나가기
@@ -97,10 +90,9 @@ namespace Team7TextRPG.UIs
             }
         }
 
-        public Skill? Read()
+        protected override string EnumTypeToText<T>(T type)
         {
-            Write();
-            return _selectedSkill;
+            return "";
         }
     }
 }

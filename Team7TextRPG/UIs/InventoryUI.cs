@@ -43,7 +43,8 @@ namespace Team7TextRPG.UIs
                         ItemBase item = items[i];
                         string jobText = item.RequiredJobType == Defines.JobType.None ? "전체" : Util.JobTypeToString(item.RequiredJobType);
                         bool equipped = GameManager.Instance.IsEquippedItem(item.DataId);
-                        TextHelper.ItContent($"{i + 1}. {(equipped ? "[E]" : "")}{item.Name} x{item.Count} | {jobText} | {item.Description}");
+                        string enhanceText = item.EnhancementLevel == 0 ? "" : $"(+{item.EnhancementLevel})";
+                        TextHelper.ItContent($"{i + 1}. {(equipped ? "[E]" : "")}{item.Name}{enhanceText} x{item.Count} | {jobText} | {item.Description}");
                     }
                     else
                     {

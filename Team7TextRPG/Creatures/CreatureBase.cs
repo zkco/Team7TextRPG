@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 using Team7TextRPG.Contents;
@@ -19,6 +20,7 @@ namespace Team7TextRPG.Creatures
         public Defines.SexType SexType { get; protected set; }
         public Defines.JobType JobType { get; protected set; } = Defines.JobType.None;
         public Stat BaseStat { get; protected set; } = new Stat();
+        public List<Skill> Skills { get; private set; } = new List<Skill>();
 
         public int Hp { get; protected set; }
         public int Mp { get; protected set; }
@@ -57,6 +59,7 @@ namespace Team7TextRPG.Creatures
                 Level = maxLevel;
                 return;
             }
+            Level = level;
             LevelData levelData = DataManager.Instance.LevelDataDict[level];
             BaseStat.StatStr = levelData.Str;
             BaseStat.StatDex = levelData.Dex;
@@ -133,6 +136,34 @@ namespace Team7TextRPG.Creatures
                 Defines.JobType.Mage => StatInt * 10,
                 _ => StatStr * 5,
             };
+        }
+
+        public void AddSkill(int skillDataId)
+        {
+            if (DataManager.Instance.SkillDataDict.TryGetValue(skillDataId, out SkillData? skillData))
+            {
+                AddSkill(skillData);
+            }
+        }
+        public void AddSkill(SkillData skillData)
+        {
+            if (skillData.RequiredJob == Defines.JobType.None
+                    || skillData.RequiredJob == JobType)
+            {
+                Skill skill = new Skill(this);
+                skill.SetSkillData(skillData);
+                Skills.Add(skill);
+            }
+        }
+        public void RemoveSkill(int dataId)
+        {
+            Skill? skill = Skills.FirstOrDefault(s => s.DataId == dataId);
+            if (skill != null)
+                RemoveSkill(skill);
+        }
+        public void RemoveSkill(Skill skill)
+        {
+            Skills.Remove(skill);
         }
     }
 }

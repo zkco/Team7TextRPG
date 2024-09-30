@@ -1,4 +1,4 @@
-﻿using Team7TextRPG.UIs;
+using Team7TextRPG.UIs;
 using Team7TextRPG.Scenes;
 using static Team7TextRPG.Scenes.TitleScene;
 using Team7TextRPG.Utils;

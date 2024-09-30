@@ -21,6 +21,12 @@ namespace Team7TextRPG.Creatures
 
         public Stat ItemStat { get; private set; } = new Stat();
 
+        public int StatPoint { get; set; }
+        public int StatPointStr { get; set; } // 힘 포인트 투자량
+        public int StatPointDex { get; set; } // 민첩 포인트 투자량
+        public int StatPointInt { get; set; } // 지능 포인트 투자량
+        public int StatPointLuck { get; set; } // 행운 포인트 투자량
+
         public override int StatStr => BaseStat.StatStr + ItemStat.StatStr;
         public override int StatDex => BaseStat.StatDex + ItemStat.StatDex;
         public override int StatInt => BaseStat.StatInt + ItemStat.StatInt;
@@ -73,10 +79,12 @@ namespace Team7TextRPG.Creatures
         {
             // 저장 데이터 로드시 사용할 예정
             SetLevel(saveData.Level);
-            BaseStat.StatStr = saveData.StatStr;
-            BaseStat.StatDex = saveData.StatDex;
-            BaseStat.StatInt = saveData.StatInt;
-            BaseStat.StatLuck = saveData.StatLuck;
+
+            StatPointStr = saveData.StatPointStr;
+            StatPointDex = saveData.StatPointDex;
+            StatPointInt = saveData.StatPointInt;
+            StatPointLuck = saveData.StatPointLuck;
+            StatPoint = saveData.StatPoint;
 
             Exp = saveData.Exp;
             JobType = saveData.JobType;
@@ -91,6 +99,35 @@ namespace Team7TextRPG.Creatures
             base.SetLevel(level);
             LevelData levelData = DataManager.Instance.LevelDataDict[level];
             MaxExp = levelData.MaxExp;
+            StatPoint += levelData.BonusPoint;
+        }
+
+        public void AddStatPoint(Defines.StatPointType type)
+        {
+            // 스텟 포인트 추가
+            if (StatPoint <= 0)
+                return;
+
+            if (type == Defines.StatPointType.StatStr)
+            {
+                StatPointStr++;
+                StatPoint--;
+            }
+            else if (type == Defines.StatPointType.StatDex)
+            {
+                StatPointDex++;
+                StatPoint--;
+            }
+            else if (type == Defines.StatPointType.StatInt)
+            {
+                StatPointInt++;
+                StatPoint--;
+            }
+            else if (type == Defines.StatPointType.StatLuck)
+            {
+                StatPointLuck++;
+                StatPoint--;
+            }
         }
 
         public void EquipItem(EquipmentItem equipment)
