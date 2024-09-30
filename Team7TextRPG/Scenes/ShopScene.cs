@@ -23,6 +23,7 @@ namespace Team7TextRPG.Scenes
 
         public override void Show()
         {
+            Console.Clear();
             // 상점 안내 출력
             WriteMessage("방문하려는 상점을 선택하세요.");
             // 1. 메뉴를 보여준다.
@@ -35,19 +36,19 @@ namespace Team7TextRPG.Scenes
             switch (selection)
             {
                 case ShopSceneType.Potion:
-                    SceneManager.Instance.LoadScene<ShopScene>();
+                    SceneManager.Instance.LoadScene<BuySellScene>();
                     break;
                 case ShopSceneType.Weapon:
-                    SceneManager.Instance.LoadScene<ShopScene>();
+                    SceneManager.Instance.LoadScene<BuySellScene>();
                     break;
                 case ShopSceneType.Armor:
-                    SceneManager.Instance.LoadScene<ShopScene>();
+                    SceneManager.Instance.LoadScene<BuySellScene>();
                     break;
                 case ShopSceneType.Accessory:
-                    SceneManager.Instance.LoadScene<ShopScene>();
+                    SceneManager.Instance.LoadScene<BuySellScene>();
                     break;
                 case ShopSceneType.Blacksmith:
-                    SceneManager.Instance.LoadScene<ShopScene>();
+                    SceneManager.Instance.LoadScene<BuySellScene>();
                     break;
                 case ShopSceneType.Outshop:
                     SceneManager.Instance.LoadScene<TownScene>();
