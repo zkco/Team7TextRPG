@@ -60,6 +60,22 @@ namespace Team7TextRPG.Managers
             PlayerChip = saveData.Chip;
             PlayerGold = saveData.Gold;
             Quest = saveData.QuestData;
+            PlayerItems = saveData.Items.Select(i =>
+            {
+                ItemBase? item = null;
+                switch (i.ItemType)
+                {
+                    case Defines.ItemType.Equipment:
+                        item = new EquipmentItem();
+                        break;
+                    case Defines.ItemType.Consumable:
+                        item = new ConsumableItem();
+                        break;
+                }
+
+                item?.SetSaveData(i);
+                return item;
+            }).Where(i => i != null).Select(i => i!).ToList();
         }
 
         public void AddGold(int gold)

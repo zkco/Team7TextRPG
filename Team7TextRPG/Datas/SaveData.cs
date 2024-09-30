@@ -15,6 +15,7 @@ namespace Team7TextRPG.Datas
         public int Chip;
         public SavePlayerData PlayerData = new SavePlayerData();
         public SaveQuestData QuestData = new SaveQuestData();
+        public List<SaveItemData> Items = new List<SaveItemData>();
     }
 
     [Serializable]
@@ -47,6 +48,15 @@ namespace Team7TextRPG.Datas
         public int CurrentQuestId;
         public int Amount1;
         public int Amount2;
+    }
+
+    [Serializable]
+    public class SaveItemData
+    {
+        public int DataId;
+        public int Count;
+        public int EnhancementLevel;
+        public Defines.ItemType ItemType;
     }
 
     public class SavedMetaData
