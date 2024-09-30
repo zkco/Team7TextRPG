@@ -27,10 +27,10 @@ namespace Team7TextRPG.Creatures
         public int StatPointInt { get; set; } // 지능 포인트 투자량
         public int StatPointLuck { get; set; } // 행운 포인트 투자량
 
-        public override int StatStr => BaseStat.StatStr + ItemStat.StatStr;
-        public override int StatDex => BaseStat.StatDex + ItemStat.StatDex;
-        public override int StatInt => BaseStat.StatInt + ItemStat.StatInt;
-        public override int StatLuck => BaseStat.StatLuck + ItemStat.StatLuck;
+        public override int StatStr => BaseStat.StatStr + ItemStat.StatStr + StatPointStr;
+        public override int StatDex => BaseStat.StatDex + ItemStat.StatDex + StatPointDex;
+        public override int StatInt => BaseStat.StatInt + ItemStat.StatInt + StatPointInt;
+        public override int StatLuck => BaseStat.StatLuck + ItemStat.StatLuck + StatPointLuck;
 
         public override int MaxHp => BaseStat.MaxHp + ItemStat.MaxHp + CalcJobMaxHp();
         public override int MaxMp => BaseStat.MaxMp + ItemStat.MaxMp + CalcJobMaxMp();

@@ -3,22 +3,37 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Team7TextRPG.Contents;
+using Team7TextRPG.Creatures;
 using Team7TextRPG.Managers;
+using Team7TextRPG.Scenes;
 using Team7TextRPG.UIs;
 using Team7TextRPG.Utils;
+using static Team7TextRPG.Scenes.TitleScene;
+using static Team7TextRPG.Scenes.TownScene;
 using static Team7TextRPG.Utils.Defines;
 
 namespace Team7TextRPG.UIs
 {
     public class StatusUI : UIBase
     {
+        public enum statPlus
+        {
+            None,
+            StatStr,
+            StatDex,
+            StatInt,
+            StatLuck,
+            back
+        }
         public override void Write()
         {
             Console.Clear();
             TextHelper.BtHeader("상태창");
-
+            TextHelper.ItHeader("기본");
             Console.WriteLine($"이름: {GameManager.Instance.Player.Name}");
             Console.WriteLine($"종족: {GameManager.Instance.Player.SpecisType}");
+            Console.WriteLine($"레벨: {GameManager.Instance.Player.Level}");
             Console.WriteLine($"HP: {GameManager.Instance.Player.MaxHp}");
             Console.WriteLine($"MP: {GameManager.Instance.Player.MaxMp}");
             Console.WriteLine("");
@@ -35,13 +50,51 @@ namespace Team7TextRPG.UIs
             Console.WriteLine($"지력: {GameManager.Instance.Player.StatInt}");
             Console.WriteLine($"운: {GameManager.Instance.Player.StatLuck}");
             Console.WriteLine("");
+            TextHelper.BtHeader("스탯투자");
+            WriteType<statPlus>();
+            Console.WriteLine($"남은 스탯 포인트: {GameManager.Instance.Player.StatPoint}");
+
+            string input = InputManager.Instance.GetInputKeyword();
+
+            statPlus selection = InputManager.Instance.ParseInputType<statPlus>(input);
+            
+            switch (selection)
+            {
+                case statPlus.StatStr:
+                    GameManager.Instance.Player?.AddStatPoint(Utils.Defines.StatPointType.StatStr);
+                    UIManager.Instance.Write<StatusUI>();
+                    return; // Scene 호출 뒤에는 while문을 빠져나가야 함.
+                case statPlus.StatDex:
+                    GameManager.Instance.Player?.AddStatPoint(Utils.Defines.StatPointType.StatDex);
+                    UIManager.Instance.Write<StatusUI>();
+                    return; // Scene 호출 뒤에는 while문을 빠져나가야 함.
+                case statPlus.StatInt:
+                    GameManager.Instance.Player?.AddStatPoint(Utils.Defines.StatPointType.StatInt);
+                    UIManager.Instance.Write<StatusUI>();
+                    return; // Scene 호출 뒤에는 while문을 빠져나가야 함.
+                case statPlus.StatLuck:
+                    GameManager.Instance.Player?.AddStatPoint(Utils.Defines.StatPointType.StatLuck);
+                    UIManager.Instance.Write<StatusUI>();
+                    return; // Scene 호출 뒤에는 while문을 빠져나가야 함.
+                case statPlus.back:
+                    SceneManager.Instance.LoadScene<TownScene>();
+                    return; // Scene 호출 뒤에는 while문을 빠져나가야 함.
+            }
 
 
 
         }
         protected override string EnumTypeToText<T>(T type)
         {
-            throw new NotImplementedException();
+            return type switch
+            {
+                statPlus.StatStr => "힘",
+                statPlus.StatDex => "민첩",
+                statPlus.StatInt => "지력",
+                statPlus.StatLuck => "운",
+                statPlus.back => "상태창 끄기",
+                _ => "없음",
+            };
         }
     }
 }
