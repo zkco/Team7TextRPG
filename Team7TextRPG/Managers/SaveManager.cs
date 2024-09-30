@@ -57,7 +57,7 @@ namespace Team7TextRPG.Managers
             saveData.PlayerData.StatPointDex = player.StatDex;
             saveData.PlayerData.StatPointInt = player.StatInt;
             saveData.PlayerData.StatPointLuck = player.StatLuck;
-            saveData.QuestData = GameManager.Instance.Quest;
+            saveData.QuestData = GameManager.Instance.PlayerQuest;
             saveData.Items = GameManager.Instance.PlayerItems.Select(i => new SaveItemData
             {
                 DataId = i.DataId,

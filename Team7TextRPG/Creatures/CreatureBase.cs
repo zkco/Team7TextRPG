@@ -138,22 +138,25 @@ namespace Team7TextRPG.Creatures
             };
         }
 
-        public void AddSkill(int skillDataId)
+        public bool AddSkill(int skillDataId)
         {
             if (DataManager.Instance.SkillDataDict.TryGetValue(skillDataId, out SkillData? skillData))
-            {
-                AddSkill(skillData);
-            }
+                return AddSkill(skillData);
+
+            return false;
         }
-        public void AddSkill(SkillData skillData)
+        public bool AddSkill(SkillData skillData)
         {
-            if (skillData.RequiredJob == Defines.JobType.None
-                    || skillData.RequiredJob == JobType)
-            {
-                Skill skill = new Skill(this);
-                skill.SetSkillData(skillData);
-                Skills.Add(skill);
-            }
+            if ((skillData.RequiredJob == Defines.JobType.None || skillData.RequiredJob == JobType) == false)
+                return false;
+
+            if (Skills.Any(s => s.DataId == skillData.DataId))
+                return false;
+
+            Skill skill = new Skill(this);
+            skill.SetSkillData(skillData);
+            Skills.Add(skill);
+            return true;
         }
         public void RemoveSkill(int dataId)
         {

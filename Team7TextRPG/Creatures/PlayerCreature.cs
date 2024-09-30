@@ -180,10 +180,21 @@ namespace Team7TextRPG.Creatures
             ItemStat.CriticalChanceRate = (EWeapon?.ItemStat.CriticalChanceRate ?? 0) + (EAccessory?.ItemStat.CriticalChanceRate ?? 0);
         }
 
-
+        public void AddExp(int exp)
+        {
+            // 경험치 획득
+            Exp += exp;
+            while (Exp >= MaxExp)
+            {
+                // 경험치 누적된 걸로 계속 레벨업
+                Exp -= MaxExp;
+                LevelUp();
+            }
+        }
         public override void LevelUp()
         {
             // 레벨업
+            SetLevel(Level + 1);
         }
 
         public override void OnDamaged(int damage)

@@ -46,8 +46,13 @@ namespace Team7TextRPG.Datas
     {
         public HashSet<int> CompletedQuests = new HashSet<int>();
         public int CurrentQuestId;
-        public int Amount1;
-        public int Amount2;
+        public Defines.QuestType QuestType;
+        public int TargetId1;
+        public int CurrentAmount1; //현재1
+        public int TargetAmount1; //목표1
+        public int TargetId2;
+        public int CurrentAmount2; //현재2
+        public int TargetAmount2; //목표2
     }
 
     [Serializable]
