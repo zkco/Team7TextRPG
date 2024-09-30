@@ -95,7 +95,7 @@ namespace Team7TextRPG.Managers
             if (Directory.Exists(_saveDir) == false)
                 Directory.CreateDirectory(_saveDir);
 
-            SavedMetaData? meta = _saveMetas.FirstOrDefault(s => s.Seq == seq);
+            SavedMetaData? meta = _saveMetas.FirstOrDefault(s => s?.Seq == seq);
             if (meta != null && File.Exists(_saveDir + meta.FileName))
                 File.Delete(_saveDir + meta.FileName);
 
