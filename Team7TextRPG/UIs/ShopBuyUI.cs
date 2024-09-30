@@ -32,7 +32,6 @@ namespace Team7TextRPG.UIs
             Console.WriteLine("");
             Console.WriteLine("0. 나가기");
             Console.WriteLine("1. 아이템 구매");
-            Console.WriteLine("2. 아이템 판매");
             Console.WriteLine("");
 
         }
