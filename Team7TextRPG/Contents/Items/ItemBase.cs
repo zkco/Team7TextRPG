@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Team7TextRPG.Datas;
+using Team7TextRPG.Managers;
 using Team7TextRPG.Utils;
 using static Team7TextRPG.Utils.Defines;
 
@@ -22,6 +23,7 @@ namespace Team7TextRPG.Contents.Items
         public Defines.JobType RequiredJobType { get; protected set; }
         public int Count { get; protected set; }
         public int MaxCount { get; protected set; }
+        public int EnhancementLevel { get; protected set; } = 0; //처음에는 0강
 
         public virtual Stat ItemStat { get; protected set; } = new Stat();
 
@@ -31,20 +33,41 @@ namespace Team7TextRPG.Contents.Items
             Name = data.Name;
             Description = data.DescText();
             ItemType = data.ItemType;
-            Price = data.Price;
+            Price = data.Price * (EnhancementLevel + 1);
             MaxCount = data.MaxCount;
-            ItemStat.StatStr = data.StatStr;
-            ItemStat.StatDex = data.StatDex;
-            ItemStat.StatInt = data.StatInt;
-            ItemStat.StatLuck = data.StatLuck;
-            ItemStat.Attack = data.Attack;
-            ItemStat.Defense = data.Defense;
-            ItemStat.Speed = data.Speed;
-            ItemStat.DodgeChanceRate = data.DodgeChanceRate;
-            ItemStat.CriticalChanceRate = data.CriticalChanceRate;
-            ItemStat.MaxHp = data.MaxHp;
-            ItemStat.MaxMp = data.MaxMp;
+            ItemStat.StatStr = CalcEnhancementValue(data.StatStr);
+            ItemStat.StatDex = CalcEnhancementValue(data.StatDex);
+            ItemStat.StatInt = CalcEnhancementValue(data.StatInt);
+            ItemStat.StatLuck = CalcEnhancementValue(data.StatLuck);
+            ItemStat.Attack = CalcEnhancementValue(data.Attack);
+            ItemStat.Defense = CalcEnhancementValue(data.Defense);
+            ItemStat.Speed = CalcEnhancementValue(data.Speed);
+            ItemStat.DodgeChanceRate = CalcEnhancementValue(data.DodgeChanceRate);
+            ItemStat.CriticalChanceRate = CalcEnhancementValue(data.CriticalChanceRate);
+            ItemStat.MaxHp = CalcEnhancementValue(data.MaxHp);
+            ItemStat.MaxMp = CalcEnhancementValue(data.MaxMp);
             Count = 1;
+        }
+
+        private int CalcEnhancementValue(int value)
+        {
+            if (value == 0) return 0;
+            return (int)(value * EnhancementLevel * 1.2);
+        }
+
+        private double CalcEnhancementValue(double value)
+        {
+            if (value == 0) return 0;
+            return value + EnhancementLevel * 1.2;
+        }
+
+        public virtual void SetSaveData(SaveItemData data)
+        {
+            if (DataManager.Instance.ItemDataDict.TryGetValue(data.DataId, out ItemData? dataItem))
+            {
+                EnhancementLevel = data.EnhancementLevel;
+                SetItemData(dataItem);
+            }
         }
 
         public virtual void Use()

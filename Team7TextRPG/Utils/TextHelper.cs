@@ -24,7 +24,7 @@ namespace Team7TextRPG.Utils
 
         public static void WriteLine(string message, params object?[]? args)
         {
-            Write(message, args);
+            Write(message + "\n", args);
         }
 
         private static void SetType(TextType type)

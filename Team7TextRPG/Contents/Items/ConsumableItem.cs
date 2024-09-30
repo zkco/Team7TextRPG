@@ -22,5 +22,10 @@ namespace Team7TextRPG.Contents.Items
             HpAmount = data.HpAmount;
             MpAmount = data.MpAmount;
         }
+
+        public override void SetSaveData(SaveItemData data)
+        {
+            base.SetSaveData(data);
+        }
     }
 }

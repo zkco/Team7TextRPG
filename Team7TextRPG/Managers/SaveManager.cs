@@ -58,6 +58,13 @@ namespace Team7TextRPG.Managers
             saveData.PlayerData.StatPointInt = player.StatInt;
             saveData.PlayerData.StatPointLuck = player.StatLuck;
             saveData.QuestData = GameManager.Instance.Quest;
+            saveData.Items = GameManager.Instance.PlayerItems.Select(i => new SaveItemData
+            {
+                DataId = i.DataId,
+                Count = i.Count,
+                EnhancementLevel = i.EnhancementLevel,
+                ItemType = i.ItemType
+            }).ToList();
 
             SaveFile(saveData, seq);
             _dirty = true;
@@ -65,7 +72,7 @@ namespace Team7TextRPG.Managers
 
         public SaveData? Load(int seq)
         {
-            SavedMetaData? savedMetaData = _saveMetas.FirstOrDefault(s => s.Seq == seq);
+            SavedMetaData? savedMetaData = _saveMetas.FirstOrDefault(s => s?.Seq == seq);
             if (savedMetaData == null) return null;
 
             string filePath = _saveDir + savedMetaData.FileName;
