@@ -1,5 +1,6 @@
 using System.Xml.Linq;
 using Team7TextRPG.Contents;
+using Team7TextRPG.Contents.CasinoGame;
 using Team7TextRPG.Contents.Items;
 using Team7TextRPG.Creatures;
 using Team7TextRPG.Datas;
@@ -25,6 +26,7 @@ namespace Team7TextRPG.Managers
         public List<ItemBase> PlayerItems { get; private set; } = new List<ItemBase>();
         public List<Skill> PlayerSkills { get; private set; } = new List<Skill>();
         public SaveQuestData Quest { get; private set; } = new SaveQuestData(); // 완료한 퀘스트 목록, 중복 X
+        public BlackJack? blackJack = new BlackJack();
 
         // 게임 limit 요소
         public const int DeadLine = 50;
