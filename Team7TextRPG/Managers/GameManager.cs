@@ -24,7 +24,7 @@ namespace Team7TextRPG.Managers
 
         public PlayerCreature? Player { get; private set; }
         public List<ItemBase> PlayerItems { get; private set; } = new List<ItemBase>();
-        public List<Skill> PlayerSkills { get; private set; } = new List<Skill>();
+        public List<Skill> PlayerSkills => Player?.Skills ?? new List<Skill>();
         public SaveQuestData Quest { get; private set; } = new SaveQuestData(); // 완료한 퀘스트 목록, 중복 X
         public BlackJack? blackJack = new BlackJack();
 
@@ -158,21 +158,15 @@ namespace Team7TextRPG.Managers
 
         public void AddSkill(SkillData skillData)
         {
-            if (Player == null) return;
-
-            Skill skill = new Skill(Player);
-            skill.SetSkillData(skillData);
-            PlayerSkills.Add(skill);
+            Player?.AddSkill(skillData);
         }
         public void RemoveSkill(int dataId)
         {
-            Skill? skill = PlayerSkills.FirstOrDefault(s => s.DataId == dataId);
-            if (skill != null)
-                RemoveSkill(skill);
+            Player?.RemoveSkill(dataId);
         }
         public void RemoveSkill(Skill skill)
         {
-            PlayerSkills.Remove(skill);
+            Player?.RemoveSkill(skill);
         }
 
         public bool IsEquippedItem(int dataId)
