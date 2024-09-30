@@ -34,10 +34,10 @@ namespace Team7TextRPG.Utils
         {
             return jobType switch
             {
-                Defines.JobType.Newbie => "초보자",
                 Defines.JobType.Warrior => "전사",
                 Defines.JobType.Mage => "마법사",
-                _ => "알 수 없음",
+                Defines.JobType.Archer => "궁수",
+                _ => "무직",
             };
         }
         public static string ShopTypeToString(Defines.ShopType shopType)
