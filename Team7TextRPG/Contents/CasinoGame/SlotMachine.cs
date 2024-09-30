@@ -89,7 +89,11 @@ namespace Team7TextRPG.Contents.CasinoGame
                             GameManager.Instance.RemoveChip(bet);
                             Shuffle();
                         }
-                        else TextHelper.BtContent("칩이 부족하다...");
+                        else
+                        {
+                            TextHelper.BtContent("칩이 부족하다...");
+                            Thread.Sleep(1000);
+                        }
                         break;
                     case 2:
                         bet += 10;

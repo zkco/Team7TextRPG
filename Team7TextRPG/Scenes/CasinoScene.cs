@@ -53,8 +53,8 @@ namespace Team7TextRPG.Scenes
             {
                 case ChoiceGame.ExchangeChips:
                     Console.Clear();
-                    TextHelper.ItContent("1. 칩을 골드로 바꾼다.");
-                    TextHelper.ItContent("2. 골드를 칩으로 바꾼다.");
+                    TextHelper.ItContent("1. 골드를 칩으로 바꾼다.");
+                    TextHelper.ItContent("2. 칩을 골드로 바꾼다.");
                     int _inputInt = InputManager.Instance.GetInputInt("숫자를 입력하세요.", 1, 2);
                     if (_inputInt == 1)
                     {
@@ -63,13 +63,45 @@ namespace Team7TextRPG.Scenes
                         int _tryExchange = InputManager.Instance.GetInputInt("몇개의 칩으로 바꿀까요?", 1, 10000);
                         if (_tryExchange * CHIP_PRICE > GameManager.Instance.PlayerGold)
                         {
+<<<<<<< Updated upstream
                             TextHelper.DtContent("돈이 모자랍니다.");
+=======
+                            Console.Clear();
+                            TextHelper.DtContent("100골드를 칩 한 개로 교환할 수 있습니다");
+                            int _tryExchange = InputManager.Instance.GetInputInt("몇개의 칩으로 바꿀까요?", 1, 10000);
+                            if (_tryExchange * CHIP_PRICE > GameManager.Instance.PlayerGold)
+                            {
+                                TextHelper.DtContent("돈이 모자랍니다.");
+                            }
+                            else 
+                            {
+                                GameManager.Instance.RemoveGold(_tryExchange * CHIP_PRICE);
+                                GameManager.Instance.AddChip(_tryExchange);
+                                TextHelper.DtContent($"{_tryExchange * CHIP_PRICE} 골드를 {_tryExchange}개의 칩으로 교환했습니다.");
+                            }
+>>>>>>> Stashed changes
                         }
                         else
                         {
+<<<<<<< Updated upstream
                             GameManager.Instance.RemoveGold(_tryExchange * CHIP_PRICE);
                             GameManager.Instance.AddChip(_tryExchange);
                             TextHelper.DtContent($"{_tryExchange * CHIP_PRICE} 골드를 {_tryExchange}개의 칩으로 교환했습니다.");
+=======
+                            Console.Clear();
+                            TextHelper.DtContent("칩 한 개를 100골드로 교환할 수 있습니다."); 
+                            int _tryExchange = InputManager.Instance.GetInputInt("몇개의 칩을 바꿀까요?", 1, 10000);
+                            if (_tryExchange > GameManager.Instance.PlayerChip)
+                            {
+                                Console.WriteLine("칩이 모자랍니다.");
+                            }
+                            else
+                            {
+                                GameManager.Instance.AddGold(_tryExchange * CHIP_PRICE);
+                                GameManager.Instance.RemoveChip(_tryExchange);
+                                TextHelper.DtContent($"칩 {_tryExchange}개를 {_tryExchange * CHIP_PRICE} 골드로 교환했습니다.");
+                            }
+>>>>>>> Stashed changes
                         }
                     }
                     else if (_inputInt == 2)
