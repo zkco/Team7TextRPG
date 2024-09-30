@@ -126,7 +126,21 @@ namespace Team7TextRPG.Utils
             Quest
         }
 
+        public enum StatPointType
+        {
+            None,
+            StatStr,
+            StatDex,
+            StatInt,
+            StatLuck
+        }
+
         public const int MAX_PLAYER_LEVEL = 100;
+        public const int ENHANCEMENT_MAX_LEVEL = 10;
+        public const int ENHANCEMENT_COST = 1000;
+        public const int ENHANCEMENT_SUCCESS_RATE = 100;
+        public const int ENHANCEMENT_FAIL_RATE = 10;
+
 
     }
 }

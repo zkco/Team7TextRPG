@@ -1,8 +1,11 @@
+using System.Xml.Linq;
 using Team7TextRPG.Contents;
+using Team7TextRPG.Contents.CasinoGame;
 using Team7TextRPG.Contents.Items;
 using Team7TextRPG.Creatures;
 using Team7TextRPG.Datas;
 using Team7TextRPG.Utils;
+using static Team7TextRPG.Utils.Defines;
 
 namespace Team7TextRPG.Managers
 {
@@ -22,7 +25,8 @@ namespace Team7TextRPG.Managers
         public PlayerCreature? Player { get; private set; }
         public List<ItemBase> PlayerItems { get; private set; } = new List<ItemBase>();
         public List<Skill> PlayerSkills { get; private set; } = new List<Skill>();
-
+        public SaveQuestData Quest { get; private set; } = new SaveQuestData(); // 완료한 퀘스트 목록, 중복 X
+        public BlackJack? blackJack = new BlackJack();
 
         // 게임 limit 요소
         public const int DeadLine = 50;
@@ -50,6 +54,30 @@ namespace Team7TextRPG.Managers
             MonsterCreature monster = new MonsterCreature();
             monster.SetMonsterData(monsterData);
             return monster;
+        }
+        public void LoadPlayer(SaveData saveData)
+        {
+            Player = new PlayerCreature(saveData.PlayerData.Name ?? "Unknown", saveData.PlayerData.SexType, saveData.PlayerData.SpeciesType);
+            Player.SetLoadData(saveData.PlayerData);
+            PlayerChip = saveData.Chip;
+            PlayerGold = saveData.Gold;
+            Quest = saveData.QuestData;
+            PlayerItems = saveData.Items.Select(i =>
+            {
+                ItemBase? item = null;
+                switch (i.ItemType)
+                {
+                    case Defines.ItemType.Equipment:
+                        item = new EquipmentItem();
+                        break;
+                    case Defines.ItemType.Consumable:
+                        item = new ConsumableItem();
+                        break;
+                }
+
+                item?.SetSaveData(i);
+                return item;
+            }).Where(i => i != null).Select(i => i!).ToList();
         }
 
         public void AddGold(int gold)
@@ -155,6 +183,11 @@ namespace Team7TextRPG.Managers
             return itemData.ItemType == Defines.ItemType.Equipment && (Player?.EWeapon?.DataId == itemData.DataId
                 || Player?.EArmor?.DataId == itemData.DataId
                 || Player?.EAccessory?.DataId == itemData.DataId);
+        }
+        public void QuestClear(int dataId)
+        {
+            if (Quest.CompletedQuests.Contains(dataId) == false)
+                Quest.CompletedQuests.Add(dataId);
         }
     }
 }

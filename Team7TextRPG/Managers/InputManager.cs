@@ -20,6 +20,16 @@ namespace Team7TextRPG.Managers
             Console.WriteLine(message);
             return Console.ReadLine() ?? String.Empty;
         }
+        public void GetInputEnter(string message = "계속하려면 엔터를 누르세요.")
+        {
+            while (true)
+            {
+                Console.WriteLine(message);
+                ConsoleKey key = Console.ReadKey().Key;
+                if (key == ConsoleKey.Enter)
+                    break;
+            }
+        }
         // 입력받은 문자열을 대문자로 변환하고 _keyword에 해당하는지 확인해서 반환하는 함수
         public string GetInputKeyword(string message = "키워드를 입력하세요.")
         {

@@ -8,14 +8,16 @@ namespace Team7TextRPG.UIs
 {
     public class QuestUI : UIBase
     {
+
         public override void Write()
         {
 
         }
-
         protected override string EnumTypeToText<T>(T type)
         {
             return String.Empty;
         }
+
     }
+
 }
