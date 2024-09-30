@@ -74,9 +74,19 @@ namespace Team7TextRPG.Contents.CasinoGame
 
         public void GameStart()
         {
-            Screen();
-            int gameInput = InputManager.Instance.GetInputInt("숫자를 입력해주세요",1 ,4);
-            switch(gameInput) = 
+            bool playing = true;
+            while (playing == true)
+            {
+                Screen();
+                int gameInput = InputManager.Instance.GetInputInt("숫자를 입력해주세요", 1, 4);
+                switch (gameInput)
+                {
+                    case 1:
+                        Shuffle();
+
+                        break;
+                }
+            }
         }
     }
 }
