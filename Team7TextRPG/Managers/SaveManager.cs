@@ -95,6 +95,10 @@ namespace Team7TextRPG.Managers
             if (Directory.Exists(_saveDir) == false)
                 Directory.CreateDirectory(_saveDir);
 
+            SavedMetaData? meta = _saveMetas.FirstOrDefault(s => s.Seq == seq);
+            if (meta != null && File.Exists(_saveDir + meta.FileName))
+                File.Delete(_saveDir + meta.FileName);
+
             string filePath = _saveDir + $"{saveData.PlayerData.Name}_{saveData.PlayerData.Level}_{saveData.PlayerData.JobType}_{seq:00}.json";
             string json = JsonConvert.SerializeObject(saveData);
             File.WriteAllText(filePath, json);
