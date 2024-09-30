@@ -21,7 +21,6 @@ namespace Team7TextRPG.Creatures
         public int ExpReward { get; private set; }
         public int ItemReward { get; private set; }
         public int DropItemRate { get; private set; }
-        public List<Skill> Skills { get; private set; } = new List<Skill>();
         public void SetMonsterData(MonsterData monsterData)
         {
             DataId = monsterData.DataId;
@@ -47,16 +46,6 @@ namespace Team7TextRPG.Creatures
             AddSkill(monsterData.SkillDataId2);
             AddSkill(monsterData.SkillDataId3);
             Hp = MaxHp;
-        }
-
-        private void AddSkill(int skillDataId)
-        {
-            if (DataManager.Instance.SkillDataDict.TryGetValue(skillDataId, out SkillData? skillData))
-            {
-                Skill skill = new Skill(this);
-                skill.SetSkillData(skillData);
-                Skills.Add(skill);
-            }
         }
 
         public override void OnDamaged(int damage)

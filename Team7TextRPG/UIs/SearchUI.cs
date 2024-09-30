@@ -20,37 +20,32 @@ namespace Team7TextRPG.UIs
         private void SearchField()
         {
             Console.WriteLine("필드를 탐색하는 중..");
-            Thread.Sleep(1000); //어떤 방법을 쓰든 지연시간을 둬서 진짜 탐색하는듯한 느낌주기
+            Thread.Sleep(1000); 
 
 
-            // 40% 확률로 몬스터 발견
-            // 30% 확률로 보물상자 발견
-            // 30% 확률로 아무것도 발견하지 못함
+
             Random random = new Random();
             int encounter = random.Next(0, 100);
-            if (encounter < 40)
+            if (encounter < 60)
             {
-                
                 EncounterMonster();
+
             }
-            else if (encounter < 70)
+            else if (encounter < 10)
             {
-                
                 FindTreasureChest();
+                Ask();
             }
             else
             {
-                
-                Console.WriteLine("아무것도 발견하지 못했습니다.");
+                Console.Clear();
+                UIManager.Instance.Write<CommonUI>();
+                Console.WriteLine("\n아무것도 발견하지 못했습니다.");
+                Ask();
             }
 
             // 탐험을 계속할지 묻는 기능
-            UIManager.Instance.Confirm("계속 탐색하시겠습니까?",
-            () =>
-            {
-                // 사용자가 탐험을 계속하도록 선택
-                SearchField();
-            });
+            
 
             //최대5번까지 탐험가능 5번이넘으면 하루가 지남
 
@@ -58,11 +53,28 @@ namespace Team7TextRPG.UIs
         }
 
 
+        private void Ask()
+        {
+            UIManager.Instance.Confirm("계속 탐색하시겠습니까?",
+            () =>
+            {
+                // 사용자가 탐험을 계속하도록 선택
+                SearchField();
+            });
+        }
+
+
+
         //몬스터랑 만났을 경우
         private void EncounterMonster()
         {
-            Console.WriteLine("몬스터와 만났습니다! 전투를 시작합니다.");
+            Console.Clear();
+            UIManager.Instance.Write<CommonUI>();
+            // 어떤 몬스터를 만났는지 알려주는 기능
+            Console.WriteLine("\n몬스터와 만났습니다! 어떻게 하시겠습니까?\n");
             //전투화면으로
+            SceneManager.Instance.LoadScene<BattleScene>();
+            
         }
 
 
