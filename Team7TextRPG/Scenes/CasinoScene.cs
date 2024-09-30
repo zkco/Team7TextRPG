@@ -56,16 +56,10 @@ namespace Team7TextRPG.Scenes
                     TextHelper.ItContent("1. 골드를 칩으로 바꾼다.");
                     TextHelper.ItContent("2. 칩을 골드로 바꾼다.");
                     int _inputInt = InputManager.Instance.GetInputInt("숫자를 입력하세요.", 1, 2);
-                    if (_inputInt == 1)
+                    JobManager.Instance.Push(() => 
                     {
-                        Console.Clear();
-                        TextHelper.DtContent("100골드를 칩 한 개로 교환할 수 있습니다.");
-                        int _tryExchange = InputManager.Instance.GetInputInt("몇개의 칩으로 바꿀까요?", 1, 10000);
-                        if (_tryExchange * CHIP_PRICE > GameManager.Instance.PlayerGold)
+                        if (_inputInt == 1)
                         {
-<<<<<<< Updated upstream
-                            TextHelper.DtContent("돈이 모자랍니다.");
-=======
                             Console.Clear();
                             TextHelper.DtContent("100골드를 칩 한 개로 교환할 수 있습니다");
                             int _tryExchange = InputManager.Instance.GetInputInt("몇개의 칩으로 바꿀까요?", 1, 10000);
@@ -79,15 +73,9 @@ namespace Team7TextRPG.Scenes
                                 GameManager.Instance.AddChip(_tryExchange);
                                 TextHelper.DtContent($"{_tryExchange * CHIP_PRICE} 골드를 {_tryExchange}개의 칩으로 교환했습니다.");
                             }
->>>>>>> Stashed changes
                         }
-                        else
+                        else if(_inputInt == 2) 
                         {
-<<<<<<< Updated upstream
-                            GameManager.Instance.RemoveGold(_tryExchange * CHIP_PRICE);
-                            GameManager.Instance.AddChip(_tryExchange);
-                            TextHelper.DtContent($"{_tryExchange * CHIP_PRICE} 골드를 {_tryExchange}개의 칩으로 교환했습니다.");
-=======
                             Console.Clear();
                             TextHelper.DtContent("칩 한 개를 100골드로 교환할 수 있습니다."); 
                             int _tryExchange = InputManager.Instance.GetInputInt("몇개의 칩을 바꿀까요?", 1, 10000);
@@ -101,28 +89,11 @@ namespace Team7TextRPG.Scenes
                                 GameManager.Instance.RemoveChip(_tryExchange);
                                 TextHelper.DtContent($"칩 {_tryExchange}개를 {_tryExchange * CHIP_PRICE} 골드로 교환했습니다.");
                             }
->>>>>>> Stashed changes
                         }
-                    }
-                    else if (_inputInt == 2)
-                    {
-                        Console.Clear();
-                        TextHelper.DtContent("칩 한 개를 100골드로 교환할 수 있습니다.");
-                        int _tryExchange = InputManager.Instance.GetInputInt("몇개의 칩을 바꿀까요?", 1, 10000);
-                        if (_tryExchange > GameManager.Instance.PlayerChip)
-                        {
-                            Console.WriteLine("칩이 모자랍니다.");
-                        }
-                        else
-                        {
-                            GameManager.Instance.AddGold(_tryExchange * CHIP_PRICE);
-                            GameManager.Instance.RemoveChip(_tryExchange);
-                            TextHelper.DtContent($"칩 {_tryExchange}개를 {_tryExchange * CHIP_PRICE} 골드로 교환했습니다.");
-                        }
-                    }
-                    TextHelper.StatusBar($"현재 보유 칩 갯수 : {GameManager.Instance.PlayerChip}");
-                    Thread.Sleep(1000);
-                    SceneManager.Instance.LoadScene<CasinoScene>();
+                        TextHelper.StatusBar($"현재 보유 칩 갯수 : {GameManager.Instance.PlayerChip}");
+                        Thread.Sleep(1000);
+                        SceneManager.Instance.LoadScene<CasinoScene>();
+                    });
                     break;
                 case ChoiceGame.ExchangeReward:
                         //칩 갯수에 따라 교환할 수 있는 보상 추가 (레어 아이템, 고효율 포션 등)
@@ -134,6 +105,7 @@ namespace Team7TextRPG.Scenes
                     CasinoManager.Instance.slotMachine?.GameStart();
                     break;
                 case ChoiceGame.OddEven:
+                    CasinoManager.Instance.oddEven?.GameStart();
                     break;
                 case ChoiceGame.FiveCardPoker:
                     break;
