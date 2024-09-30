@@ -57,7 +57,7 @@ namespace Team7TextRPG.Managers
             saveData.PlayerData.StatPointDex = player.StatDex;
             saveData.PlayerData.StatPointInt = player.StatInt;
             saveData.PlayerData.StatPointLuck = player.StatLuck;
-            saveData.QuestData = GameManager.Instance.Quest;
+            saveData.QuestData = GameManager.Instance.PlayerQuest;
             saveData.Items = GameManager.Instance.PlayerItems.Select(i => new SaveItemData
             {
                 DataId = i.DataId,
@@ -94,6 +94,10 @@ namespace Team7TextRPG.Managers
             // Save File
             if (Directory.Exists(_saveDir) == false)
                 Directory.CreateDirectory(_saveDir);
+
+            SavedMetaData? meta = _saveMetas.FirstOrDefault(s => s.Seq == seq);
+            if (meta != null && File.Exists(_saveDir + meta.FileName))
+                File.Delete(_saveDir + meta.FileName);
 
             string filePath = _saveDir + $"{saveData.PlayerData.Name}_{saveData.PlayerData.Level}_{saveData.PlayerData.JobType}_{seq:00}.json";
             string json = JsonConvert.SerializeObject(saveData);

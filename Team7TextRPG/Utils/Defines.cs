@@ -38,6 +38,7 @@ namespace Team7TextRPG.Utils
             None,
             Common,
             Elite,
+            Boss
         }
 
         public enum NpcType

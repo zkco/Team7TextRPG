@@ -34,10 +34,10 @@ namespace Team7TextRPG.Utils
         {
             return jobType switch
             {
-                Defines.JobType.Newbie => "초보자",
                 Defines.JobType.Warrior => "전사",
                 Defines.JobType.Mage => "마법사",
-                _ => "알 수 없음",
+                Defines.JobType.Archer => "궁수",
+                _ => "무직",
             };
         }
         public static string ShopTypeToString(Defines.ShopType shopType)
@@ -123,6 +123,23 @@ namespace Team7TextRPG.Utils
                     sb.Append("♥");
                 else
                     sb.Append("♡");
+            }
+            sb.Append(")");
+            return sb.ToString();
+        }
+        public static string GetMpBar(int mp, int maxMp)
+        {
+            // 크리쳐의 마력 게이지
+            int hpPercent = maxMp == 0 ? 0 : (int)Math.Ceiling((mp * 5.0) / maxMp);
+
+            StringBuilder sb = new StringBuilder();
+            sb.Append("(");
+            for (int i = 0; i < 5; i++)
+            {
+                if (i < hpPercent)
+                    sb.Append("★");
+                else
+                    sb.Append("☆");
             }
             sb.Append(")");
             return sb.ToString();
