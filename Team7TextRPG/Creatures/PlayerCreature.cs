@@ -67,8 +67,8 @@ namespace Team7TextRPG.Creatures
             this.Mp = MaxMp;
 
             // 치트
-            GameManager.Instance.AddGold(100000);
-            GameManager.Instance.AddChip(1000);
+            GameManager.Instance.AddGold(5000);
+            GameManager.Instance.AddChip(100);
 
             foreach (var item in DataManager.Instance.ItemDataDict.Values)
                 GameManager.Instance.AddItem(item);
