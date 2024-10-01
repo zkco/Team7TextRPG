@@ -138,7 +138,7 @@ namespace Team7TextRPG.Contents.CasinoGame
             }
             for (int i = 0; i < WhosHand.Count - 1; i++)
             {
-                if ((int)WhosHand[i].RankOfCard + 1 == (int)WhosHand[i + 1].RankOfCard + 1)
+                if ((int)WhosHand[i].RankOfCard + 1 == (int)WhosHand[i + 1].RankOfCard)
                 {
                     straightCount++;
                 }
@@ -160,7 +160,7 @@ namespace Team7TextRPG.Contents.CasinoGame
                     isRoyal = true; //로얄,마운틴
                     isStraight = true;
                 }
-                if (straightCount > 4) isStraight = true; //스트레이트
+                if (straightCount == 4) isStraight = true; //스트레이트
             }
             if (pairCount == 1) return HandRank.Pair; //원페어
             else if (pairCount == 2)
@@ -203,7 +203,7 @@ namespace Team7TextRPG.Contents.CasinoGame
             TextHelper.DtContent("나의 패");
             foreach (Card card in Hand)
             {
-                Console.WriteLine($"{i+1}. " + CardOnBoard(Hand[i]));
+                Console.WriteLine($"{i + 1}. " + CardOnBoard(Hand[i]));
                 i++;
             }
         }
@@ -256,7 +256,7 @@ namespace Team7TextRPG.Contents.CasinoGame
             UIManager.Instance.Confirm($"게임 시작을 위해 {_bet}개의 칩을 지불합니다.",
                 () =>
                 {
-                    if(GameManager.Instance.PlayerChip >= _bet)
+                    if (GameManager.Instance.PlayerChip >= _bet)
                     {
                         GameManager.Instance.RemoveChip(_bet);
                     }
@@ -299,9 +299,9 @@ namespace Team7TextRPG.Contents.CasinoGame
             {
                 Console.Clear();
                 Board();
-                if(_changeCount < 2)
+                if (_changeCount < 2)
                 {
-                    TextHelper.ItContent("6. 그만두기");
+                    TextHelper.ItContent("6. 교체하지 않음");
                     int input = InputManager.Instance.GetInputInt($"교체할 카드를 골라주세요. ({_changeCount + 1}/2)", 1, 6);
                     switch (input)
                     {
@@ -323,7 +323,7 @@ namespace Team7TextRPG.Contents.CasinoGame
                 TextHelper.ItContent("1. 레이즈");
                 TextHelper.ItContent("2. 폴드");
                 int playing = InputManager.Instance.GetInputInt($"숫자를 입력해주세요.", 1, 2);
-                switch(playing)
+                switch (playing)
                 {
                     case 1:
                         count = Raise(count);
@@ -359,11 +359,12 @@ namespace Team7TextRPG.Contents.CasinoGame
                 if ((int)HandRanking(Hand) > (int)dealerHand)
                 {
                     TextHelper.ItContent("당신이 승리했습니다!");
-                    TextHelper.ItContent($"획득한 칩 : {_bet*2}");
+                    TextHelper.ItContent($"획득한 칩 : {_bet * 2}");
                     GameManager.Instance.AddChip(_bet * 2);
-                    if ((int)HandRanking(Hand) > 9)
+                    if ((int)HandRanking(Hand) >= 9)
                     {
-                        TextHelper.BtContent($"$$빅 핸드 보너스 {_bet*3}$$");
+                        TextHelper.BtContent($"$$빅 핸드 보너스 {_bet * 3}$$");
+                        TextHelper.BtContent($"$$총 획득 칩 : {_bet * 5}$$");
                         GameManager.Instance.AddChip(_bet * 3);
                     }
                 }
@@ -371,14 +372,12 @@ namespace Team7TextRPG.Contents.CasinoGame
                 {
                     TextHelper.CtContent("당신이 패배했습니다...");
                     TextHelper.ItContent($"잃은 칩 : {_bet}");
-                    GameManager.Instance.RemoveChip(_bet);
-                    
                 }
-                else if((int)HandRanking(Hand) == (int)dealerHand)
+                else if ((int)HandRanking(Hand) == (int)dealerHand)
                 {
                     TextHelper.CtContent("묻고 더블로 가!");
                     Thread.Sleep(3000);
-                    Deck.Clear();
+                    Hand.Clear();
                     return GameMain(0, _bet);
                 }
                 _changeCount = 0;
