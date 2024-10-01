@@ -252,14 +252,25 @@ namespace Team7TextRPG.Contents.CasinoGame
             Hand.Clear();
             MakeCard();
             Shuffle();
+            TextHelper.CtContent("현재 보유 칩 갯수 : {0}\r\n", GameManager.Instance.PlayerChip);
             UIManager.Instance.Confirm($"게임 시작을 위해 {_bet}개의 칩을 지불합니다.",
                 () =>
                 {
-                    GameManager.Instance.RemoveChip(_bet);
+                    if(GameManager.Instance.PlayerChip >= _bet)
+                    {
+                        GameManager.Instance.RemoveChip(_bet);
+                    }
+                    else
+                    {
+                        TextHelper.CtContent("칩이 모자랍니다.");
+                        SceneManager.Instance.LoadScene<CasinoScene>();
+                        return;
+                    }
                 },
                 () =>
                 {
                     SceneManager.Instance.LoadScene<CasinoScene>();
+                    return;
                 });
             while (_gameover == false)
             {
@@ -273,6 +284,7 @@ namespace Team7TextRPG.Contents.CasinoGame
                 () =>
                 {
                     SceneManager.Instance.LoadScene<CasinoScene>();
+                    return;
                 });
         }
         private int GameMain(int count, int bet)

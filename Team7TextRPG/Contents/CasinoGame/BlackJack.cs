@@ -218,6 +218,7 @@ namespace Team7TextRPG.Contents.CasinoGame
                 () =>
                 {
                     SceneManager.Instance.LoadScene<CasinoScene>();
+                    return;
                 });
         }
     }

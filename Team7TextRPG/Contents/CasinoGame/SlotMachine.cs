@@ -119,6 +119,7 @@ namespace Team7TextRPG.Contents.CasinoGame
                 }
             }
             SceneManager.Instance.LoadScene<CasinoScene>();
+            return;
         }
 
         public void GetScore()
@@ -150,12 +151,12 @@ namespace Team7TextRPG.Contents.CasinoGame
                         TextHelper.BtContent("잭팟이다!");
                         break;
                 }
+                _count++;
             }
             else
             {
                 TextHelper.BtContent("이런...");
             }
-            _count++;
         }
     }
 }

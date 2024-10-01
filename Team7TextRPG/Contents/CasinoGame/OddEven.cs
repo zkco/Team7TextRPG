@@ -129,6 +129,7 @@ namespace Team7TextRPG.Contents.CasinoGame
                         {
                             _playing = false;
                             SceneManager.Instance.LoadScene<CasinoScene>();
+                            return;
                         });
                 }
                 else if(AddScore() % 2 == 0 && BetNumb == 2) 
@@ -145,6 +146,7 @@ namespace Team7TextRPG.Contents.CasinoGame
                         {
                             _playing = false;
                             SceneManager.Instance.LoadScene<CasinoScene>();
+                            return;
                         });
                 }
                 else
@@ -160,6 +162,7 @@ namespace Team7TextRPG.Contents.CasinoGame
                         {
                             _playing = false;
                             SceneManager.Instance.LoadScene<CasinoScene>();
+                            return;
                         });
                 }
             }
