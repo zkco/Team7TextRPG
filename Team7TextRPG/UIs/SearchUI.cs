@@ -28,16 +28,17 @@ namespace Team7TextRPG.UIs
         //필드 탐색하기
         private void SearchField()
         {
-            Console.WriteLine("필드를 탐색하는 중..");
+            Console.Clear();
+            TextHelper.SlowPrint("필드를 탐색하는 중..", 50);
             Thread.Sleep(1000);
 
             int encounter = _random.Next(0, 100);
-            if (encounter < 60)
+            if (encounter < 30)
             {
                 EncounterMonster();
 
             }
-            else if (encounter < 10)
+            else if (encounter < 30)
             {
                 FindTreasureChest();
             }
@@ -46,6 +47,7 @@ namespace Team7TextRPG.UIs
                 Console.Clear();
                 UIManager.Instance.Write<CommonUI>();
                 Console.WriteLine("\n아무것도 발견하지 못했습니다.");
+                Thread.Sleep(1000);
             }
 
             // 탐험을 계속할지 묻는 기능
@@ -75,7 +77,7 @@ namespace Team7TextRPG.UIs
             Console.Clear();
             UIManager.Instance.Write<CommonUI>();
             // 어떤 몬스터를 만났는지 알려주는 기능
-            Console.WriteLine("\n몬스터와 만났습니다! 어떻게 하시겠습니까?\n");
+            Console.WriteLine("\n몬스터와 만났습니다! \n");
             //전투화면으로
             //SceneManager.Instance.LoadScene<BattleScene>();
             List<MonsterData> monsterList = GameManager.Instance.GetMonsterDataList(_battleType);
@@ -91,8 +93,35 @@ namespace Team7TextRPG.UIs
         //보물상자 발견했을경우 
         private void FindTreasureChest()
         {
-            Console.WriteLine("숨겨진 보물상자를 발견했습니다!");
-            //보물획득처리 시스템으로 UI? 화면?
+            Console.Clear();
+            TextHelper.SlowPrintColor("우연히 보물상자를 발견했습니다!", 50);
+
+            int treasureType = _random.Next(0, 2); // 0이면 골드, 1이면 아이템
+            if (treasureType == 0)
+            {
+                int goldAmount = _random.Next(50, 201); // 50~200 골드
+                GameManager.Instance.AddGold(goldAmount);
+                Console.WriteLine($"보물상자에서 {goldAmount} 골드를 획득했습니다!");
+            }
+            else
+            {
+                List<ItemData> itemList = DataManager.Instance.ItemDataDict.Values.ToList();
+                if (itemList.Count > 0)
+                {
+                    int randomIndex = _random.Next(0, itemList.Count);
+                    ItemData randomItem = itemList[randomIndex];
+
+                    if (GameManager.Instance.AddItem(randomItem))
+                    {
+                        Console.WriteLine($"보물상자에서 {randomItem.Name}을(를) 획득했습니다!");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"{randomItem.Name}을(를) 더 이상 소지할 수 없습니다.");
+                    }
+                }
+            }
+            Thread.Sleep(2000);
         }
 
         protected override string EnumTypeToText<T>(T type)
