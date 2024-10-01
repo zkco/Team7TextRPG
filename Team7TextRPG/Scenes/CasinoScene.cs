@@ -1,15 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.Design;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Serialization;
 using Team7TextRPG.Managers;
-using Team7TextRPG.UIs;
 using Team7TextRPG.Utils;
-using static Team7TextRPG.Scenes.DungeonScene;
 
 namespace Team7TextRPG.Scenes
 {
@@ -26,7 +16,8 @@ namespace Team7TextRPG.Scenes
             BlackJack,
             SlotMachine,
             OddEven,
-            FiveCardPoker
+            FiveCardPoker,
+            Exit
         }
         public override void Show()
         {
@@ -110,6 +101,9 @@ namespace Team7TextRPG.Scenes
                 case ChoiceGame.FiveCardPoker:
                     CasinoManager.Instance.fiveCardPoker?.GameStart();
                     break;
+                case ChoiceGame.Exit:
+                    SceneManager.Instance.LoadScene<TownScene>();
+                    break;
             }
 
         }
@@ -124,6 +118,7 @@ namespace Team7TextRPG.Scenes
                 ChoiceGame.SlotMachine => "슬롯머신",
                 ChoiceGame.OddEven => "홀짝",
                 ChoiceGame.FiveCardPoker => "파이브카드 포커",
+                ChoiceGame.Exit => "마을로 돌아가기",
                 _ => "없음"
             };
         }
