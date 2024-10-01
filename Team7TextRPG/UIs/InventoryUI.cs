@@ -33,7 +33,7 @@ namespace Team7TextRPG.UIs
                 // 인벤토리 표시
                 TextHelper.ItHeader("인벤토리");
                 TextHelper.PageWrite($"현재 페이지: {pageIndex + 1}/{(GameManager.Instance.PlayerItems.Count - 1) / pageSize + 1}");
-                TextHelper.ItContent("번호 | 이름 | 직업 | 설명");
+                TextHelper.ItContent("번호 | 이름 | 직업 | 능력치 | 설명");
                 ItemBase[] items = GameManager.Instance.PlayerItems.Skip(pageIndex * pageSize).Take(pageSize).ToArray();
                 // 1. 인벤토리 아이템 목록 표시
                 for (int i = 0; i < 5; i++)
@@ -44,7 +44,7 @@ namespace Team7TextRPG.UIs
                         string jobText = item.RequiredJobType == Defines.JobType.None ? "전체" : Util.JobTypeToString(item.RequiredJobType);
                         bool equipped = GameManager.Instance.IsEquippedItem(item.DataId);
                         string enhanceText = item.EnhancementLevel == 0 ? "" : $"(+{item.EnhancementLevel})";
-                        TextHelper.ItContent($"{i + 1}. {(equipped ? "[E]" : "")}{item.Name}{enhanceText} x{item.Count} | {jobText} | {item.Description}");
+                        TextHelper.ItContent($"{i + 1}. {(equipped ? "[E]" : "")}{item.Name}{enhanceText} x{item.Count} | {jobText} | {item.ItemStat.ToString()} | {item.Description}");
                     }
                     else
                     {
