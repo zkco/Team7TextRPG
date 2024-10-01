@@ -16,9 +16,9 @@ namespace Team7TextRPG.Scenes
         public enum BattleSceneType
         {
             None,
-            StartBattle,
-            UseItem,
-            Sneak,
+            StartBattle, // 전투 시작
+            UseItem, // 아이템 사용
+            Sneak, // 도망
         }
 
         public override void Show()

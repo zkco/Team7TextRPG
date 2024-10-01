@@ -20,6 +20,7 @@ namespace Team7TextRPG.Managers
         public Dictionary<int, QuestData> QuestDataDict = new Dictionary<int, QuestData>();
         public Dictionary<int, ShopData> ShopDataDict = new Dictionary<int, ShopData>();
         public Dictionary<int, SkillData> SkillDataDict = new Dictionary<int, SkillData>();
+        public Dictionary<int, BattleData> BattleDataDict = new Dictionary<int, BattleData>();
 
         public void Init()
         {
@@ -31,6 +32,7 @@ namespace Team7TextRPG.Managers
             LoadQuestData();
             LoadShopData();
             LoadSkillData();
+            LoadBattleData();
         }
 
         private void LoadLevelData()
@@ -81,6 +83,13 @@ namespace Team7TextRPG.Managers
             SkillDataDict.Clear();
             foreach (var item in data)
                 SkillDataDict.Add(item.DataId, item);
+        }
+        private void LoadBattleData()
+        {
+            List<BattleData> data = DataTransfer.ParseExcelDataToList<BattleData>("Battle");
+            BattleDataDict.Clear();
+            foreach (var item in data)
+                BattleDataDict.Add(item.DataId, item);
         }
     }
 }

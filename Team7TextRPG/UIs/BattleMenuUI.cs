@@ -43,7 +43,7 @@ namespace Team7TextRPG.UIs
         {
             WriteType<BattleAction>();
             BattleAction selection = InputManager.Instance.GetInputType<BattleAction>();
-
+            
 
             switch (selection)
             {

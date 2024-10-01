@@ -182,5 +182,20 @@ namespace Team7TextRPG.Managers
             if (Quest.CompletedQuests.Contains(dataId) == false)
                 Quest.CompletedQuests.Add(dataId);
         }
+
+        public List<MonsterData> GetMonsterDataList(BattleType battleType)
+        {
+            int playerLevel = battleType == BattleType.Field ? Player?.Level ?? 1 : Defines.MAX_PLAYER_LEVEL;
+            return DataManager.Instance.BattleDataDict.Values
+            // 현재 배틀 위치 기준으로 필터링
+            .Where(s => s.BattleType == battleType)
+            // 몬스터의 레벨이 플레이어 레벨보다 같거나 낮은 몬스터만 null이 아닌 인스턴스로 반환
+            .Select(x => DataManager.Instance.MonsterDataDict.TryGetValue(x.MonsterDataId, out MonsterData? monsterData) && monsterData.Level <= playerLevel ? monsterData : null)
+            // null 이 아닌것만 필터링
+            .Where(s => s != null)
+            // nullable을 nullable 이 아닌 타입으로 반환
+            .Select(s => s!)
+            .ToList();
+        }
     }
 }

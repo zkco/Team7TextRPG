@@ -74,6 +74,27 @@ namespace Team7TextRPG.Utils
                 _ => "알 수 없음",
             };
         }
+        public static string BattleTypeToString(Defines.BattleType battleType)
+        {
+            return battleType switch
+            {
+                Defines.BattleType.Dungeon_Easy => "슈퍼 겁쟁이들의 쉼터",
+                Defines.BattleType.Dungeon_Normal => "겁쟁이들의 쉼터",
+                Defines.BattleType.Dungeon_Hard => "상남자 클럽",
+                Defines.BattleType.Field => "평화로운 필드",
+                _ => "없음",
+            };
+        }
+        public static int BattleTypeToClearCount(Defines.BattleType battleType)
+        {
+            return battleType switch
+            {
+                Defines.BattleType.Dungeon_Easy => 5,
+                Defines.BattleType.Dungeon_Normal => 10,
+                Defines.BattleType.Dungeon_Hard => 15,
+                _ => 0,
+            };
+        }
         public static int GrowthValue(int level, int maxLevel, double growthRate = 1.2, double baseExp = 100)
         {
             return (int)(baseExp * Math.Pow(growthRate, level));

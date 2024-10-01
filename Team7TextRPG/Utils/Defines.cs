@@ -38,6 +38,16 @@ namespace Team7TextRPG.Utils
             None,
             Common,
             Elite,
+            Boss,
+        }
+
+        public enum BattleType
+        {
+            None,
+            Field,
+            Dungeon_Easy,
+            Dungeon_Normal,
+            Dungeon_Hard,
         }
 
         public enum NpcType
