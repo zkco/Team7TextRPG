@@ -81,6 +81,7 @@ namespace Team7TextRPG.Utils
             None,
             Equipment,
             Consumable,
+            Quest,
         }
 
         public enum EquipmentType
