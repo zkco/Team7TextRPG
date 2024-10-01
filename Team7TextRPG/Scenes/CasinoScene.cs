@@ -7,7 +7,7 @@ namespace Team7TextRPG.Scenes
     internal class CasinoScene : SceneBase
     {
         const int CHIP_PRICE = 100; //골드 / 칩 교환비
-
+        
 
         private enum ChoiceGame
         {

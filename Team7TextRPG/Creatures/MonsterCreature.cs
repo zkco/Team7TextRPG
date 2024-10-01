@@ -63,10 +63,16 @@ namespace Team7TextRPG.Creatures
         {
             int expReward = ExpReward;   
             int goldReward = ItemReward; 
-            GameManager.Instance.Player.AddExp(expReward);
+            GameManager.Instance.Player?.AddExp(expReward);
             GameManager.Instance.AddGold(goldReward);
             GameManager.Instance.QuestKillAdd(DataId);
             Console.WriteLine($"\n{Name} 을(를) 처치하여 {expReward} 경험치와 {goldReward} 골드를 얻었습니다!");
+            Console.WriteLine("몬스터의 시체에서 안 긁어진 복권을 발견했다!");
+            if(GameManager.Instance.PlayerItems.Exists(lottery => lottery.DataId == 1049 && lottery.Count == 99))
+            {
+                Console.WriteLine("가지고 있는 복권이 너무 많아 더 이상 주울 수 없다...");
+            }
+            else GameManager.Instance.AddItem(1049);
             Thread.Sleep(2000);
         }
 
