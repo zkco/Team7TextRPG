@@ -41,7 +41,7 @@ namespace Team7TextRPG.Managers
             Player.SetJob(Defines.JobType.Newbie);
             // 플레이어 초기화
             Player.Init();
-        
+
         }
         public MonsterCreature? CreateMonster(int dataId)
         {
@@ -72,6 +72,9 @@ namespace Team7TextRPG.Managers
                         break;
                     case Defines.ItemType.Consumable:
                         item = new ConsumableItem();
+                        break;
+                    case Defines.ItemType.Quest:
+                        item = new QuestItem();
                         break;
                 }
 
@@ -124,6 +127,9 @@ namespace Team7TextRPG.Managers
                         break;
                     case Defines.ItemType.Consumable:
                         item = new ConsumableItem();
+                        break;
+                    case ItemType.Quest:
+                        item = new QuestItem();
                         break;
                 }
 
