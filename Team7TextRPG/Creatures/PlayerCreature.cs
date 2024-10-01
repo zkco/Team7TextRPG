@@ -7,6 +7,7 @@ using Team7TextRPG.Contents;
 using Team7TextRPG.Contents.Items;
 using Team7TextRPG.Datas;
 using Team7TextRPG.Managers;
+using Team7TextRPG.Scenes;
 using Team7TextRPG.Utils;
 
 namespace Team7TextRPG.Creatures
@@ -134,7 +135,7 @@ namespace Team7TextRPG.Creatures
         public void EquipItem(EquipmentItem equipment)
         {
             // 장비 장착
-            OnEuipmentChanged();
+            
             UnEquipItem(equipment.EquipmentType);
             if (equipment.EquipmentType == Defines.EquipmentType.Weapon)
                 EWeapon = equipment;
@@ -142,6 +143,8 @@ namespace Team7TextRPG.Creatures
                 EArmor = equipment;
             else if (equipment.EquipmentType == Defines.EquipmentType.Accessory)
                 EAccessory = equipment;
+
+            OnEuipmentChanged();
         }
 
         public void UnEquipItem(Defines.EquipmentType equipmentType)
@@ -219,7 +222,7 @@ namespace Team7TextRPG.Creatures
 
         public override void OnDead()
         {
-            // 사망했을 때, 필요없다면 제거합시다. //필요합니당
+           
         }
 
         public void Rest()

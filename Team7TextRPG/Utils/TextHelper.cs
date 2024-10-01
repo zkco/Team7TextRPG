@@ -110,5 +110,34 @@ namespace Team7TextRPG.Utils
             Console.WriteLine($"[ {text} ]");
             Console.ResetColor();
         }
+
+        public static void SlowPrint(string message, int delay = 50)
+        {
+            foreach (char c in message)
+            {
+                Console.Write(c);
+                Thread.Sleep(delay); 
+            }
+            Console.WriteLine(); 
+        }
+
+        private static ConsoleColor[] colors = new ConsoleColor[]
+        {
+        ConsoleColor.Red, ConsoleColor.Green, ConsoleColor.Blue, ConsoleColor.Yellow,
+        ConsoleColor.Cyan, ConsoleColor.Magenta, ConsoleColor.White, ConsoleColor.Gray
+        };
+
+        public static void SlowPrintColor(string message, int delay = 100)
+        {
+            Random random = new Random();
+            foreach (char c in message)
+            {
+                Console.ForegroundColor = colors[random.Next(colors.Length)];
+                Console.Write(c);
+                Thread.Sleep(delay);
+            }
+            Console.ResetColor();
+            Console.WriteLine(); 
+        }
     }
 }

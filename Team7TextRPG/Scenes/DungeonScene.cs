@@ -41,6 +41,15 @@ namespace Team7TextRPG.Scenes
             while (true)
             {
                 Console.Clear();
+                if (GameManager.Instance.Player?.IsDead == true)
+                {
+                    SceneManager.Instance.LoadScene<TitleScene>();
+
+                    TextHelper.ItHeader("플레이어가 사망했습니다.");
+                    InputManager.Instance.GetInputEnter();
+
+                    return;
+                }
                 TextHelper.BtHeader($"{Util.BattleTypeToString(diff)} 던전");
                 TextHelper.ItHeader($"진행 상황 : {dungeonPlayCount}/{dungeonClearCount}");
 
