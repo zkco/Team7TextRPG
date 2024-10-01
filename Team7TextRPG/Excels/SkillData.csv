@@ -2,3 +2,5 @@ DataId,Name,Description,RequiredLevel,RequiredJobType,MpCoast,LearnPrice,SkillTy
 4001,강타,강력한 일격,1,None,5,300,Attack,Percent,120,1,1
 4002,붕대감기,상처에 붕대를 감는다.,3,None,8,200,Heal,Absolute,10,1,1
 4003,스매시,검을 강력하게 휘두른다.,5,Warrior,9,1000,Attack,Percent,150,1,1
+4004,매직 미사일,쉽게 피할 수 있어보인다.,5,Mage,5,1000,Attack,Percent,150,1,1
+4005,근접 사격,멀리서 쏘면 다 피하니까.. 가까이서 쏜다.,5,Archer,7,1000,Attack,Percent,150,1,1

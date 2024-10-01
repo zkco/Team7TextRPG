@@ -36,7 +36,7 @@ namespace Team7TextRPG.Scenes
             switch (selection)
             {
                 case EventType.MeetCheif:
-                    UIManager.Instance.Write<QuestUI>();
+                    UIManager.Instance.Write<ReceiveQuestUI>();
                     SceneManager.Instance.LoadScene<EventScene>();
                     break;
                 case EventType.ClassChange:

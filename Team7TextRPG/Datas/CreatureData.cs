@@ -34,8 +34,8 @@ namespace Team7TextRPG.Datas
         public int Attack; // 공격력
         public int Defense; // 방어력
         public int Speed; // 속도
-        public int DodgeChanceRate; // 회피 확률
-        public int CriticalChanceRate; // 치명타 확률
+        public double DodgeChanceRate; // 회피 확률
+        public double CriticalChanceRate; // 치명타 확률
         public int ExpReward; // 경험치 보상
         public int ItemReward; // 아이템 보상
         public int DropItemRate; // 드랍 확률

@@ -155,6 +155,7 @@ namespace Team7TextRPG.Contents.CasinoGame
             {
                 TextHelper.BtContent("이런...");
             }
+            _count++;
         }
     }
 }

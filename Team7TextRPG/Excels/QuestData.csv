@@ -1,2 +1,8 @@
-DataId,NpcDataId,QuestType,Name,Description,Order,TargetDataId1,Amount1,TargetDataId2,Amount2,ExpReward,GoldReward,ItemRewardDataId1,ItemRewardDataId2,RequiredLevel
-2001,105,Hunt,고블린 처치,촌장이 의뢰하는 고블린 퇴치 의뢰,1,3001,10,0,0,200,300,0,0,1
+DataId,QuestType,Name,Description,Order,TargetDataId1,Amount1,TargetDataId2,Amount2,ExpReward,GoldReward,ItemRewardDataId1,ItemRewardDataId2,RequiredLevel,RequiredJobType,SkillRewardDataId
+2001,Hunt,고블린 퇴치 의뢰,마을 근처 고블린 때문에 골머리를 썩고 있습니다. 제발 고블린 좀 퇴치해주십시오.,1,3001,5,0,0,200,300,0,0,1,None,0
+2002,Hunt,슬라임 퇴치 의뢰,고블린이 줄어드니 이번에는 슬라임이 판을 칩니다. 슬라임 퇴치 좀 해주십시오.,2,3002,5,0,0,300,500,0,0,3,None,0
+2003,Hunt,좀비 퇴치 의뢰,좀비가 안보이던 좀비가 갑자기 기승을 부립니다. 좀비 퇴치좀 도와주십시오.,3,3003,10,0,0,500,800,0,0,5,None,0
+2004,Hunt,고블린과 슬라임,전사 스킬을 배우고 싶다면 의뢰를 완료하십시오.,4,3001,5,3002,5,600,800,0,0,5,Warrior,4003
+2005,Hunt,고블린과 슬라임,마법사 스킬을 배우고 싶다면 의뢰를 완료하십시오.,4,3001,5,3002,5,600,800,0,0,5,Mage,4004
+2006,Hunt,고블린과 슬라임,궁수 스킬을 배우고 싶다면 의뢰를 완료하십시오.,4,3001,5,3002,5,600,800,0,0,5,Archer,4005
+2007,Gathering,오크 이빨 수집,오크에게서 이빨을 수집해주실 수 있을까요? 오크 이빨이 변비에 참 좋답니다.,5,3007,5,0,0,800,1000,0,0,7,None,0

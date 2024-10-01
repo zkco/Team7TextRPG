@@ -62,6 +62,10 @@ namespace Team7TextRPG.Creatures
         public override void OnDead()
         {
             // 사망했을 때, 필요없다면 제거합시다.
+            // 아이템을 떨군다.
+            // 경험치를 플레이어에게 넘겨준다.
+            // 퀘스트가 있으면 퀘스트에 킬 포인트 추가.
+            GameManager.Instance.QuestKillAdd(DataId);
         }
 
         public override void OnHealed(int heal)

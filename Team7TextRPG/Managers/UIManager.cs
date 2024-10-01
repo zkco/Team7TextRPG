@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Team7TextRPG.Contents;
+using Team7TextRPG.Datas;
 using Team7TextRPG.Scenes;
 using Team7TextRPG.UIs;
 using Team7TextRPG.Utils;
@@ -31,6 +32,22 @@ namespace Team7TextRPG.Managers
         {
             ShopUI shopUI = new ShopUI(type);
             shopUI.Write();
+        }
+        public void SearchWrite(Defines.BattleType type)
+        {
+            SearchUI search = new SearchUI(type);
+            search.Write();
+        }
+        public void BattleWrite(MonsterData[] monsterDatas)
+        {
+            BattleUI battleUI = new BattleUI(monsterDatas);
+            battleUI.Write();
+        }
+        public Defines.BattleType DungeonRead()
+        {
+            DungeonDiffUI diffUI = new DungeonDiffUI();
+            diffUI.Write();
+            return diffUI.Read();
         }
         public Skill? SkillRead()
         {
