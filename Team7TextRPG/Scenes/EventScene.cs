@@ -24,7 +24,7 @@ namespace Team7TextRPG.Scenes
             WriteType<EventType>();
 
             string input = InputManager.Instance.GetInputKeyword();
-            // 공통 UI 호출한 경우 볼일 마치가 다시 처음으로
+            // 공통 UI 호출한 경우 볼일 마치면 다시 처음으로
             if (UIManager.Instance.CommonLoad(input))
             {
                 SceneManager.Instance.LoadScene<EventScene>();
