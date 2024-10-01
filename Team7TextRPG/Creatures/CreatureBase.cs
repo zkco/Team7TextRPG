@@ -1,8 +1,12 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
+using Team7TextRPG.Contents;
+using Team7TextRPG.Datas;
+using Team7TextRPG.Managers;
 using Team7TextRPG.Utils;
 
 namespace Team7TextRPG.Creatures
@@ -12,10 +16,14 @@ namespace Team7TextRPG.Creatures
         public string? Name { get; protected set; }
         public int Level { get; protected set; }
 
-        public Defines.SpecisType SpecisType { get; protected set; }
+        public Defines.SpeciesType SpecisType { get; protected set; }
         public Defines.SexType SexType { get; protected set; }
         public Defines.JobType JobType { get; protected set; } = Defines.JobType.None;
-        public CreatureStat BaseStat { get; protected set; } = new CreatureStat();
+        public Stat BaseStat { get; protected set; } = new Stat();
+        public List<Skill> Skills { get; private set; } = new List<Skill>();
+
+        public int Hp { get; protected set; }
+        public int Mp { get; protected set; }
 
         public virtual int StatStr => BaseStat.StatStr;
         public virtual int StatDex => BaseStat.StatDex;
@@ -31,13 +39,33 @@ namespace Team7TextRPG.Creatures
         public virtual double DodgeChanceRate => BaseStat.DodgeChanceRate + CalcJobDodgeChanceRate();
         public virtual double CriticalChanceRate => BaseStat.CriticalChanceRate + CalcJobCriticalChanceRate();
 
+        public bool IsDead => Hp <= 0;
+
         protected Random random = new Random();
 
-        public abstract void SetInfo(Defines.JobType job);
-        public abstract void LevelUp();
         public abstract void OnDamaged(int damage);
         public abstract void OnHealed(int heal);
         public abstract void OnDead();
+
+        public virtual void LevelUp()
+        {
+            SetLevel(Level + 1);
+        }
+        protected virtual void SetLevel(int level)
+        {
+            int maxLevel = DataManager.Instance.LevelDataDict.Count;
+            if (maxLevel < level)
+            {
+                Level = maxLevel;
+                return;
+            }
+            Level = level;
+            LevelData levelData = DataManager.Instance.LevelDataDict[level];
+            BaseStat.StatStr = levelData.Str;
+            BaseStat.StatDex = levelData.Dex;
+            BaseStat.StatInt = levelData.Int;
+            BaseStat.StatLuck = levelData.Luck;
+        }
 
         public int CalcJobAttack()
         {
@@ -88,6 +116,54 @@ namespace Team7TextRPG.Creatures
                 Defines.JobType.Mage => StatLuck * 0.002,
                 _ => 0.01,
             };
+        }
+        public int CalcJobMaxHp()
+        {
+            return JobType switch
+            {
+                Defines.JobType.Warrior => StatStr * 10,
+                Defines.JobType.Archer => StatDex * 5,
+                Defines.JobType.Mage => StatInt * 5,
+                _ => StatStr * 10,
+            };
+        }
+        public int CalcJobMaxMp()
+        {
+            return JobType switch
+            {
+                Defines.JobType.Warrior => StatStr * 5,
+                Defines.JobType.Archer => StatDex * 5,
+                Defines.JobType.Mage => StatInt * 10,
+                _ => StatStr * 5,
+            };
+        }
+
+        public void AddSkill(int skillDataId)
+        {
+            if (DataManager.Instance.SkillDataDict.TryGetValue(skillDataId, out SkillData? skillData))
+            {
+                AddSkill(skillData);
+            }
+        }
+        public void AddSkill(SkillData skillData)
+        {
+            if (skillData.RequiredJob == Defines.JobType.None
+                    || skillData.RequiredJob == JobType)
+            {
+                Skill skill = new Skill(this);
+                skill.SetSkillData(skillData);
+                Skills.Add(skill);
+            }
+        }
+        public void RemoveSkill(int dataId)
+        {
+            Skill? skill = Skills.FirstOrDefault(s => s.DataId == dataId);
+            if (skill != null)
+                RemoveSkill(skill);
+        }
+        public void RemoveSkill(Skill skill)
+        {
+            Skills.Remove(skill);
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,14 +9,11 @@ namespace Team7TextRPG.Utils
     public class JobQueue
     {
         Queue<Action> _jobQueue = new Queue<Action>();
-        bool _flush = false;
         // 내부적으로 Queue 아이템을 삽입한다.
         public void Push(Action job)
         {
             // Job을 Queue에 삽입한다.
             _jobQueue.Enqueue(job);
-            if (_flush == false)
-                _flush = true;
         }
         // Job 이 있는지 확인 하고 Job을 실행한다.
         public void Flush()
@@ -38,10 +35,7 @@ namespace Team7TextRPG.Utils
         {
             // Job이 없으면 Null을 반환
             if (_jobQueue.Count == 0)
-            {
-                _flush = false;
                 return null;
-            }
 
             // Job을 꺼내서 반환한다.
             return _jobQueue.Dequeue();

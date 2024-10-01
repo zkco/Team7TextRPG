@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,11 +6,18 @@ using System.Threading.Tasks;
 
 namespace Team7TextRPG.UIs
 {
-    public class ShopBuyUI : UIBase
+    public class QuestUI : UIBase
     {
+
         public override void Write()
         {
-            // 상점 구매 목록 표시
+
         }
+        protected override string EnumTypeToText<T>(T type)
+        {
+            return String.Empty;
+        }
+
     }
+
 }

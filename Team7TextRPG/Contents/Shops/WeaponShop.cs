@@ -1,25 +1,18 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Team7TextRPG.Contents.Items;
+using Team7TextRPG.Datas;
+using Team7TextRPG.Managers;
+using Team7TextRPG.Utils;
 
 namespace Team7TextRPG.Contents.Shops
 {
-    internal class WeaponShop : ShopBase
+    public class WeaponShop : ShopBase
     {
-        // 나열..
-        public override void Buy()
-        {
-        }
+        public override Defines.ShopType ShopType { get; protected set; } = Defines.ShopType.Weapon;
 
-        public override void Sell()
-        {
-        }
-
-        public override void Show()
-        {
-
-        }
     }
 }
