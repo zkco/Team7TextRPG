@@ -65,7 +65,7 @@ namespace Team7TextRPG.Contents.CasinoGame
         {
             Console.Clear();
             TextHelper.CtContent("현재 보유 칩 갯수 : {0}", GameManager.Instance.PlayerChip);
-            TextHelper.DtContent("♬♬♬ = X5   ☆☆☆ = X5");
+            TextHelper.DtContent("♬♬♬ = X5    ☆☆☆ = X5");
             TextHelper.DtContent("◇◇◇ = X10   ΩΩΩ = X20   ⑦⑦⑦ = X100\r\n");
             TextHelper.ItContent("|------|------|------|");
             TextHelper.ItContent("|  {0}  |  {1}  |  {2}  |", MarkSym(_display[0, 0]), MarkSym(_display[1, 0]), MarkSym(_display[2, 0]));
@@ -90,6 +90,7 @@ namespace Team7TextRPG.Contents.CasinoGame
                         if (GameManager.Instance.PlayerChip >= _bet)
                         {
                             GameManager.Instance.RemoveChip(_bet);
+                            _count++;
                             Shuffle();
                         }
                         else
@@ -122,10 +123,7 @@ namespace Team7TextRPG.Contents.CasinoGame
 
         public void GetScore()
         {
-            if (_count == 0)
-            {
-                
-            }
+            if (_count == 0) { }
             else if (MarkSym(_display[0, 0]) == MarkSym(_display[1, 0]) &&
                 MarkSym(_display[0, 0]) == MarkSym(_display[2, 0]))
             {
@@ -157,7 +155,6 @@ namespace Team7TextRPG.Contents.CasinoGame
             {
                 TextHelper.BtContent("이런...");
             }
-            _count++;
         }
     }
 }

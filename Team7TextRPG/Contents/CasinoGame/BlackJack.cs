@@ -15,7 +15,6 @@ namespace Team7TextRPG.Contents.CasinoGame
         public List<Card> Hand = new List<Card>();
         public List<Card> DealerHand = new List<Card>();
         private bool _gameOver = false;
-        private bool _isSplit = false;
         private bool _isStay = false;
 
         public void MakeCard()
