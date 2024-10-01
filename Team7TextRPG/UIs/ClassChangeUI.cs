@@ -25,7 +25,7 @@ namespace Team7TextRPG.UIs
             Thread.Sleep(1000);
             TextHelper.BtContent("※ 전직 가능 조건 Level 5 이상, 현재 직업 초보자 ※");
 
-            if(GameManager.Instance.Player?.JobType != Defines.JobType.Newbie)
+            if(GameManager.Instance.Player?.JobType != Defines.JobType.Newbie || GameManager.Instance.Player?.Level < Defines.CLASS_CHANGE_LEVEL)
             {
                 TextHelper.DtContent("전직가능한 상태가 아닙니다. 이전 화면으로 돌아갑니다.");
                 InputManager.Instance.GetInputEnter();
