@@ -150,7 +150,7 @@ namespace Team7TextRPG.Utils
         public const int ENHANCEMENT_COST = 1000;
         public const int ENHANCEMENT_SUCCESS_RATE = 100;
         public const int ENHANCEMENT_FAIL_RATE = 10;
-
+        public const int CLASS_CHANGE_LEVEL = 5;
 
     }
 }
