@@ -27,7 +27,7 @@ namespace Team7TextRPG.Managers
 
         public int SaveSlotTotalCount => _saveMetas.Length;
 
-        private string _saveDir = "Save/";
+        private string _saveDir = "Saves/";
         private SavedMetaData?[] _saveMetas = new SavedMetaData?[20];
         private bool _dirty = true;
 
@@ -99,7 +99,7 @@ namespace Team7TextRPG.Managers
             if (meta != null && File.Exists(_saveDir + meta.FileName))
                 File.Delete(_saveDir + meta.FileName);
 
-            string filePath = _saveDir + $"{saveData.PlayerData.Name}_{saveData.PlayerData.Level}_{saveData.PlayerData.JobType}_{seq:00}.json";
+            string filePath = _saveDir + $"{seq:00}_{saveData.PlayerData.Level:00}_{saveData.PlayerData.JobType}_{saveData.PlayerData.Name}.json";
             string json = JsonConvert.SerializeObject(saveData);
             File.WriteAllText(filePath, json);
             LoadSavedMetaData();
@@ -108,6 +108,10 @@ namespace Team7TextRPG.Managers
         private void LoadSavedMetaData()
         {
             _saveMetas = new SavedMetaData?[20];
+
+            if (Directory.Exists(_saveDir) == false)
+                Directory.CreateDirectory(_saveDir);
+
             string[] files = Directory.GetFiles(_saveDir);
 
             for (int i = 0; i < files.Length; i++)
@@ -115,10 +119,11 @@ namespace Team7TextRPG.Managers
                 string file = files[i];
                 string fileName = Path.GetFileName(file);
                 string[] meta = fileName.Split('_');
+
                 if (meta.Length != 4)
                     continue;
 
-                if (string.IsNullOrWhiteSpace(meta[0]))
+                if (int.TryParse(meta[0], out int seq) == false)
                     continue;
 
                 if (int.TryParse(meta[1], out int level) == false)
@@ -127,7 +132,7 @@ namespace Team7TextRPG.Managers
                 if (Enum.TryParse(meta[2], out Defines.JobType jobType) == false)
                     continue;
 
-                if (int.TryParse(meta[3].Split('.')[0], out int seq) == false)
+                if (string.IsNullOrWhiteSpace(meta[3]))
                     continue;
 
                 SavedMetaData data = new SavedMetaData();
