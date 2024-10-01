@@ -19,47 +19,47 @@ namespace Team7TextRPG.Scenes
            {
                 "======= Team 7 RPG =======",
                 "",
-                "총괄 개발: 김태호",
+                "총괄 개발:                             김태호",
                 "Core(Contents,Creature,Datas,Manager): 김태호",
-                "컨텐츠: 박두산",
+                "컨텐츠기획:                            박두산",
                  "",
                 "-----------------------------------------------",
                  "",
-                "상태보기 UI: 길종혁",
-                "상점 구매/판매 UI: 길종혁, 김태호",
-                "퀘스트 UI: 길종혁, 김태호",
-                "캐릭터 생성 UI: 김태호",
-                "인벤토리 UI: 김태호",
-                "Confirm UI: 김태호",
-                "휴식 UI: 김태호",
-                "공통 UI: 김태호",
-                "퀘스트 UI: 김태호",
-                "탐색 UI: 이민섭, 김태호",
-                "이벤트 UI: 박두산",
+                "상태보기 UI:                           길종혁",
+                "상점 구매/판매 UI:             길종혁, 김태호",
+                "퀘스트 UI:                     길종혁, 김태호",
+                "캐릭터 생성 UI:                        김태호",
+                "인벤토리 UI:                           김태호",
+                "Confirm UI:                            김태호",
+                "휴식 UI:                               김태호",
+                "공통 UI:                               김태호",
+                "퀘스트 UI:                             김태호",
+                "탐색 UI:                       이민섭, 김태호",
+                "이벤트 UI:                             박두산",
                  "",
                 "-----------------------------------------------",
                  "",
-                "타이틀 화면: 김태호",
-                "마을 화면: 박두산",
-                "던전 화면: 박두산",
-                "전투 화면: 이민섭, 김태호",
-                "상점 화면: 길종혁, 김태호",
+                "타이틀 화면:                           김태호",
+                "마을 화면:                             박두산",
+                "던전 화면:                             박두산",
+                "전투 화면:                     이민섭, 김태호",
+                "상점 화면:                     길종혁, 김태호",
                  "",
                 "-----------------------------------------------",
                  "",
-                "상점 목록: 길종혁",
-                "아이템 목록: 김태호, 박두산",
-                "스킬 목록: 김태호",
-                "퀘스트 목록: 김태호",
+                "상점 목록:                             길종혁",
+                "아이템 목록:                   김태호, 박두산",
+                "스킬 목록:                             김태호",
+                "퀘스트 목록:                           김태호",
                  "",
                 "======= Signature =======",
                  "",
-                "카지노 시스템(블랙잭,포커,슬롯머신,주사위게임): 박두산",
+                "카지노(블랙잭,포커,슬롯머신,주사위):   박두산",
                  "",
-                "세이브저장 시스템: 김태호",
-                "데이터저장 시스템: 김태호",
-                "강화 UI: 김태호",
-                "콘솔 출력 시스템: 김태호",
+                "세이브저장 시스템:                     김태호",
+                "데이터저장 시스템:                     김태호",
+                "강화 UI:                               김태호",
+                "콘솔 출력 시스템:                      김태호",
                  "",
                  "",
                  "",
@@ -72,20 +72,30 @@ namespace Team7TextRPG.Scenes
             Console.ForegroundColor = ConsoleColor.Black;
             Console.Clear();
 
-            for (int i = 0; i < credits.Length + Console.WindowHeight; i++)
+            int windowWidth = Console.WindowWidth;
+            int windowHeight = Console.WindowHeight;
+
+            if (windowHeight <= 0 || windowWidth <= 0) return;
+
+            for (int i = 0; i < credits.Length + windowHeight; i++)
             {
                 Console.Clear();
 
+                int middleY = Math.Max(0, (windowHeight - credits.Length) / 2);
 
-                for (int j = 0; j < Console.WindowHeight; j++)
+                for (int j = 0; j < windowHeight; j++)
                 {
-                    int creditIndex = i - (Console.WindowHeight - j);
-
+                    int creditIndex = i - (windowHeight - j);
 
                     if (creditIndex >= 0 && creditIndex < credits.Length)
-                    {
-                        Console.SetCursorPosition((Console.WindowWidth - credits[creditIndex].Length) / 2, j);
-                        Console.WriteLine(credits[creditIndex]);
+                    {                      
+                        int leftPosition = 2;
+
+                        if (middleY + j < windowHeight)
+                        {
+                            Console.SetCursorPosition(leftPosition, middleY + j);
+                            Console.WriteLine(credits[creditIndex]);
+                        }
                     }
                 }
 
