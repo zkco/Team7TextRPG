@@ -23,5 +23,6 @@ namespace Team7TextRPG.Managers
         public BlackJack? blackJack = new BlackJack();
         public SlotMachine? slotMachine = new SlotMachine();
         public OddEven? oddEven = new OddEven();
+        public FiveCardPoker? fiveCardPoker = new FiveCardPoker();
     }
 }

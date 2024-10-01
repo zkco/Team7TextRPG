@@ -108,6 +108,7 @@ namespace Team7TextRPG.Scenes
                     CasinoManager.Instance.oddEven?.GameStart();
                     break;
                 case ChoiceGame.FiveCardPoker:
+                    CasinoManager.Instance.fiveCardPoker?.GameStart();
                     break;
             }
 
