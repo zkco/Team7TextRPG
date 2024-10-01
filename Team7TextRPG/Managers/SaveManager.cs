@@ -53,10 +53,11 @@ namespace Team7TextRPG.Managers
             saveData.PlayerData.EWeaponId = player.EWeapon?.DataId ?? 0;
             saveData.PlayerData.EArmorId = player.EArmor?.DataId ?? 0;
             saveData.PlayerData.EAccessoryId = player.EAccessory?.DataId ?? 0;
-            saveData.PlayerData.StatPointStr = player.StatStr;
-            saveData.PlayerData.StatPointDex = player.StatDex;
-            saveData.PlayerData.StatPointInt = player.StatInt;
-            saveData.PlayerData.StatPointLuck = player.StatLuck;
+            saveData.PlayerData.StatPointStr = player.StatPointStr;
+            saveData.PlayerData.StatPointDex = player.StatPointDex;
+            saveData.PlayerData.StatPointInt = player.StatPointInt;
+            saveData.PlayerData.StatPointLuck = player.StatPointLuck;
+            saveData.PlayerData.StatPoint = player.StatPoint;
             saveData.QuestData = GameManager.Instance.Quest;
             saveData.Items = GameManager.Instance.PlayerItems.Select(i => new SaveItemData
             {
