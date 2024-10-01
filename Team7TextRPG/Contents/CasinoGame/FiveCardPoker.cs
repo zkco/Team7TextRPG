@@ -31,7 +31,7 @@ namespace Team7TextRPG.Contents.CasinoGame
     {
         private List<Card> Deck = new List<Card>();
         private List<Card> Hand = new List<Card>();
-        private int _bet = 0;
+        private int _bet = 100;
         private bool _gameover = false;
         private int _changeCount = 0;
 
@@ -126,7 +126,7 @@ namespace Team7TextRPG.Contents.CasinoGame
             //숫자 순 정렬
             for (int i = 0; i < WhosHand.Count; i++)
             {
-                for (int j = 1; j < WhosHand.Count; j++)
+                for (int j = 0; j > WhosHand.Count; j++)
                 {
                     if ((int)WhosHand[i].RankOfCard > (int)WhosHand[j].RankOfCard)
                     {
@@ -263,7 +263,7 @@ namespace Team7TextRPG.Contents.CasinoGame
                 });
             while (_gameover == false)
             {
-                GameMain(count);
+                GameMain(count, _bet);
             }
             UIManager.Instance.Confirm("다시 하시겠습니까?",
                 () =>
@@ -275,7 +275,7 @@ namespace Team7TextRPG.Contents.CasinoGame
                     SceneManager.Instance.LoadScene<CasinoScene>();
                 });
         }
-        private void GameMain(int count)
+        private int GameMain(int count, int bet)
         {
             while (Hand.Count < 5)
             {
@@ -301,8 +301,7 @@ namespace Team7TextRPG.Contents.CasinoGame
                             Hand.RemoveAt(input - 1);
                             Hand.Add(DrawCard());
                             _changeCount++;
-                            GameMain(count);
-                            break;
+                            return GameMain(count, _bet);
                         case 6:
                             break;
                     }
@@ -318,7 +317,7 @@ namespace Team7TextRPG.Contents.CasinoGame
                         count = Raise(count);
                         _changeCount = 0;
                         count++;
-                        GameMain(count);
+                        GameMain(count, _bet);
                         break;
                     case 2:
                         Console.Clear();
@@ -367,12 +366,14 @@ namespace Team7TextRPG.Contents.CasinoGame
                 {
                     TextHelper.CtContent("묻고 더블로 가!");
                     Thread.Sleep(3000);
-                    GameMain(0);
+                    Deck.Clear();
+                    return GameMain(0, _bet);
                 }
                 _changeCount = 0;
                 _gameover = true;
                 Thread.Sleep(3000);
             }
+            return 0;
         }
     }
 }
