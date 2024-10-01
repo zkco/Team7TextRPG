@@ -6,6 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Team7TextRPG.Creatures;
 using Team7TextRPG.Managers;
 using Team7TextRPG.Scenes;
 using Team7TextRPG.Utils;
@@ -152,10 +153,10 @@ namespace Team7TextRPG.Contents.CasinoGame
                 }
             }
             if (flushCount == 4) isFlush = true; //플러시
-            if (straightCount > 3)
+            if (straightCount >= 3)
             {
-                if (WhosHand[0].RankOfCard == Rank.Ace &&
-                    WhosHand[4].RankOfCard == Rank.King)
+                if ((int)WhosHand[0].RankOfCard == 1 &&
+                    (int)WhosHand[4].RankOfCard == 13)
                 {
                     isRoyal = true; //로얄,마운틴
                     isStraight = true;
@@ -228,8 +229,8 @@ namespace Team7TextRPG.Contents.CasinoGame
         {
             Console.Clear();
             Board();
-            int input = InputManager.Instance.GetInputInt($"레이즈 할 칩을 입력해주세요. (0 ~ {_bet * 2})", 0, _bet * 2);
-            if (GameManager.Instance.PlayerChip >= input)
+            int input = InputManager.Instance.GetInputInt($"레이즈 할 칩을 입력해주세요. ({_bet} ~ {_bet * 2})", _bet, _bet * 2);
+            if (GameManager.Instance.PlayerChip >= _bet)
             {
                 GameManager.Instance.RemoveChip(input);
                 _bet += input;
@@ -238,8 +239,9 @@ namespace Team7TextRPG.Contents.CasinoGame
             else
             {
                 TextHelper.DtContent("소지한 칩이 부족합니다.");
+                TextHelper.ItContent("체크");
                 Thread.Sleep(1000);
-                Raise(count);
+                count++;
             }
             return count;
         }
@@ -253,41 +255,54 @@ namespace Team7TextRPG.Contents.CasinoGame
             MakeCard();
             Shuffle();
             TextHelper.CtContent("현재 보유 칩 갯수 : {0}\r\n", GameManager.Instance.PlayerChip);
-            UIManager.Instance.Confirm($"게임 시작을 위해 {_bet}개의 칩을 지불합니다.",
-                () =>
+            TextHelper.ItContent("게임 시작을 위해 100개의 칩을 지불합니다.");
+            int inputInt = InputManager.Instance.GetInputInt("1. 네 2. 아니오",1,2);
+            if(inputInt == 1)
+            {
+                if (GameManager.Instance.PlayerChip >= 100)
                 {
-                    if (GameManager.Instance.PlayerChip >= _bet)
-                    {
-                        GameManager.Instance.RemoveChip(_bet);
-                    }
-                    else
-                    {
-                        TextHelper.CtContent("칩이 모자랍니다.");
-                        SceneManager.Instance.LoadScene<CasinoScene>();
-                        return;
-                    }
-                },
-                () =>
+                    GameManager.Instance.RemoveChip(100);
+                }
+                else
                 {
+                    TextHelper.CtContent("칩이 모자랍니다.");
+                    Thread.Sleep(1000);
                     SceneManager.Instance.LoadScene<CasinoScene>();
                     return;
-                });
+                }
+            }
+            else
+            {
+                SceneManager.Instance.LoadScene<CasinoScene>();
+                return;
+            }
             while (_gameover == false)
             {
-                GameMain(count, _bet);
+                GameMain(count);
             }
-            UIManager.Instance.Confirm("다시 하시겠습니까?",
-                () =>
+            TextHelper.ItContent("다시 하시겠습니까?");
+            inputInt = InputManager.Instance.GetInputInt("1. 네 2. 아니오", 1, 2);
+            if(inputInt == 1)
+            {
+                if (GameManager.Instance.PlayerGold < 100)
                 {
-                    GameStart();
-                },
-                () =>
-                {
-                    SceneManager.Instance.LoadScene<CasinoScene>();
+                    TextHelper.CtContent("칩이 모자랍니다.");
+                    Thread.Sleep(1000);
                     return;
-                });
+                }
+                else
+                {
+                    GameManager.Instance.RemoveChip(100);
+                    GameStart();
+                }
+            }
+            else
+            {
+                SceneManager.Instance.LoadScene<CasinoScene>();
+                return;
+            }
         }
-        private int GameMain(int count, int bet)
+        private int GameMain(int count)
         {
             while (Hand.Count < 5)
             {
@@ -313,7 +328,7 @@ namespace Team7TextRPG.Contents.CasinoGame
                             Hand.RemoveAt(input - 1);
                             Hand.Add(DrawCard());
                             _changeCount++;
-                            return GameMain(count, _bet);
+                            return GameMain(count);
                         case 6:
                             break;
                     }
@@ -321,17 +336,25 @@ namespace Team7TextRPG.Contents.CasinoGame
                 Console.Clear();
                 Board();
                 TextHelper.ItContent("1. 레이즈");
-                TextHelper.ItContent("2. 폴드");
-                int playing = InputManager.Instance.GetInputInt($"숫자를 입력해주세요.", 1, 2);
+                TextHelper.ItContent("2. 체크");
+                TextHelper.ItContent("3. 폴드");
+                int playing = InputManager.Instance.GetInputInt($"숫자를 입력해주세요.", 1, 3);
                 switch (playing)
                 {
                     case 1:
                         count = Raise(count);
                         _changeCount = 0;
                         count++;
-                        GameMain(count, _bet);
+                        GameMain(count);
                         break;
                     case 2:
+                        TextHelper.BtContent("체크");
+                        Thread.Sleep(1000);
+                        _changeCount = 0;
+                        count++;
+                        GameMain(count);
+                        break;
+                    case 3:
                         Console.Clear();
                         Board();
                         TextHelper.BtContent("폴드하셨습니다.");
@@ -378,7 +401,8 @@ namespace Team7TextRPG.Contents.CasinoGame
                     TextHelper.CtContent("묻고 더블로 가!");
                     Thread.Sleep(3000);
                     Hand.Clear();
-                    return GameMain(0, _bet);
+                    count = 0;
+                    return GameMain(0);
                 }
                 _changeCount = 0;
                 _gameover = true;
