@@ -61,11 +61,13 @@ namespace Team7TextRPG.Creatures
 
         public override void OnDead()
         {
-            // 사망했을 때, 필요없다면 제거합시다.
-            // 아이템을 떨군다.
-            // 경험치를 플레이어에게 넘겨준다.
-            // 퀘스트가 있으면 퀘스트에 킬 포인트 추가.
+            int expReward = ExpReward;   
+            int goldReward = ItemReward; 
+            GameManager.Instance.Player.AddExp(expReward);
+            GameManager.Instance.AddGold(goldReward);
             GameManager.Instance.QuestKillAdd(DataId);
+            Console.WriteLine($"\n{Name} 을(를) 처치하여 {expReward} 경험치와 {goldReward} 골드를 얻었습니다!");
+            Thread.Sleep(2000);
         }
 
         public override void OnHealed(int heal)

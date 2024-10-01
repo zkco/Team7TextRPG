@@ -22,7 +22,7 @@ namespace Team7TextRPG.UIs
             InterfaceBar();
         }
 
-        public void StatusBar(bool isHpNumber = false)
+        public void StatusBar(bool isHpNumber = true)
         {
             if (GameManager.Instance.Player == null)
             {
@@ -31,6 +31,8 @@ namespace Team7TextRPG.UIs
             }
 
             var player = GameManager.Instance.Player;
+
+            string playerInfo = $"이름: {player.Name} | 레벨: {player.Level} | 직업: {player.JobType} | 경험치: {player.Exp}/{player.MaxExp}";
 
             int gold = GameManager.Instance.PlayerGold;
             int hp = GameManager.Instance.Player.Hp;
@@ -46,16 +48,12 @@ namespace Team7TextRPG.UIs
             int attack = player.Attack;
             int defense = player.Defense;
 
-
+            TextHelper.StatusBar(playerInfo);
             TextHelper.StatusBar(
                 $"체력: {hpBar} {hpNumber} | " +
                 $"마나: {mpBar} {mpNumber} | " +
                 $"공격력: {attack} | 방어력: {defense} | 소지금: {gold}G"
             );
-
-
-
-
         }
 
         public void InterfaceBar()
