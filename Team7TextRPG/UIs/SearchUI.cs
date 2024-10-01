@@ -29,7 +29,7 @@ namespace Team7TextRPG.UIs
         private void SearchField()
         {
             Console.Clear();
-            TextHelper.SlowPrint("필드를 탐색하는 중..", 50);
+            TextHelper.SlowPrint("주변을 살펴보는 중..", 50);
             Thread.Sleep(1000);
 
             int encounter = _random.Next(0, 100);
