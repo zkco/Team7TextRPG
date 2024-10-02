@@ -3,25 +3,29 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Team7TextRPG.Contents.Items;
 using Team7TextRPG.Managers;
 using Team7TextRPG.Utils;
 
-namespace Team7TextRPG.Scenes
+namespace Team7TextRPG.Contents
 {
-    public class LotteryScene : SceneBase
+    public class Lottery
     {
-        public override void Show()
+        public void Show()
         {
-            TextHelper.BtHeader("복권 긁기");
-            TextHelper.ItContent($"현재 보유 중인 복권 수량 {GameManager.Instance.PlayerItems.Find(x => x.DataId == 1049)?.Count}"); //복권 갯수
-            UIManager.Instance.Confirm("복권을 긁습니다.",
-                () =>
+            while (true)
+            {
+                ItemBase? item = GameManager.Instance.PlayerItems.Find(x => x.DataId == 1049);
+
+                TextHelper.BtHeader("복권 긁기");
+                TextHelper.ItContent($"현재 보유 중인 복권 수량 {item?.Count}"); //복권 갯수
+                if (UIManager.Instance.Confirm("복권을 긁습니다."))
                 {
-                    if (GameManager.Instance.PlayerItems.Find(x => x.DataId == 1049)?.Count > 0)
+                    if (item?.Count > 0)
                     {
                         TextHelper.SlowPrint("복권을 긁고 있습니다.");
                         //복권 갯수 삭감
-                        GameManager.Instance.PlayerItems.Find(x => x.DataId == 1049)?.RemoveCount();
+                        GameManager.Instance.RemoveItem(item);
                         //복권 결과 출력 함수
                         GameManager.Instance.AddGold(LotteryReward());
                         GameManager.Instance.ScratchLottery(); //복권 긁은 횟수 추가
@@ -32,11 +36,10 @@ namespace Team7TextRPG.Scenes
                         TextHelper.DtContent("가지고 있는 복권이 없습니다.");
                         Thread.Sleep(1000);
                     }
-                },
-                () =>
-                {
-                    return;
-                });
+                }
+                else return;
+            }
+
         }
 
         private int LotteryReward()
@@ -45,7 +48,7 @@ namespace Team7TextRPG.Scenes
             int targetScore = 0;
             Random rand = new Random();
             targetScore = rand.Next(1000) + 1;
-            if(targetScore > 300)
+            if (targetScore > 300)
             {
                 TextHelper.DtContent("꽝... 다음 기회에..");
                 reward = 0;
@@ -78,11 +81,6 @@ namespace Team7TextRPG.Scenes
                 reward = 100000000;
             }
             return reward;
-        }
-
-        protected override string SceneTypeToText<T>(T type)
-        {
-            throw new NotImplementedException();
         }
 
         private void Winning()
@@ -197,7 +195,7 @@ namespace Team7TextRPG.Scenes
             Console.Clear();
             for (int i = 0; i < _winningString1.Length; i++)
             {
-                Console.SetCursorPosition(x - _winningString1[1].Length/2, i);
+                Console.SetCursorPosition(x - _winningString1[1].Length / 2, i);
                 Console.WriteLine(_winningString1[i]);
             }
             for (int i = 0; i < _winningString2.Length; i++)

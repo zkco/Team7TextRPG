@@ -48,7 +48,7 @@ namespace Team7TextRPG.Scenes
                     SceneManager.Instance.LoadScene<CasinoScene>();
                     break;
                 case EventType.Lottery:
-                    SceneManager.Instance.LoadScene<LotteryScene>();
+                    UIManager.Instance.Write<LotteryUI>();
                     SceneManager.Instance.LoadScene<EventScene>();
                     break;
                 case EventType.Exit:
