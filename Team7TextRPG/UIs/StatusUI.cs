@@ -80,7 +80,6 @@ namespace Team7TextRPG.UIs
                     UIManager.Instance.Write<StatusUI>();
                     return; // Scene 호출 뒤에는 while문을 빠져나가야 함.
                 case statPlus.back:
-                    SceneManager.Instance.LoadScene<TownScene>();
                     return; // Scene 호출 뒤에는 while문을 빠져나가야 함.
             }
 
