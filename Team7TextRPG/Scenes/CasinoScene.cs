@@ -63,7 +63,7 @@ namespace Team7TextRPG.Scenes
                             Console.Clear();
                             TextHelper.DtContent("100골드를 칩 한 개로 교환할 수 있습니다");
                             int _tryExchange = InputManager.Instance.GetInputInt("몇개의 칩으로 바꿀까요?", 1, 10000);
-                            if (_tryExchange * CHIP_PRICE > GameManager.Instance.Gold)
+                            if (GameManager.Instance.HasGold(_tryExchange * CHIP_PRICE) == false)
                             {
                                 TextHelper.DtContent("돈이 모자랍니다.");
                             }

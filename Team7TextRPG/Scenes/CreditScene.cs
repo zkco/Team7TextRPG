@@ -33,6 +33,9 @@ namespace Team7TextRPG.Scenes
                 case Defines.EndingType.SpecialLottery:
                     credits.AddRange(GetSpecialEnding());
                     break;
+                case Defines.EndingType.Bankruptcy:
+                    credits.AddRange(GetBankruptcyEnding());
+                    break;
                 default:
                     break;
             }
@@ -145,12 +148,6 @@ namespace Team7TextRPG.Scenes
                 "",
                 "HAPP ENDING?",
                 "",
-                "NO!",
-                "",
-                "도박 중독은 질병입니다.",
-                "",
-                "도박 중독 1336과 함께하면 끊을 수 있습니다.",
-                "",
                 "",
                 "",
                 "",
@@ -209,6 +206,33 @@ namespace Team7TextRPG.Scenes
                 "|--------|",
                 "",
                 "",
+                "",
+                "",
+            };
+        }
+        private string[] GetBankruptcyEnding()
+        {
+            return new string[]
+            {
+                "============= 복권 사냥 RPG =============",
+                "",
+                "용사는 마침내 파산을 선언합니다.",
+                "",
+                "용사는 더 이상 돈이 없습니다.",
+                "",
+                "더 이상 복권을 구매할 수도 없습니다.",
+                "",
+                "아무것도 살 수 없습니다.",
+                "",
+                "용사는 더 이상 용사가 아닙니다.",
+                "",
+                "용사는 치료가 시급해 보입니다...",
+                "",
+                "THE END",
+                "",
+                "도박 중독은 질병입니다.",
+                "",
+                "도박 중독 1336과 함께하면 끊을 수 있습니다.",
                 "",
                 "",
             };
