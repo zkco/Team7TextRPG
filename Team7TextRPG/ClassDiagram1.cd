@@ -1,0 +1,481 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" GroupingSetting="Access">
+  <Class Name="Team7TextRPG.Creatures.CreatureBase">
+    <Position X="24.5" Y="19" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>mAAAIBACBQAIAAAAEAAQmAwBAIBAgAAZQAQACgQERgA=</HashCode>
+      <FileName>Creatures\CreatureBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Team7TextRPG.Creatures.MonsterCreature">
+    <Position X="27.75" Y="19" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAAQAwAAAAAAAAkAIAAAgAAAAAAAAACBAAAAA=</HashCode>
+      <FileName>Creatures\MonsterCreature.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Team7TextRPG.Creatures.PlayerCreature">
+    <Position X="21.5" Y="19" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>BAECMJQCAQCIAAQCEgAQgAQFBKBAgAAAAAACCgIEBAI=</HashCode>
+      <FileName>Creatures\PlayerCreature.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Team7TextRPG.Contents.CasinoGame.BlackJack" Collapsed="true">
+    <Position X="21.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAACAACAAACAAAEIAIAAAAACAACAQAABAAAAAFAA=</HashCode>
+      <FileName>Contents\CasinoGame\BlackJack.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Team7TextRPG.Contents.CasinoGame.Card" Collapsed="true">
+    <Position X="23" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Contents\CasinoGame\Card.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Team7TextRPG.Contents.CasinoGame.FiveCardPoker" Collapsed="true">
+    <Position X="19.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAADACAKIAAEAQAAAAEAAAACAAAABCACAANAA=</HashCode>
+      <FileName>Contents\CasinoGame\FiveCardPoker.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Team7TextRPG.Contents.CasinoGame.OddEven" Collapsed="true">
+    <Position X="21.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAAAACAAAAACAQAAAAAAAAAAABAAACgABAEAA=</HashCode>
+      <FileName>Contents\CasinoGame\OddEven.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Team7TextRPG.Contents.CasinoGame.SlotMachine" Collapsed="true">
+    <Position X="21.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAACAACABAAAAAAAAAAAAAAAAACCgAAAEAA=</HashCode>
+      <FileName>Contents\CasinoGame\SlotMachine.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Team7TextRPG.Contents.Items.ConsumableItem">
+    <Position X="16" Y="22" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAgAAAAAAAACAAAAAAEAABAAAAAAIAAAAAA=</HashCode>
+      <FileName>Contents\Items\ConsumableItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Team7TextRPG.Contents.Items.EquipmentItem">
+    <Position X="16" Y="19" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAAAgAAAAAAAAAAAAAAAEAAAAAACAAAAAAACE=</HashCode>
+      <FileName>Contents\Items\EquipmentItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Team7TextRPG.Contents.Items.ItemBase">
+    <Position X="18.25" Y="19" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAQggAAAEAAQAAAY4BAEEACAAAAAAAAAAAgA=</HashCode>
+      <FileName>Contents\Items\ItemBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Team7TextRPG.Contents.Shops.AccessoryShop" Collapsed="true">
+    <Position X="19.25" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Contents\Shops\AccessoryShop.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Team7TextRPG.Contents.Shops.ArmorShop" Collapsed="true">
+    <Position X="20.25" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Contents\Shops\ArmorShop.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Team7TextRPG.Contents.Shops.BlacksmithShop" Collapsed="true">
+    <Position X="22.25" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAQAAABAAAAAAAAAAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Contents\Shops\BlacksmithShop.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Team7TextRPG.Contents.Shops.PotionShop" Collapsed="true">
+    <Position X="23.25" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Contents\Shops\PotionShop.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Team7TextRPG.Contents.Shops.ShopBase" Collapsed="true">
+    <Position X="21.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAAAAAAABQAAAAAAAAAAAFAAIAAAIAgAAABBI=</HashCode>
+      <FileName>Contents\Shops\ShopBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Team7TextRPG.Contents.Shops.WeaponShop" Collapsed="true">
+    <Position X="21.25" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Contents\Shops\WeaponShop.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Team7TextRPG.Contents.Battle" Collapsed="true">
+    <Position X="19.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAAAAAAAAAAAAAAACEAAAAAAAAAAAAAAAAAAACA=</HashCode>
+      <FileName>Contents\Battle.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Team7TextRPG.Contents.Quest" Collapsed="true">
+    <Position X="23" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAQAAAAAAAAAAAIAAICAAAAgAAADBA=</HashCode>
+      <FileName>Contents\Quest.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Team7TextRPG.Contents.Skill" Collapsed="true">
+    <Position X="19.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAACAgAAAAAAAgAIYQEgAEIAAgAAAgACAAEQA=</HashCode>
+      <FileName>Contents\Skill.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Team7TextRPG.Contents.Stat" Collapsed="true">
+    <Position X="23" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIBACAAAIAAAEAAAAAAABAIBAgAAAAAAAAgAABAA=</HashCode>
+      <FileName>Contents\Stat.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Team7TextRPG.Datas.BattleData" Collapsed="true">
+    <Position X="27" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAMAAAAAAAAAAAIAAAAAAAA=</HashCode>
+      <FileName>Datas\BattleData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Team7TextRPG.Datas.LevelData" Collapsed="true">
+    <Position X="27" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAACCAAAAAABAIAAAAAABAAAAAAAAACI=</HashCode>
+      <FileName>Datas\CreatureData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Team7TextRPG.Datas.MonsterData" Collapsed="true">
+    <Position X="28.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIRACAAAoAAAAAAAQEAYBAIhAgAABAAAAAhAABAA=</HashCode>
+      <FileName>Datas\CreatureData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Team7TextRPG.Datas.ItemData" Collapsed="true">
+    <Position X="28.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAIBACAQBoAAAAAAACAAYRAIBAgBAAAAAAIgAABgA=</HashCode>
+      <FileName>Datas\ItemData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Team7TextRPG.Datas.QuestData" Collapsed="true">
+    <Position X="27" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEBAAAAAAAgACAAAMAkQAYQAAgAAAAABAQAAAAAAAA=</HashCode>
+      <FileName>Datas\QuestData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Team7TextRPG.Datas.SaveData" Collapsed="true">
+    <Position X="28.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAADAAAAAAAAAAAAAAAAIAAAAAAAAAEAAE=</HashCode>
+      <FileName>Datas\SaveData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Team7TextRPG.Datas.SavePlayerData" Collapsed="true">
+    <Position X="27" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAISAAAAAACAgAQAAgAAAAQEAAAAAAARAAAAAEIAQgA=</HashCode>
+      <FileName>Datas\SaveData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Team7TextRPG.Datas.SaveQuestData" Collapsed="true">
+    <Position X="28.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAABAAAAAAAACAABAQAJAABAAA=</HashCode>
+      <FileName>Datas\SaveData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Team7TextRPG.Datas.SaveItemData" Collapsed="true">
+    <Position X="28.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAYIAAAAAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>Datas\SaveData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Team7TextRPG.Datas.SavedMetaData" Collapsed="true">
+    <Position X="27" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAAAAAAABAAAAAAAAAQAAAAAAAABAAAAAIBAAAA=</HashCode>
+      <FileName>Datas\SaveData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Team7TextRPG.Datas.ShopData" Collapsed="true">
+    <Position X="27" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAACAABAAAAAAAIAAAAAAAAAAAAAAAAIAAA=</HashCode>
+      <FileName>Datas\ShopData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Team7TextRPG.Datas.SkillData" Collapsed="true">
+    <Position X="28.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAgAAAAAAAgAAYACgAAIAAgAAAgACAAEAA=</HashCode>
+      <FileName>Datas\SkillData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Team7TextRPG.Managers.CasinoManager" Collapsed="true">
+    <Position X="31" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAQAAAAAAAAAAAAAAAABAAAQAAQAAAAgAA=</HashCode>
+      <FileName>Managers\CasinoManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Team7TextRPG.Managers.DataManager" Collapsed="true">
+    <Position X="32.75" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAIAEAAAICQAIIAQAEBAAAgAAAAAQAACBAAABAE=</HashCode>
+      <FileName>Managers\DataManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Team7TextRPG.Managers.GameManager" Collapsed="true">
+    <Position X="31" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>hCAMgAEhCAAAAAAgMA0AIBAAgAAACAAERgACAQgQRIA=</HashCode>
+      <FileName>Managers\GameManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Team7TextRPG.Managers.InputManager" Collapsed="true">
+    <Position X="31" Y="12.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAgAAAAAAAAAABAAIAAAAAQASAQAAAEAA=</HashCode>
+      <FileName>Managers\InputManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Team7TextRPG.Managers.JobManager" Collapsed="true">
+    <Position X="32.75" Y="12.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAABAAAAAAAAAAAAAAAAAAQAAAAAAICAA=</HashCode>
+      <FileName>Managers\JobManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Team7TextRPG.Managers.SaveManager" Collapsed="true">
+    <Position X="32.75" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAGoIAQAAAAAAAAAAAAAAAAAAAABAAARAAAAAgAAAA=</HashCode>
+      <FileName>Managers\SaveManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Team7TextRPG.Managers.SceneManager" Collapsed="true">
+    <Position X="31" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAAAAAAAAACAAAAAAAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>Managers\SceneManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Team7TextRPG.Managers.UIManager" Collapsed="true">
+    <Position X="32.75" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgEAACAAAIQCAAAAAAAAAAIAAABAAAIQAABAQEKAAA=</HashCode>
+      <FileName>Managers\UIManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Team7TextRPG.Scenes.CasinoScene" Collapsed="true">
+    <Position X="8" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAE=</HashCode>
+      <FileName>Scenes\CasinoScene.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Team7TextRPG.Scenes.CreditScene" Collapsed="true">
+    <Position X="15" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAAAAAAAAAAABAAAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Scenes\CreditScene.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Team7TextRPG.Scenes.DungeonScene" Collapsed="true">
+    <Position X="12.75" Y="15.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAIAAAAAAA=</HashCode>
+      <FileName>Scenes\DungeonScene.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Team7TextRPG.Scenes.EventScene" Collapsed="true">
+    <Position X="10.25" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Scenes\EventScene.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Team7TextRPG.Scenes.FieldScene" Collapsed="true">
+    <Position X="8" Y="15.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Scenes\FieldScene.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Team7TextRPG.Scenes.SceneBase">
+    <Position X="11.5" Y="12.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAAAAAAAQAAAAAAAAAEAAAAAACAAAAAAAA=</HashCode>
+      <FileName>Scenes\SceneBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Team7TextRPG.Scenes.ShopScene" Collapsed="true">
+    <Position X="12.75" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Scenes\ShopScene.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Team7TextRPG.Scenes.TitleScene" Collapsed="true">
+    <Position X="10.25" Y="15.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Scenes\TitleScene.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Team7TextRPG.Scenes.TownScene" Collapsed="true">
+    <Position X="15" Y="15.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Scenes\TownScene.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Team7TextRPG.UIs.BattleUI" Collapsed="true">
+    <Position X="8" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAABAAAAAAEAAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>UIs\BattleUI.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Team7TextRPG.UIs.ClassChangeUI" Collapsed="true">
+    <Position X="8" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>UIs\ClassChangeUI.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Team7TextRPG.UIs.CommonUI" Collapsed="true">
+    <Position X="15" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAIAAAAAAAAAEAAAAAAAAAAAAIEAAAA=</HashCode>
+      <FileName>UIs\CommonUI.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Team7TextRPG.UIs.ConfirmUI" Collapsed="true">
+    <Position X="12.75" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQAAAAAAAAAAAAEAAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>UIs\ConfirmUI.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Team7TextRPG.UIs.DungeonDiffUI" Collapsed="true">
+    <Position X="10.25" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAgEAAAAAAAAAAACAEAAAA=</HashCode>
+      <FileName>UIs\DungeonDiffUI.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Team7TextRPG.UIs.InventoryUI" Collapsed="true">
+    <Position X="10.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAQAAAAAAAAEAAAAAIAAAAAgAEABBA=</HashCode>
+      <FileName>UIs\InventoryUI.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Team7TextRPG.UIs.LoadGameUI" Collapsed="true">
+    <Position X="10.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAQAAAAAAAAEAAAAAIAAAAAgAEABBA=</HashCode>
+      <FileName>UIs\LoadGameUI.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Team7TextRPG.UIs.NewGameUI" Collapsed="true">
+    <Position X="8" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>UIs\NewGameUI.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Team7TextRPG.UIs.QuestUI" Collapsed="true">
+    <Position X="15" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>UIs\QuestUI.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Team7TextRPG.UIs.ReceiveQuestUI" Collapsed="true">
+    <Position X="12.75" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>UIs\ReceiveQuestUI.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Team7TextRPG.UIs.RestUI" Collapsed="true">
+    <Position X="12.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>UIs\RestUI.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Team7TextRPG.UIs.SaveGameUI" Collapsed="true">
+    <Position X="12.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAQAAAAAAAAEAAAAAIAAAAAgAEABBA=</HashCode>
+      <FileName>UIs\SaveGameUI.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Team7TextRPG.UIs.SearchUI" Collapsed="true">
+    <Position X="10.25" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAQBAAA0AAAQAAAAAAACAEAAAE=</HashCode>
+      <FileName>UIs\SearchUI.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Team7TextRPG.UIs.ShopUI" Collapsed="true">
+    <Position X="8" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAAAAAAAAAEACAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>UIs\ShopUI.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Team7TextRPG.UIs.SkillUI" Collapsed="true">
+    <Position X="15" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAQAAAAAABgEAAAAAIAAAAAgAEABBA=</HashCode>
+      <FileName>UIs\SkillUI.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Team7TextRPG.UIs.StatusUI" Collapsed="true">
+    <Position X="15" Y="2" Width="1.5" />
+    <InheritanceLine Type="Team7TextRPG.UIs.UIBase" FixedFromPoint="true">
+      <Path>
+        <Point X="12.25" Y="4.75" />
+        <Point X="12.25" Y="2.991" />
+        <Point X="15.75" Y="2.991" />
+        <Point X="15.75" Y="2.691" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>UIs\StatusUI.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Team7TextRPG.UIs.UIBase">
+    <Position X="11.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAACAAAEAAAA=</HashCode>
+      <FileName>UIs\UIBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="맑은 고딕" Size="9" />
+</ClassDiagram>
