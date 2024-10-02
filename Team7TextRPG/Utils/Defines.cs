@@ -146,12 +146,23 @@ namespace Team7TextRPG.Utils
             StatLuck
         }
 
+        public enum EndingType
+        {
+            None,
+            Gold,
+            Chip,
+            SpecialLottery,
+            Death
+        }
+
         public const int MAX_PLAYER_LEVEL = 100;
         public const int ENHANCEMENT_MAX_LEVEL = 10;
         public const int ENHANCEMENT_COST = 1000;
         public const int ENHANCEMENT_SUCCESS_RATE = 100;
         public const int ENHANCEMENT_FAIL_RATE = 10;
         public const int CLASS_CHANGE_LEVEL = 5;
-
+        public const int ENDING_GOLD_CONDITION = 100000000;
+        public const int ENDING_CHIP_CONDITION = 1000000;
+        public const int ENDING_SPECIAL_LOTTERY_CONDITION = 1;
     }
 }
