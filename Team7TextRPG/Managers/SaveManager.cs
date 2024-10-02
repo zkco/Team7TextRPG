@@ -40,8 +40,9 @@ namespace Team7TextRPG.Managers
 
             // Save Data
             SaveData saveData = new SaveData();
-            saveData.Gold = GameManager.Instance.PlayerGold;
-            saveData.Chip = GameManager.Instance.PlayerChip;
+            saveData.PlayerData.Gold = player.Gold;
+            saveData.PlayerData.Chip = player.Chip;
+            saveData.PlayerData.ScratchedLottery = player.ScratchedLottery;
             saveData.PlayerData.Name = player.Name;
             saveData.PlayerData.Level = player.Level;
             saveData.PlayerData.Exp = player.Exp;

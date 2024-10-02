@@ -24,6 +24,13 @@ namespace Team7TextRPG.Scenes
         public override void Show()
         {
             Console.Clear();
+            if (GameManager.Instance.IsGameEnd())
+            {
+                GameManager.Instance.GameEnd();
+                InputManager.Instance.GetInputEnter();
+                return;
+            }
+
             TextHelper.BtHeader("마을");
             UIManager.Instance.CommonWriteBar();
             // UI Base 출력

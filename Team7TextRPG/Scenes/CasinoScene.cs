@@ -23,6 +23,13 @@ namespace Team7TextRPG.Scenes
         public override void Show()
         {
             Console.Clear();
+            if (GameManager.Instance.IsGameEnd())
+            {
+                GameManager.Instance.GameEnd();
+                InputManager.Instance.GetInputEnter();
+                return;
+            }
+
             TextHelper.BtHeader("카지노");
             // [상태, 인벤토리, 스킬, 퀘스트]
             UIManager.Instance.CommonWriteBar();
@@ -56,7 +63,7 @@ namespace Team7TextRPG.Scenes
                             Console.Clear();
                             TextHelper.DtContent("100골드를 칩 한 개로 교환할 수 있습니다");
                             int _tryExchange = InputManager.Instance.GetInputInt("몇개의 칩으로 바꿀까요?", 1, 10000);
-                            if (_tryExchange * CHIP_PRICE > GameManager.Instance.PlayerGold)
+                            if (_tryExchange * CHIP_PRICE > GameManager.Instance.Gold)
                             {
                                 TextHelper.DtContent("돈이 모자랍니다.");
                             }
@@ -72,7 +79,7 @@ namespace Team7TextRPG.Scenes
                             Console.Clear();
                             TextHelper.DtContent("칩 한 개를 100골드로 교환할 수 있습니다.");
                             int _tryExchange = InputManager.Instance.GetInputInt("몇개의 칩을 바꿀까요?", 1, 10000);
-                            if (_tryExchange > GameManager.Instance.PlayerChip)
+                            if (_tryExchange > GameManager.Instance.Chip)
                             {
                                 Console.WriteLine("칩이 모자랍니다.");
                             }
@@ -88,7 +95,7 @@ namespace Team7TextRPG.Scenes
                             SceneManager.Instance.LoadScene<CasinoScene>();
                             return;
                         }
-                        TextHelper.StatusBar($"현재 보유 칩 갯수 : {GameManager.Instance.PlayerChip}");
+                        TextHelper.StatusBar($"현재 보유 칩 갯수 : {GameManager.Instance.Chip}");
                         Thread.Sleep(1000);
                         SceneManager.Instance.LoadScene<CasinoScene>();
                         return;
@@ -128,7 +135,7 @@ namespace Team7TextRPG.Scenes
             switch(input)
             {
                 case 1:
-                    if(GameManager.Instance.PlayerChip >= 7777)
+                    if(GameManager.Instance.Chip >= 7777)
                     {
                         GameManager.Instance.RemoveChip(7777);
                         GameManager.Instance.AddItem(1030);
@@ -139,7 +146,7 @@ namespace Team7TextRPG.Scenes
                     }
                     break;
                 case 2:
-                    if (GameManager.Instance.PlayerChip >= 7777)
+                    if (GameManager.Instance.Chip >= 7777)
                     {
                         GameManager.Instance.RemoveChip(7777);
                         GameManager.Instance.AddItem(1039);
@@ -150,7 +157,7 @@ namespace Team7TextRPG.Scenes
                     }
                     break;
                 case 3:
-                    if (GameManager.Instance.PlayerChip >= 7777)
+                    if (GameManager.Instance.Chip >= 7777)
                     {
                         GameManager.Instance.RemoveChip(7777);
                         GameManager.Instance.AddItem(1040);
@@ -161,7 +168,7 @@ namespace Team7TextRPG.Scenes
                     }
                     break;
                 case 4:
-                    if (GameManager.Instance.PlayerChip >= 2000)
+                    if (GameManager.Instance.Chip >= 2000)
                     {
                         GameManager.Instance.RemoveChip(2000);
                         GameManager.Instance.AddItem(1038);

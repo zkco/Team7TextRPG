@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using Team7TextRPG.Contents;
@@ -21,6 +22,10 @@ namespace Team7TextRPG.Creatures
         public int MaxExp { get; private set; }
 
         public Stat ItemStat { get; private set; } = new Stat();
+
+        public int Gold { get; private set; } //소지 중인 금액
+        public int Chip { get; private set; } //소지 중인 칩 갯수 
+        public int ScratchedLottery { get; private set; } = 1; //게임 중 긁은 복권의 갯수
 
         public int StatPoint { get; set; }
         public int StatPointStr { get; set; } // 힘 포인트 투자량
@@ -76,6 +81,9 @@ namespace Team7TextRPG.Creatures
             // 저장 데이터 로드시 사용할 예정
             SetLevel(saveData.Level);
 
+            Chip = saveData.Chip;
+            Gold = saveData.Gold;
+            ScratchedLottery = saveData.ScratchedLottery;
             StatPointStr = saveData.StatPointStr;
             StatPointDex = saveData.StatPointDex;
             StatPointInt = saveData.StatPointInt;
@@ -225,6 +233,32 @@ namespace Team7TextRPG.Creatures
             Mp = MaxMp;
         }
 
-        
+
+
+        public void AddGold(int gold)
+        {
+            Gold += gold;
+        }
+        public void RemoveGold(int gold)
+        {
+            Gold -= gold;
+        }
+        public bool HasGold(int gold)
+        {
+            return Gold >= gold;
+        }
+
+        public void AddChip(int chip)
+        {
+            Chip += chip;
+        }
+        public void RemoveChip(int chip)
+        {
+            Chip -= chip;
+        }
+        public void AddScratchedLottery()
+        {
+            ScratchedLottery++;
+        }
     }
 }

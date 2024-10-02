@@ -64,7 +64,7 @@ namespace Team7TextRPG.Contents.CasinoGame
         public void Screen()
         {
             Console.Clear();
-            TextHelper.CtContent("현재 보유 칩 갯수 : {0}", GameManager.Instance.PlayerChip);
+            TextHelper.CtContent("현재 보유 칩 갯수 : {0}", GameManager.Instance.Chip);
             TextHelper.DtContent("♬♬♬ = X5    ☆☆☆ = X5");
             TextHelper.DtContent("◇◇◇ = X10   ΩΩΩ = X20   ⑦⑦⑦ = X100\r\n");
             TextHelper.ItContent("|------|------|------|");
@@ -87,7 +87,7 @@ namespace Team7TextRPG.Contents.CasinoGame
                 switch (gameInput)
                 {
                     case 1:
-                        if (GameManager.Instance.PlayerChip >= _bet)
+                        if (GameManager.Instance.Chip >= _bet)
                         {
                             GameManager.Instance.RemoveChip(_bet);
                             _count++;

@@ -317,11 +317,6 @@ namespace Team7TextRPG.Contents
             {
                 Console.WriteLine($"{monster.Name} - HP: {monster.Hp}/{monster.MaxHp}");
             }
-
-            
-
-
-
         }
     }
 }

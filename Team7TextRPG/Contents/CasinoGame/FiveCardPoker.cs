@@ -200,7 +200,7 @@ namespace Team7TextRPG.Contents.CasinoGame
             int i = 0;
             Console.Clear();
             TextHelper.CtContent("현재 판 돈 {0}", _bet * 2);
-            TextHelper.CtContent("현재 보유 칩 갯수 : {0}\r\n", GameManager.Instance.PlayerChip);
+            TextHelper.CtContent("현재 보유 칩 갯수 : {0}\r\n", GameManager.Instance.Chip);
             TextHelper.DtContent("나의 패");
             foreach (Card card in Hand)
             {
@@ -230,7 +230,7 @@ namespace Team7TextRPG.Contents.CasinoGame
             Console.Clear();
             Board();
             int input = InputManager.Instance.GetInputInt($"레이즈 할 칩을 입력해주세요. ({_bet} ~ {_bet * 2})", _bet, _bet * 2);
-            if (GameManager.Instance.PlayerChip >= _bet)
+            if (GameManager.Instance.Chip >= _bet)
             {
                 GameManager.Instance.RemoveChip(input);
                 _bet += input;
@@ -254,12 +254,12 @@ namespace Team7TextRPG.Contents.CasinoGame
             Hand.Clear();
             MakeCard();
             Shuffle();
-            TextHelper.CtContent("현재 보유 칩 갯수 : {0}\r\n", GameManager.Instance.PlayerChip);
+            TextHelper.CtContent("현재 보유 칩 갯수 : {0}\r\n", GameManager.Instance.Chip);
             TextHelper.ItContent("게임 시작을 위해 100개의 칩을 지불합니다.");
             int inputInt = InputManager.Instance.GetInputInt("1. 네 2. 아니오",1,2);
             if(inputInt == 1)
             {
-                if (GameManager.Instance.PlayerChip >= 100)
+                if (GameManager.Instance.Chip >= 100)
                 {
                     GameManager.Instance.RemoveChip(100);
                 }
@@ -284,7 +284,7 @@ namespace Team7TextRPG.Contents.CasinoGame
             inputInt = InputManager.Instance.GetInputInt("1. 네 2. 아니오", 1, 2);
             if(inputInt == 1)
             {
-                if (GameManager.Instance.PlayerGold < 100)
+                if (GameManager.Instance.Gold < 100)
                 {
                     TextHelper.CtContent("칩이 모자랍니다.");
                     Thread.Sleep(1000);

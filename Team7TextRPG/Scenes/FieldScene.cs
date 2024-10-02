@@ -23,13 +23,13 @@ namespace Team7TextRPG.Scenes
         public override void Show()
         {
             Console.Clear();
-            if (GameManager.Instance.Player?.IsDead == true)
+            if(GameManager.Instance.IsGameEnd())
             {
-                SceneManager.Instance.LoadScene<TitleScene>();
-                TextHelper.ItHeader("플레이어가 사망했습니다.");
+                GameManager.Instance.GameEnd();
                 InputManager.Instance.GetInputEnter();
                 return;
             }
+
             TextHelper.BtHeader("필드");
             // [상태, 인벤토리, 스킬, 퀘스트]
             UIManager.Instance.CommonWriteBar();

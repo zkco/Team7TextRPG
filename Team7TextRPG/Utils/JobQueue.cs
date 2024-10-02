@@ -40,5 +40,10 @@ namespace Team7TextRPG.Utils
             // Job을 꺼내서 반환한다.
             return _jobQueue.Dequeue();
         }
+
+        public void Clear()
+        {
+            _jobQueue.Clear();
+        }
     }
 }

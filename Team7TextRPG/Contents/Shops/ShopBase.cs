@@ -118,7 +118,7 @@ namespace Team7TextRPG.Contents.Shops
                             if (index < items.Length)
                             {
                                 ItemData item = items[index];
-                                if (GameManager.Instance.PlayerGold < item.Price)
+                                if (GameManager.Instance.Gold < item.Price)
                                 {
                                     TextHelper.WriteLine("골드가 부족합니다.");
                                     break;

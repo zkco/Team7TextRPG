@@ -34,7 +34,7 @@ namespace Team7TextRPG.UIs
 
             string playerInfo = $"이름: {player.Name} | 레벨: {player.Level} | 직업: {player.JobType} | 경험치: {player.Exp}/{player.MaxExp}";
 
-            int gold = GameManager.Instance.PlayerGold;
+            int gold = GameManager.Instance.Gold;
             int hp = GameManager.Instance.Player.Hp;
             int maxHp = GameManager.Instance.Player.MaxHp;
             string hpBar = Util.GetHpBar(hp, maxHp);

@@ -11,8 +11,6 @@ namespace Team7TextRPG.Datas
     [Serializable]
     public class SaveData
     {
-        public int Gold;
-        public int Chip;
         public SavePlayerData PlayerData = new SavePlayerData();
         public SaveQuestData QuestData = new SaveQuestData();
         public List<SaveItemData> Items = new List<SaveItemData>();
@@ -21,6 +19,10 @@ namespace Team7TextRPG.Datas
     [Serializable]
     public class SavePlayerData
     {
+        public int Gold;
+        public int Chip;
+        public int ScratchedLottery;
+
         public string? Name;
         public int Level;
         public int Exp;
