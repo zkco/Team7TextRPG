@@ -24,6 +24,7 @@ namespace Team7TextRPG.Scenes
                         GameManager.Instance.PlayerItems.Find(x => x.DataId == 1049)?.RemoveCount();
                         //복권 결과 출력 함수
                         GameManager.Instance.AddGold(LotteryReward());
+                        GameManager.Instance.ScratchLottery(); //복권 긁은 횟수 추가
                         Thread.Sleep(1000);
                     }
                     else
@@ -54,7 +55,7 @@ namespace Team7TextRPG.Scenes
                 TextHelper.DtContent("5등");
                 reward = 5000;
             }
-            else if (targetScore > 50)
+            else if (targetScore > 25)
             {
                 TextHelper.DtContent("4등!");
                 reward = 50000;

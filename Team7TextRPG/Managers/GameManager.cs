@@ -32,6 +32,7 @@ namespace Team7TextRPG.Managers
         public int CurrentDay { get; private set; } = 0;
         public int PlayerGold { get; private set; } //소지 중인 금액
         public int PlayerChip { get; private set; } //소지 중인 칩 갯수 
+        private int _scratchedLottery = 0; //게임 중 긁은 복권의 갯수
 
         public void CreatePlayer(string name, Defines.SexType sexType, Defines.SpeciesType specisType)
         {
@@ -325,6 +326,11 @@ namespace Team7TextRPG.Managers
             // nullable을 nullable 이 아닌 타입으로 반환
             .Select(s => s!)
             .ToList();
+        }
+
+        public void ScratchLottery()
+        {
+            _scratchedLottery += 1;
         }
     }
 }
