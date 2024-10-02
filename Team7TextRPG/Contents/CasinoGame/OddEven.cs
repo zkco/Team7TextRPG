@@ -84,6 +84,7 @@ namespace Team7TextRPG.Contents.CasinoGame
             _bet = InputManager.Instance.GetInputInt("숫자를 입력해주세요. (최대 300)", 1, 300);
             if (GameManager.Instance.PlayerChip >= _bet)
             {
+                GameManager.Instance.RemoveChip(_bet);
                 Console.Clear();
                 TextHelper.ItContent("베팅 방법을 선택해주세요.");
                 Console.WriteLine("1. 홀");
@@ -128,6 +129,7 @@ namespace Team7TextRPG.Contents.CasinoGame
                         {
                             _playing = false;
                             SceneManager.Instance.LoadScene<CasinoScene>();
+                            return;
                         });
                 }
                 else if(AddScore() % 2 == 0 && BetNumb == 2) 
@@ -144,6 +146,7 @@ namespace Team7TextRPG.Contents.CasinoGame
                         {
                             _playing = false;
                             SceneManager.Instance.LoadScene<CasinoScene>();
+                            return;
                         });
                 }
                 else
@@ -159,6 +162,7 @@ namespace Team7TextRPG.Contents.CasinoGame
                         {
                             _playing = false;
                             SceneManager.Instance.LoadScene<CasinoScene>();
+                            return;
                         });
                 }
             }

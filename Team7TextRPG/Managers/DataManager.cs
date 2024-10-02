@@ -16,10 +16,10 @@ namespace Team7TextRPG.Managers
         public Dictionary<int, ItemData> ItemDataDict = new Dictionary<int, ItemData>();
         public Dictionary<int, LevelData> LevelDataDict = new Dictionary<int, LevelData>();
         public Dictionary<int, MonsterData> MonsterDataDict = new Dictionary<int, MonsterData>();
-        public Dictionary<int, NpcData> NpcDataDict = new Dictionary<int, NpcData>();
         public Dictionary<int, QuestData> QuestDataDict = new Dictionary<int, QuestData>();
         public Dictionary<int, ShopData> ShopDataDict = new Dictionary<int, ShopData>();
         public Dictionary<int, SkillData> SkillDataDict = new Dictionary<int, SkillData>();
+        public Dictionary<int, BattleData> BattleDataDict = new Dictionary<int, BattleData>();
 
         public void Init()
         {
@@ -27,10 +27,10 @@ namespace Team7TextRPG.Managers
             LoadLevelData();
             LoadItemData();
             LoadMonsterData();
-            LoadNpcData();
             LoadQuestData();
             LoadShopData();
             LoadSkillData();
+            LoadBattleData();
         }
 
         private void LoadLevelData()
@@ -54,13 +54,6 @@ namespace Team7TextRPG.Managers
             foreach (var item in data)
                 MonsterDataDict.Add(item.DataId, item);
         }
-        private void LoadNpcData()
-        {
-            List<NpcData> data = DataTransfer.ParseExcelDataToList<NpcData>("Npc");
-            NpcDataDict.Clear();
-            foreach (var item in data)
-                NpcDataDict.Add(item.DataId, item);
-        }
         private void LoadQuestData()
         {
             List<QuestData> data = DataTransfer.ParseExcelDataToList<QuestData>("Quest");
@@ -81,6 +74,13 @@ namespace Team7TextRPG.Managers
             SkillDataDict.Clear();
             foreach (var item in data)
                 SkillDataDict.Add(item.DataId, item);
+        }
+        private void LoadBattleData()
+        {
+            List<BattleData> data = DataTransfer.ParseExcelDataToList<BattleData>("Battle");
+            BattleDataDict.Clear();
+            foreach (var item in data)
+                BattleDataDict.Add(item.DataId, item);
         }
     }
 }

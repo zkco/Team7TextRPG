@@ -23,6 +23,13 @@ namespace Team7TextRPG.Scenes
         public override void Show()
         {
             Console.Clear();
+            if (GameManager.Instance.Player?.IsDead == true)
+            {
+                SceneManager.Instance.LoadScene<TitleScene>();
+                TextHelper.ItHeader("플레이어가 사망했습니다.");
+                InputManager.Instance.GetInputEnter();
+                return;
+            }
             TextHelper.BtHeader("필드");
             // [상태, 인벤토리, 스킬, 퀘스트]
             UIManager.Instance.CommonWriteBar();
@@ -46,7 +53,8 @@ namespace Team7TextRPG.Scenes
             switch (selection)
             {
                 case FieldSceneType.Search:
-                    UIManager.Instance.Write<SearchUI>();   //탐색ui로
+                    UIManager.Instance.SearchWrite(Defines.BattleType.Field);   //탐색ui로
+                    SceneManager.Instance.LoadScene<FieldScene>();  //던전화면으로
                     break;
                 case FieldSceneType.Dungeon:
                     SceneManager.Instance.LoadScene<DungeonScene>();  //던전화면으로

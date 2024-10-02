@@ -24,5 +24,33 @@ namespace Team7TextRPG.Contents
         public int Speed { get; set; } // 속도 ex) 5
         public double DodgeChanceRate { get; set; } // 회피 확률 ex) 0.1 (10%)
         public double CriticalChanceRate { get; set; } // 치명타 확률 ex) 0.5 (50%)
+
+        public override string ToString()
+        {
+            string text = "없음";
+            if (StatStr != 0)
+                text = $"힘: {StatStr}";
+            if (StatDex != 0)
+                text += $", 민첩: {StatDex}";
+            if (StatInt != 0)
+                text += $", 지능: {StatInt}";
+            if (StatLuck != 0)
+                text += $", 운: {StatLuck}";
+            if (MaxHp != 0)
+                text += $", 체력: {MaxHp}";
+            if (MaxMp != 0)
+                text += $", 마나: {MaxMp}";
+            if (Attack != 0)
+                text += $", 공격: {Attack}";
+            if (Defense != 0)
+                text += $", 방어: {Defense}";
+            if (Speed != 0)
+                text += $", 속도: {Speed}";
+            if (DodgeChanceRate != 0)
+                text += $", 회피: {DodgeChanceRate * 100:0.#}%";
+            if (CriticalChanceRate != 0)
+                text += $", 치명타: {CriticalChanceRate * 100:0.#}%";
+            return text;
+        }
     }
 }

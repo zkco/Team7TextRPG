@@ -7,6 +7,7 @@ using Team7TextRPG.Contents;
 using Team7TextRPG.Contents.Items;
 using Team7TextRPG.Datas;
 using Team7TextRPG.Managers;
+using Team7TextRPG.Scenes;
 using Team7TextRPG.Utils;
 
 namespace Team7TextRPG.Creatures
@@ -63,16 +64,11 @@ namespace Team7TextRPG.Creatures
             this.SetLevel(1);
             this.Exp = 0;
             this.Hp = MaxHp;
+            this.Mp = MaxMp;
 
             // 치트
-            GameManager.Instance.AddGold(100000);
-            GameManager.Instance.AddChip(1000);
-
-            foreach (var item in DataManager.Instance.ItemDataDict.Values)
-                GameManager.Instance.AddItem(item);
-
-            foreach (var skill in DataManager.Instance.SkillDataDict.Values)
-                GameManager.Instance.AddSkill(skill);
+            GameManager.Instance.AddGold(5000);
+            GameManager.Instance.AddChip(100);
         }
 
         public void SetLoadData(SavePlayerData saveData)
@@ -133,7 +129,7 @@ namespace Team7TextRPG.Creatures
         public void EquipItem(EquipmentItem equipment)
         {
             // 장비 장착
-            OnEuipmentChanged();
+            
             UnEquipItem(equipment.EquipmentType);
             if (equipment.EquipmentType == Defines.EquipmentType.Weapon)
                 EWeapon = equipment;
@@ -141,6 +137,8 @@ namespace Team7TextRPG.Creatures
                 EArmor = equipment;
             else if (equipment.EquipmentType == Defines.EquipmentType.Accessory)
                 EAccessory = equipment;
+
+            OnEuipmentChanged();
         }
 
         public void UnEquipItem(Defines.EquipmentType equipmentType)
@@ -180,10 +178,21 @@ namespace Team7TextRPG.Creatures
             ItemStat.CriticalChanceRate = (EWeapon?.ItemStat.CriticalChanceRate ?? 0) + (EAccessory?.ItemStat.CriticalChanceRate ?? 0);
         }
 
-
+        public void AddExp(int exp)
+        {
+            // 경험치 획득
+            Exp += exp;
+            while (Exp >= MaxExp)
+            {
+                // 경험치 누적된 걸로 계속 레벨업
+                Exp -= MaxExp;
+                LevelUp();
+            }
+        }
         public override void LevelUp()
         {
             // 레벨업
+            SetLevel(Level + 1);
         }
 
         public override void OnDamaged(int damage)
@@ -207,7 +216,7 @@ namespace Team7TextRPG.Creatures
 
         public override void OnDead()
         {
-            // 사망했을 때, 필요없다면 제거합시다.
+           
         }
 
         public void Rest()
@@ -215,5 +224,7 @@ namespace Team7TextRPG.Creatures
             Hp = MaxHp;
             Mp = MaxMp;
         }
+
+        
     }
 }

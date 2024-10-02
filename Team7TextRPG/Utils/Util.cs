@@ -34,10 +34,10 @@ namespace Team7TextRPG.Utils
         {
             return jobType switch
             {
-                Defines.JobType.Newbie => "초보자",
                 Defines.JobType.Warrior => "전사",
                 Defines.JobType.Mage => "마법사",
-                _ => "알 수 없음",
+                Defines.JobType.Archer => "궁수",
+                _ => "무직",
             };
         }
         public static string ShopTypeToString(Defines.ShopType shopType)
@@ -72,6 +72,27 @@ namespace Team7TextRPG.Utils
                 Defines.CommonUIType.Skill => "스킬",
                 Defines.CommonUIType.Quest => "퀘스트",
                 _ => "알 수 없음",
+            };
+        }
+        public static string BattleTypeToString(Defines.BattleType battleType)
+        {
+            return battleType switch
+            {
+                Defines.BattleType.Dungeon_Easy => "슈퍼 겁쟁이들의 쉼터",
+                Defines.BattleType.Dungeon_Normal => "겁쟁이들의 쉼터",
+                Defines.BattleType.Dungeon_Hard => "상남자 클럽",
+                Defines.BattleType.Field => "평화로운 필드",
+                _ => "없음",
+            };
+        }
+        public static int BattleTypeToClearCount(Defines.BattleType battleType)
+        {
+            return battleType switch
+            {
+                Defines.BattleType.Dungeon_Easy => 5,
+                Defines.BattleType.Dungeon_Normal => 10,
+                Defines.BattleType.Dungeon_Hard => 15,
+                _ => 0,
             };
         }
         public static int GrowthValue(int level, int maxLevel, double growthRate = 1.2, double baseExp = 100)
@@ -123,6 +144,23 @@ namespace Team7TextRPG.Utils
                     sb.Append("♥");
                 else
                     sb.Append("♡");
+            }
+            sb.Append(")");
+            return sb.ToString();
+        }
+        public static string GetMpBar(int mp, int maxMp)
+        {
+            // 크리쳐의 마력 게이지
+            int hpPercent = maxMp == 0 ? 0 : (int)Math.Ceiling((mp * 5.0) / maxMp);
+
+            StringBuilder sb = new StringBuilder();
+            sb.Append("(");
+            for (int i = 0; i < 5; i++)
+            {
+                if (i < hpPercent)
+                    sb.Append("★");
+                else
+                    sb.Append("☆");
             }
             sb.Append(")");
             return sb.ToString();
