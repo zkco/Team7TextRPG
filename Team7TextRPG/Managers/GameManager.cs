@@ -337,6 +337,20 @@ namespace Team7TextRPG.Managers
             .ToList();
         }
 
+        public List<MonsterData> GetBossMonsterDataList(BattleType battleType)
+        {
+            return DataManager.Instance.BattleDataDict.Values
+            // 현재 배틀 위치 기준으로 필터링
+            .Where(s => s.BattleType == battleType)
+            // 보스 몬스터만
+            .Select(x => DataManager.Instance.MonsterDataDict.TryGetValue(x.MonsterDataId, out MonsterData? monsterData) && monsterData.MonsterType == MonsterType.Boss ? monsterData : null)
+            // null 이 아닌것만 필터링
+            .Where(s => s != null)
+            // nullable을 nullable 이 아닌 타입으로 반환
+            .Select(s => s!)
+            .ToList();
+        }
+
         public void ScratchLottery()
         {
             Player?.AddScratchedLottery();

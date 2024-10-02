@@ -85,7 +85,7 @@ namespace Team7TextRPG.Scenes
                             InputManager.Instance.GetInputEnter();
                             break;
                         }
-                        List<MonsterData> bossList = GameManager.Instance.GetMonsterDataList(diff);
+                        List<MonsterData> bossList = GameManager.Instance.GetBossMonsterDataList(diff);
                         UIManager.Instance.BattleWrite(bossList.ToArray());  //보스와 전투
                         SceneManager.Instance.LoadScene<FieldScene>();
                         break; // Scene 호출 뒤에는 while문을 빠져나가야 함.
