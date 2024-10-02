@@ -13,14 +13,24 @@ namespace Team7TextRPG.Scenes
         public override void Show()
         {
             TextHelper.BtHeader("복권 긁기");
-            TextHelper.ItContent("현재 보유 중인 복권 수량 {___}"); //복권 갯수
+            TextHelper.ItContent($"현재 보유 중인 복권 수량 {GameManager.Instance.PlayerItems.Find(x => x.DataId == 1049)?.Count}"); //복권 갯수
             UIManager.Instance.Confirm("복권을 긁습니다.",
                 () =>
                 {
-                    TextHelper.SlowPrint("복권을 긁고 있습니다.");
-                    Thread.Sleep(1000);
-                    //복권 갯수 삭감
-                    //복권 결과 출력 함수
+                    if (GameManager.Instance.PlayerItems.Find(x => x.DataId == 1049)?.Count > 0)
+                    {
+                        TextHelper.SlowPrint("복권을 긁고 있습니다.");
+                        //복권 갯수 삭감
+                        GameManager.Instance.PlayerItems.Find(x => x.DataId == 1049)?.RemoveCount();
+                        //복권 결과 출력 함수
+                        GameManager.Instance.AddGold(LotteryReward());
+                        Thread.Sleep(1000);
+                    }
+                    else
+                    {
+                        TextHelper.DtContent("가지고 있는 복권이 없습니다.");
+                        Thread.Sleep(1000);
+                    }
                 },
                 () =>
                 {
@@ -37,28 +47,34 @@ namespace Team7TextRPG.Scenes
             if(targetScore > 300)
             {
                 TextHelper.DtContent("꽝... 다음 기회에..");
+                reward = 0;
             }
             else if (targetScore > 100)
             {
                 TextHelper.DtContent("5등");
+                reward = 5000;
             }
             else if (targetScore > 50)
             {
                 TextHelper.DtContent("4등!");
+                reward = 50000;
             }
             else if (targetScore > 5)
             {
                 TextHelper.DtContent("3등!!!");
+                reward = 2000000;
             }
             else if (targetScore > 1)
             {
                 TextHelper.DtContent("아깝다!! 2등!!");
+                reward = 40000000;
             }
             else if (targetScore == 1)
             {
                 Winning();
                 Console.Clear();
                 TextHelper.DtContent("$$ 1등 당첨 $$");
+                reward = 100000000;
             }
             return reward;
         }
