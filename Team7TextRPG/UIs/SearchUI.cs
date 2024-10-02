@@ -33,7 +33,7 @@ namespace Team7TextRPG.UIs
             Thread.Sleep(1000);
 
             int encounter = _random.Next(0, 100);
-            if (encounter < 30)
+            if (encounter < 80)
             {
                 EncounterMonster();
 
