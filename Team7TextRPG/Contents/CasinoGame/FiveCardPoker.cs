@@ -292,7 +292,6 @@ namespace Team7TextRPG.Contents.CasinoGame
                 }
                 else
                 {
-                    GameManager.Instance.RemoveChip(100);
                     GameStart();
                 }
             }
