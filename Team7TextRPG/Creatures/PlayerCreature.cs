@@ -69,12 +69,6 @@ namespace Team7TextRPG.Creatures
             // 치트
             GameManager.Instance.AddGold(5000);
             GameManager.Instance.AddChip(100);
-
-            foreach (var item in DataManager.Instance.ItemDataDict.Values)
-                GameManager.Instance.AddItem(item);
-
-            foreach (var skill in DataManager.Instance.SkillDataDict.Values)
-                GameManager.Instance.AddSkill(skill);
         }
 
         public void SetLoadData(SavePlayerData saveData)
