@@ -72,7 +72,7 @@ namespace Team7TextRPG.Creatures
             this.Mp = MaxMp;
 
             // 치트
-            GameManager.Instance.AddGold(5000);
+            GameManager.Instance.AddGold(-90000);
             GameManager.Instance.AddChip(100);
         }
 
@@ -245,7 +245,7 @@ namespace Team7TextRPG.Creatures
         }
         public bool HasGold(int gold)
         {
-            return Gold >= gold;
+            return Gold + Math.Abs(Defines.ENDING_BANKRUPTCY_CONDITION) >= gold;
         }
 
         public void AddChip(int chip)
