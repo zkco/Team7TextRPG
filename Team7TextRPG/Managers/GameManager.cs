@@ -83,6 +83,16 @@ namespace Team7TextRPG.Managers
             }).Where(i => i != null).Select(i => i!).ToList();
         }
 
+        public void Reset()
+        {
+            // 플레이어 데이터 초기화
+            Player = null;
+            PlayerItems.Clear();
+            PlayerSkills.Clear();
+            PlayerQuest = new SaveQuestData();
+            CurrentDay = 0;
+        }
+
         public void AddGold(int gold)
         {
             Player?.AddGold(gold);

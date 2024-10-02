@@ -19,6 +19,7 @@ namespace Team7TextRPG.Scenes
         {
             Console.ResetColor();
             Console.Clear();
+            GameManager.Instance.Reset();
             // 로고 출력
             TextHelper.BtContent("Team7 Text RPG");
             // 1. 메뉴를 보여준다.
