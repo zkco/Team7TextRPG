@@ -79,10 +79,10 @@ namespace Team7TextRPG.Contents.CasinoGame
 
         private int Betting()
         {
-            TextHelper.DtContent($"현재 칩 갯수 : {GameManager.Instance.PlayerChip}");
+            TextHelper.DtContent($"현재 칩 갯수 : {GameManager.Instance.Chip}");
             TextHelper.ItContent("베팅할 칩 갯수를 입력해주세요.");
             _bet = InputManager.Instance.GetInputInt("숫자를 입력해주세요. (최대 300)", 1, 300);
-            if (GameManager.Instance.PlayerChip >= _bet)
+            if (GameManager.Instance.Chip >= _bet)
             {
                 GameManager.Instance.RemoveChip(_bet);
                 Console.Clear();
@@ -119,7 +119,7 @@ namespace Team7TextRPG.Contents.CasinoGame
                 {
                     TextHelper.BtContent("당신이 승리했습니다!");
                     GameManager.Instance.AddChip(_bet * 2);
-                    TextHelper.DtContent($"현재 칩 갯수 : {GameManager.Instance.PlayerChip}");
+                    TextHelper.DtContent($"현재 칩 갯수 : {GameManager.Instance.Chip}");
                     UIManager.Instance.Confirm("다시 하시겠습니까?",
                         () =>
                         {
@@ -129,13 +129,14 @@ namespace Team7TextRPG.Contents.CasinoGame
                         {
                             _playing = false;
                             SceneManager.Instance.LoadScene<CasinoScene>();
+                            return;
                         });
                 }
                 else if(AddScore() % 2 == 0 && BetNumb == 2) 
                 {
                     TextHelper.BtContent("당신이 승리했습니다!");
                     GameManager.Instance.AddChip(_bet * 2);
-                    TextHelper.DtContent($"현재 칩 갯수 : {GameManager.Instance.PlayerChip}");
+                    TextHelper.DtContent($"현재 칩 갯수 : {GameManager.Instance.Chip}");
                     UIManager.Instance.Confirm("다시 하시겠습니까?",
                         () =>
                         {
@@ -145,12 +146,13 @@ namespace Team7TextRPG.Contents.CasinoGame
                         {
                             _playing = false;
                             SceneManager.Instance.LoadScene<CasinoScene>();
+                            return;
                         });
                 }
                 else
                 {
                     TextHelper.BtContent("베팅한 모든 금액을 잃었습니다...");
-                    TextHelper.DtContent($"현재 칩 갯수 : {GameManager.Instance.PlayerChip}");
+                    TextHelper.DtContent($"현재 칩 갯수 : {GameManager.Instance.Chip}");
                     UIManager.Instance.Confirm("다시 하시겠습니까?",
                         () =>
                         {
@@ -160,6 +162,7 @@ namespace Team7TextRPG.Contents.CasinoGame
                         {
                             _playing = false;
                             SceneManager.Instance.LoadScene<CasinoScene>();
+                            return;
                         });
                 }
             }

@@ -4,3 +4,21 @@ DataId,Name,Description,RequiredLevel,RequiredJobType,MpCoast,LearnPrice,SkillTy
 4003,스매시,검을 강력하게 휘두른다.,5,Warrior,9,1000,Attack,Percent,150,1,1
 4004,매직 미사일,쉽게 피할 수 있어보인다.,5,Mage,5,1000,Attack,Percent,150,1,1
 4005,근접 사격,멀리서 쏘면 다 피하니까.. 가까이서 쏜다.,5,Archer,7,1000,Attack,Percent,150,1,1
+4006,방패 가격,방패는 없지만 방패로 가격할 수 있다.,8,Warrior,11,0,Attack,Absolute,120,1,1
+4007,파이어볼,뜨거워 보이는 불덩이를 날린다.,8,Mage,8,0,Attack,Absolute,100,1,1
+4008,속사,재빠르게 화살을 쏜다.,8,Archer,9,0,Attack,Absolute,80,1,2
+4009,얼음창,대상에게 빠른속도로 얼음조각을 날린다,10,Mage,8,1500,Attack,Percent,120,1,1
+4010,분노의 강타,양손에 든 무기로 강력한 일격을 가한다,10,Warrior,13,1500,Attack,Absolute,150,1,1
+4011,조준 사격,대상을 정확하게 조준하여 물리피해를 입힌다,10,Archer,10,1500,Attack,Absolute,130,1,1
+4012,얼음 화살,적을 빙결시킬 얼음 덩어리를 날린다,13,Mage,12,0,Attack,Absolute,150,1,1
+4013,광란,격노하여 무자비한 공격을 가한다,13,Warrior,12,0,Attack,Percent,180,1,1
+4014,연발사격,빠른속도로 수많은 화살을 쏟아낸다,13,Archer,12,0,Attack,Percent,180,1,1
+4015,얼음불꽃화살,적에게 얼음과 불꽃으로 이루어진 마력구체를 날린다,15,Mage,15,2000,Attack,Percent,200,1,1
+4016,고통 감내,고통을 감내하고 싸워서 얻은 상처를 회복한다,15,Warrior,8,2000,Heal,Absolute,150,1,1
+4017,화살비,적 머리위에 화살을 비처럼 쏟아낸다,15,Archer,15,2000,Attack,Percent,200,3,1
+4018,혼돈의 화살,혼돈의 광선을 날려 큰피해를 가한다,18,Mage,17,0,Attack,Absolute,230,1,1
+4019,거인의 강타,적의 방어구를 강타해 물리피해를 가한다,18,Warrior,18,0,Attack,Absolute,250,1,1
+4020,독화살,적에게 독이 발린 화살을 날린다,18,Archer,15,0,Attack,Percent,230,1,1
+4021,불사조의 불길,새의 형태에 화염을 날린다,20,Mage,20,2500,Attack,Percent,250,3,1
+4022,칼날폭풍,소용돌이가 되어 적에게 피해를 가한다,20,Warrior,20,2500,Attack,Percent,250,3,1
+4023,정조준,적의 머리를 노려 치명적인 피해를 가한다,20,Archer,20,2500,Attack,Percent,250,1,1

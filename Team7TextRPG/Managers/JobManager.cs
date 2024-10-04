@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -32,6 +32,10 @@ namespace Team7TextRPG.Managers
         public void Flush()
         {
             _jobQueue.Flush();
+        }
+        public void Clear()
+        {
+            _jobQueue.Clear();
         }
     }
 }

@@ -26,7 +26,6 @@ DataId,BattleType,MonsterDataId
 5025,Dungeon_Easy,3007
 5026,Dungeon_Easy,3008
 5027,Dungeon_Easy,3009
-5028,Dungeon_Easy,3010
 5029,Dungeon_Normal,3011
 5030,Dungeon_Normal,3012
 5031,Dungeon_Normal,3013
@@ -36,7 +35,6 @@ DataId,BattleType,MonsterDataId
 5035,Dungeon_Normal,3017
 5036,Dungeon_Normal,3018
 5037,Dungeon_Normal,3019
-5038,Dungeon_Normal,3020
 5039,Dungeon_Hard,3021
 5040,Dungeon_Hard,3022
 5041,Dungeon_Hard,3023
@@ -46,4 +44,3 @@ DataId,BattleType,MonsterDataId
 5045,Dungeon_Hard,3027
 5046,Dungeon_Hard,3028
 5047,Dungeon_Hard,3029
-5048,Dungeon_Hard,3030

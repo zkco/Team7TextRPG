@@ -12,19 +12,27 @@ namespace Team7TextRPG.Scenes
             MeetCheif,
             ClassChange,
             Casino,
+            Lottery,
             Exit
         }
         //public List<Quest> 
         public override void Show()
         {
             Console.Clear();
+            if (GameManager.Instance.IsGameEnd())
+            {
+                GameManager.Instance.GameEnd();
+                InputManager.Instance.GetInputEnter();
+                return;
+            }
+
             TextHelper.BtHeader("이벤트");
             // [상태, 인벤토리, 스킬, 퀘스트]
             UIManager.Instance.CommonWriteBar();
             WriteType<EventType>();
 
             string input = InputManager.Instance.GetInputKeyword();
-            // 공통 UI 호출한 경우 볼일 마치가 다시 처음으로
+            // 공통 UI 호출한 경우 볼일 마치면 다시 처음으로
             if (UIManager.Instance.CommonLoad(input))
             {
                 SceneManager.Instance.LoadScene<EventScene>();
@@ -46,6 +54,10 @@ namespace Team7TextRPG.Scenes
                 case EventType.Casino:
                     SceneManager.Instance.LoadScene<CasinoScene>();
                     break;
+                case EventType.Lottery:
+                    UIManager.Instance.Write<LotteryUI>();
+                    SceneManager.Instance.LoadScene<EventScene>();
+                    break;
                 case EventType.Exit:
                     SceneManager.Instance.LoadScene<TownScene>();
                     break;
@@ -58,6 +70,7 @@ namespace Team7TextRPG.Scenes
                 EventType.MeetCheif => "촌장을 만난다.",
                 EventType.ClassChange => "전직의 제단으로 간다.",
                 EventType.Casino => "카지노로 이동한다.",
+                EventType.Lottery => "복권을 긁는다.",
                 EventType.Exit => "마을로 돌아간다.",
                 _ => "없음",
             };

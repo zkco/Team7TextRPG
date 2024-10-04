@@ -149,17 +149,18 @@ namespace Team7TextRPG.Contents.CasinoGame
             int _winCost = 0;
             MakeCard();
             Shuffle();
-            TextHelper.CtContent("현재 보유 칩 갯수 : {0}", GameManager.Instance.PlayerChip);
-            int betChips = InputManager.Instance.GetInputInt("베팅 칩 갯수를 입력해주세요. (최대 1000개)", 1, 1000);
-            if (betChips > GameManager.Instance.PlayerChip)
+            TextHelper.CtContent("현재 보유 칩 갯수 : {0}", GameManager.Instance.Chip);
+            int betChips = InputManager.Instance.GetInputInt("베팅 칩 갯수를 입력해주세요. (최대 10000개)", 1, 10000);
+            if (betChips > GameManager.Instance.Chip)
             {
-                if (GameManager.Instance.PlayerChip < 1)
+                if (GameManager.Instance.Chip < 1)
                 {
                     Console.WriteLine("칩이 없습니다. 카지노 화면으로 돌아갑니다.");
                     SceneManager.Instance.LoadScene<CasinoScene>();
+                    return;
                 }
                 Console.WriteLine("칩 갯수가 모자랍니다.");
-                InputManager.Instance.GetInputInt("베팅 칩 갯수를 입력해주세요. (최대 1000개)", 1, 1000);
+                InputManager.Instance.GetInputInt("베팅 칩 갯수를 입력해주세요. (최대 10000개)", 1, 10000);
             }
             else
             {
@@ -218,6 +219,7 @@ namespace Team7TextRPG.Contents.CasinoGame
                 () =>
                 {
                     SceneManager.Instance.LoadScene<CasinoScene>();
+                    return;
                 });
         }
     }

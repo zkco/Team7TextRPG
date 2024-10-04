@@ -52,6 +52,7 @@ namespace Team7TextRPG.Contents.Items
         private int CalcEnhancementValue(int value)
         {
             if (value == 0) return 0;
+            if (EnhancementLevel == 0) return value;
             return (int)(value * EnhancementLevel * 1.2);
         }
 

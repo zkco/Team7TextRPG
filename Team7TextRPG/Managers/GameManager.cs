@@ -4,6 +4,7 @@ using Team7TextRPG.Contents.CasinoGame;
 using Team7TextRPG.Contents.Items;
 using Team7TextRPG.Creatures;
 using Team7TextRPG.Datas;
+using Team7TextRPG.Scenes;
 using Team7TextRPG.Utils;
 using static Team7TextRPG.Utils.Defines;
 
@@ -27,11 +28,12 @@ namespace Team7TextRPG.Managers
         public List<Skill> PlayerSkills => Player?.Skills ?? new List<Skill>();
         public SaveQuestData PlayerQuest { get; private set; } = new SaveQuestData(); // 완료한 퀘스트 목록, 중복 X
 
+        public int Chip => Player?.Chip ?? 0;
+        public int Gold => Player?.Gold ?? 0;
+
         // 게임 limit 요소
         public const int DeadLine = 50;
         public int CurrentDay { get; private set; } = 0;
-        public int PlayerGold { get; private set; } //소지 중인 금액
-        public int PlayerChip { get; private set; } //소지 중인 칩 갯수 
 
         public void CreatePlayer(string name, Defines.SexType sexType, Defines.SpeciesType specisType)
         {
@@ -41,7 +43,7 @@ namespace Team7TextRPG.Managers
             Player.SetJob(Defines.JobType.Newbie);
             // 플레이어 초기화
             Player.Init();
-        
+
         }
         public MonsterCreature? CreateMonster(int dataId)
         {
@@ -59,8 +61,6 @@ namespace Team7TextRPG.Managers
         {
             Player = new PlayerCreature(saveData.PlayerData.Name ?? "Unknown", saveData.PlayerData.SexType, saveData.PlayerData.SpeciesType);
             Player.SetLoadData(saveData.PlayerData);
-            PlayerChip = saveData.Chip;
-            PlayerGold = saveData.Gold;
             PlayerQuest = saveData.QuestData;
             PlayerItems = saveData.Items.Select(i =>
             {
@@ -73,6 +73,9 @@ namespace Team7TextRPG.Managers
                     case Defines.ItemType.Consumable:
                         item = new ConsumableItem();
                         break;
+                    case Defines.ItemType.Quest:
+                        item = new QuestItem();
+                        break;
                 }
 
                 item?.SetSaveData(i);
@@ -80,26 +83,36 @@ namespace Team7TextRPG.Managers
             }).Where(i => i != null).Select(i => i!).ToList();
         }
 
+        public void Reset()
+        {
+            // 플레이어 데이터 초기화
+            Player = null;
+            PlayerItems.Clear();
+            PlayerSkills.Clear();
+            PlayerQuest = new SaveQuestData();
+            CurrentDay = 0;
+        }
+
         public void AddGold(int gold)
         {
-            PlayerGold += gold;
+            Player?.AddGold(gold);
         }
         public void RemoveGold(int gold)
         {
-            PlayerGold -= gold;
+            Player?.RemoveGold(gold);
         }
         public bool HasGold(int gold)
         {
-            return PlayerGold >= gold;
+            return Player?.HasGold(gold) ?? false;
         }
 
         public void AddChip(int chip)
         {
-            PlayerChip += chip;
+            Player?.AddChip(chip);
         }
         public void RemoveChip(int chip)
         {
-            PlayerChip -= chip;
+            Player?.RemoveChip(chip);
         }
 
         public bool AddItem(int dataId)
@@ -124,6 +137,9 @@ namespace Team7TextRPG.Managers
                         break;
                     case Defines.ItemType.Consumable:
                         item = new ConsumableItem();
+                        break;
+                    case ItemType.Quest:
+                        item = new QuestItem();
                         break;
                 }
 
@@ -319,6 +335,68 @@ namespace Team7TextRPG.Managers
             // nullable을 nullable 이 아닌 타입으로 반환
             .Select(s => s!)
             .ToList();
+        }
+
+        public List<MonsterData> GetBossMonsterDataList(BattleType battleType)
+        {
+            return DataManager.Instance.BattleDataDict.Values
+            // 현재 배틀 위치 기준으로 필터링
+            .Where(s => s.BattleType == battleType)
+            // 보스 몬스터만
+            .Select(x => DataManager.Instance.MonsterDataDict.TryGetValue(x.MonsterDataId, out MonsterData? monsterData) && monsterData.MonsterType == MonsterType.Boss ? monsterData : null)
+            // null 이 아닌것만 필터링
+            .Where(s => s != null)
+            // nullable을 nullable 이 아닌 타입으로 반환
+            .Select(s => s!)
+            .ToList();
+        }
+
+        public void ScratchLottery()
+        {
+            Player?.AddScratchedLottery();
+        }
+
+        public Defines.EndingType GetEndingType()
+        {
+            // 엔딩s
+            // 복권 1회 사용으로 당첨 엔딩 ->
+            if (Player?.ScratchedLottery == Defines.ENDING_SPECIAL_LOTTERY_CONDITION && Player?.Gold >= Defines.ENDING_GOLD_CONDITION)
+            {
+                TextHelper.ItHeader("복권 1회 사용으로 당첨되어 엔딩을 획득했습니다.");
+                return Defines.EndingType.SpecialLottery;
+            }
+            // 골드가 1억 이상이면 엔딩 ->
+            if (Player?.Gold >= Defines.ENDING_GOLD_CONDITION)
+            {
+                TextHelper.ItHeader("골드 1억을 모아 엔딩을 획득했습니다.");
+                return Defines.EndingType.Gold;
+            }
+            // 칩 100만개 엔딩 -> 
+            if (Player?.Chip >= Defines.ENDING_CHIP_CONDITION)
+            {
+                TextHelper.ItHeader("칩 100만개를 모아 엔딩을 획득했습니다.");
+                return Defines.EndingType.Chip;
+            }
+            // 사망 엔딩 ->
+            if (Player?.IsDead == true)
+            {
+                TextHelper.ItHeader("플레이어가 사망했습니다.");
+                return Defines.EndingType.Death;
+            }
+                
+
+            return Defines.EndingType.None;
+        }
+
+        public bool IsGameEnd()
+        {
+            return GetEndingType() != EndingType.None;
+        }
+
+        public void GameEnd()
+        {
+            JobManager.Instance.Clear();
+            SceneManager.Instance.LoadScene<CreditScene>();
         }
     }
 }

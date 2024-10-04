@@ -41,6 +41,13 @@ namespace Team7TextRPG.Scenes
             while (true)
             {
                 Console.Clear();
+                if (GameManager.Instance.IsGameEnd())
+                {
+                    GameManager.Instance.GameEnd();
+                    InputManager.Instance.GetInputEnter();
+                    return;
+                }
+
                 TextHelper.BtHeader($"{Util.BattleTypeToString(diff)} 던전");
                 TextHelper.ItHeader($"진행 상황 : {dungeonPlayCount}/{dungeonClearCount}");
 
@@ -78,7 +85,7 @@ namespace Team7TextRPG.Scenes
                             InputManager.Instance.GetInputEnter();
                             break;
                         }
-                        List<MonsterData> bossList = GameManager.Instance.GetMonsterDataList(diff);
+                        List<MonsterData> bossList = GameManager.Instance.GetBossMonsterDataList(diff);
                         UIManager.Instance.BattleWrite(bossList.ToArray());  //보스와 전투
                         SceneManager.Instance.LoadScene<FieldScene>();
                         break; // Scene 호출 뒤에는 while문을 빠져나가야 함.
