@@ -21,7 +21,7 @@ namespace Team7TextRPG.Scenes
             Console.Clear();
             GameManager.Instance.Reset();
             // 로고 출력
-            TextHelper.BtContent("Team7 Text RPG");
+            TextHelper.BtContent("복권 사냥 RPG");
             // 1. 메뉴를 보여준다.
             WriteType<TitleSceneType>();
             // 2. 사용자 입력 받는다.
