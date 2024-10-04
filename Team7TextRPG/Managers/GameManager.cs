@@ -377,6 +377,13 @@ namespace Team7TextRPG.Managers
                 TextHelper.ItHeader("칩 100만개를 모아 엔딩을 획득했습니다.");
                 return Defines.EndingType.Chip;
             }
+
+            if (Player?.Gold <= Defines.ENDING_BANKRUPTCY_CONDITION)
+            {
+                TextHelper.ItHeader("파산하여 엔딩을 획득했습니다.");
+                return Defines.EndingType.Bankruptcy;
+            }
+
             // 사망 엔딩 ->
             if (Player?.IsDead == true)
             {

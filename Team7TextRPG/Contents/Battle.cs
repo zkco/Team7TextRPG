@@ -19,7 +19,7 @@ namespace Team7TextRPG.Contents
         private PlayerCreature _player;
         private bool _battleEnded;
         private bool _monsterFirstAttackMsg = false;
-
+        private Random random = new Random();
         public enum BattleAction
         {
             None,
@@ -71,8 +71,6 @@ namespace Team7TextRPG.Contents
                 }
             }
 
-
-
             void ShowBattleStatus()
             {
                 Console.Clear();
@@ -99,23 +97,42 @@ namespace Team7TextRPG.Contents
                 Console.WriteLine();
                 Console.WriteLine("=== 몬스터의 턴 ===");
 
-                // 살아있는 몬스터만 턴을 가짐
-                foreach (var monster in _monsters.Where(monster => !monster.IsDead)) 
+                foreach (var monster in _monsters.Where(monster => !monster.IsDead))
                 {
-
-
                     Thread.Sleep(500);
 
-               
-                    int damage = monster.Attack; 
-                    _player.OnDamaged(damage); // 플레이어에게 데미지 적용
+                    bool isDodged = random.NextDouble() < _player.DodgeChanceRate;
+                    if (isDodged)
+                    {
+                        Console.ForegroundColor = ConsoleColor.White; 
+                        Console.WriteLine($"{_player.Name}이(가) {monster.Name}의 공격을 회피했습니다!");
+                        Console.ResetColor(); 
+                        Thread.Sleep(500);
+                        continue;
+                    }
 
-                    Console.WriteLine($"\n{monster.Name} 이(가) {damage}의 피해를 입혔습니다!");
+                    bool isCriticalHit = random.NextDouble() < monster.CriticalChanceRate;
+                    int damage = isCriticalHit ? (int)(monster.Attack * 1.5) : monster.Attack;
+
+                    damage = Math.Max(damage - _player.Defense, 1); 
+
+                    _player.OnDamaged(damage); 
+
+                    if (isCriticalHit)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Yellow; 
+                        Console.WriteLine($"*** 치명타! *** {monster.Name}이(가) {damage}의 피해를 입혔습니다!");
+                        Console.ResetColor(); 
+                    }
+                    else
+                    {
+                        Console.WriteLine($"{monster.Name}이(가) {damage}의 피해를 입혔습니다!");
+                    }
 
                     if (_player.IsDead)
                     {
-                        Console.WriteLine($"{_player.Name} 이(가) 전투에 패배했습니다.");
-                        break; 
+                        Console.WriteLine($"{_player.Name}이(가) 전투에 패배했습니다.");
+                        break;
                     }
 
                     Thread.Sleep(500);
@@ -208,20 +225,31 @@ namespace Team7TextRPG.Contents
             // 공격
             void Attack()
             {
-                MonsterCreature targetMonster = SelectTarget();
-
-                int damage = _player.Attack;
-                targetMonster.OnDamaged(damage);
-
-                Console.WriteLine($"{_player.Name}이(가) {targetMonster.Name}에게 {damage}의 피해를 입혔습니다!");
-
-
-                Thread.Sleep(1000);
-
-                if (targetMonster.IsDead)
                 {
-                    Console.WriteLine($"{targetMonster.Name}이(가) 쓰러졌습니다.");
-                    Thread.Sleep(5000);
+                    MonsterCreature targetMonster = SelectTarget();
+                    bool isCriticalHit = random.NextDouble() < _player.CriticalChanceRate;
+                    int damage = isCriticalHit ? (int)(_player.Attack * 1.5) : _player.Attack;
+                    damage = Math.Max(damage - targetMonster.Defense, 1); 
+                    targetMonster.OnDamaged(damage);
+
+                    if (isCriticalHit)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Yellow; 
+                        Console.WriteLine($"*** 치명타! *** {_player.Name}이(가) {targetMonster.Name}에게 {damage}의 피해를 입혔습니다!");
+                        Console.ResetColor(); 
+                    }
+                    else
+                    {
+                        Console.WriteLine($"{_player.Name}이(가) {targetMonster.Name}에게 {damage}의 피해를 입혔습니다!");
+                    }
+
+                    Thread.Sleep(1000);
+
+                    if (targetMonster.IsDead)
+                    {
+                        Console.WriteLine($"{targetMonster.Name}이(가) 쓰러졌습니다.");
+                        Thread.Sleep(1000);
+                    }
                 }
             }
 
